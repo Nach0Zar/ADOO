@@ -1,5 +1,19 @@
 package adaptador.recordatorio.whatsapp;
 
-public interface AdapterRecordadorWhatsapp {
-    
+
+import java.util.*;
+
+import modelos.dtos.RecordatorioDTO;
+
+/**
+ * 
+ */
+public interface AdapterRecordadorWhatsApp {
+
+    /**
+     * @param recordatorio 
+     * @return
+     */
+    public void enviarRecordatorio(RecordatorioDTO recordatorio);
+
 }

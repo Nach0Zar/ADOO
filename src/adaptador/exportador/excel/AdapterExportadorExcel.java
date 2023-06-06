@@ -1,5 +1,18 @@
 package adaptador.exportador.excel;
 
-public class AdapterExportadorExcel implements AdapterExcel {
-    
+import java.util.*;
+
+import modelos.dtos.FichaMedicaDTO;
+
+/**
+ * 
+ */
+public interface AdapterExportadorExcel {
+
+    /**
+     * @param fichaMedica 
+     * @return
+     */
+    public void exportarFichaMedica(FichaMedicaDTO fichaMedica);
+
 }
