@@ -22,8 +22,12 @@ public class AdapterEmail implements AdapterRecordadorEmail {
      */
     @Override
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        // TODO implement here
-        throw new UnsupportedOperationException("Unimplemented method 'enviarRecordatorio'");
+        System.out.println(
+                "Se ha enviado un mensaje por Email al correo " + recordatorio.getDestinatario().getEmail()
+                        + " del Cliente Adoptante " + recordatorio.getDestinatario().getNombre()
+                        + " " + recordatorio.getDestinatario().getApellido() +
+                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: " + recordatorio.getMensaje()
+        );
     }
 
 }
