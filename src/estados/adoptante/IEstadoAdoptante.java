@@ -3,19 +3,14 @@ package estados.adoptante;
 
 import java.util.*;
 
+import modelos.Adopcion;
 import modelos.Animal;
 import modelos.ClienteAdoptante;
 
-/**
- * 
- */
+
 public interface IEstadoAdoptante {
 
-    /**
-     * @param animal 
-     * @param clienteAdoptante 
-     * @return
-     */
-    public void adopcionrAnimal(Animal animal, ClienteAdoptante clienteAdoptante);
+
+    public void adopcionAnimal(Animal animal, ClienteAdoptante clienteAdoptante , Adopcion adopcion);
 
 }
