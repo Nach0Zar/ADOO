@@ -4,39 +4,26 @@ import java.util.*;
 
 import enums.Calificacion;
 
-/**
- * 
- */
 public class Encuesta {
+    private Calificacion estadoAnimal;
+    private Calificacion limpieza;
+    private Calificacion ambiente;
 
-    /**
-     * Default constructor
-     */
-    public Encuesta() {
+    public Encuesta(Calificacion estadoAnimal, Calificacion limpieza, Calificacion ambiente) {
+    	this.estadoAnimal = estadoAnimal;
+    	this.limpieza = limpieza;
+    	this.ambiente = ambiente;
     }
-
-    /**
-     * 
-     */
-    private Calificacion EstadoAnimal;
-
-    /**
-     * 
-     */
-    private Calificacion Limpieza;
-
-    /**
-     * 
-     */
-    private Calificacion Ambiente;
-
-    /**
-     * @param Calificacion estadoAnimal 
-     * @param Calificaicon limpieza 
-     * @param Calificacion ambiente
-     */
-    public void crearEncuesta(Calificacion estadoAnimal, Calificacion limpieza, Calificacion ambiente) {
-        // TODO implement here
+    
+    public Calificacion getCalificacionEstado() {
+    	return this.estadoAnimal;
     }
-
+    
+    public Calificacion getLimpieza() {
+    	return this.limpieza;
+    }
+    
+    public Calificacion getAmbiente() {
+    	return this.ambiente;
+    }
 }
