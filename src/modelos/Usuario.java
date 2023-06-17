@@ -4,15 +4,15 @@ import adaptador.autenticar.Autenticador;
 import modelos.dtos.UsuarioDTO;
 
 public class Usuario {
-	private Autenticador adaptadorAuntentidor ;
+	private AdapterAutenticador adaptadorAuntentidor ;
     private Boolean autenticacion = false;
     private String nombre;
     private String email;
     
-    public Usuario(UsuarioDTO usuario) {
-    	this.adaptadorAuntentidor = new AdapterAutenticador();
-    	this.nombre = usuario.getNombre();
-    	this.email = usuario.getEmail();
+    public Usuario(String email, String nombre) {
+    	this.adaptadorAuntentidor = new Autenticador();
+    	this.email = email;
+    	this.nombre = nombre;
     }
        
     public boolean autenticarse() {
