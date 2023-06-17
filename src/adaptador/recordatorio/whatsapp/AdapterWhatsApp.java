@@ -1,16 +1,8 @@
 package adaptador.recordatorio.whatsapp;
 
-
 import modelos.dtos.RecordatorioDTO;
 
-/**
- * 
- */
 public class AdapterWhatsApp implements AdapterRecordadorWhatsApp {
-
-    /**
-     * Default constructor
-     */
     public AdapterWhatsApp() {
     }
 
@@ -20,8 +12,12 @@ public class AdapterWhatsApp implements AdapterRecordadorWhatsApp {
      */
     @Override
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enviarRecordatorio'");
+        System.out.println(
+                "Se ha enviado un mensaje por Whatsapp al numero " + recordatorio.getDestinatario().getTelefono()
+                        + " del Cliente Adoptante " + recordatorio.getDestinatario().getNombre()
+                        + " " + recordatorio.getDestinatario().getApellido() +
+                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: " + recordatorio.getMensaje()
+        );
     }
 
 }
