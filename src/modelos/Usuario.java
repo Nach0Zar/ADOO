@@ -1,44 +1,27 @@
 package modelos;
-
-
-import java.util.*;
-
+import adaptador.autenticar.AdapterAutenticador;
+import adaptador.autenticar.Autenticador;
 import modelos.dtos.UsuarioDTO;
 
-/**
- * 
- */
 public class Usuario {
-
-    /**
-     * Default constructor
-     */
-    public Usuario() {
-    }
-
-    /**
-     * 
-     */
-    private String autenticacion;
-
-    /**
-     * 
-     */
+	private AdapterAutenticador adaptadorAuntentidor ;
+    private Boolean autenticacion = false;
     private String nombre;
-
-    /**
-     * 
-     */
     private String email;
-
-    /**
-     * @param String email  
-     * @param String nombre 
-     * @return
-     */
-    public UsuarioDTO autenticarse(String email , String nombre) {
-        // TODO implement here
-        return null;
+    
+    public Usuario(String email, String nombre) {
+    	this.adaptadorAuntentidor = new Autenticador();
+    	this.email = email;
+    	this.nombre = nombre;
+    }
+       
+    public boolean autenticarse() {
+    	this.autenticacion = this.adaptadorAuntentidor.autenticarse(this.email, this.nombre);
+        return this.autenticacion;
+    }	
+    
+    public String getEmail() {
+    	return this.email;
     }
 
 }

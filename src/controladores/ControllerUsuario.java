@@ -1,32 +1,44 @@
 package controladores;
 
 import java.util.*;
-
 import modelos.Usuario;
+import modelos.dtos.UsuarioDTO;
 
-/**
- * 
- */
 public class ControllerUsuario {
+    private ArrayList<Usuario> usuarios;
+    private static ControllerUsuario instancia;
 
-    /**
-     * Default constructor
-     */
     public ControllerUsuario() {
+        usuarios = new ArrayList<Usuario>();
     }
 
-    /**
-     * 
-     */
-    private List<Usuario> usuarios;
+    public static ControllerUsuario getInstancia(){
+        if (instancia == null)
+            instancia = new ControllerUsuario();
+        return instancia;
+    }
+    
+    public void crearUsuario(String email, String nombre) {
+      Usuario nuevoUsuario = new Usuario(email, nombre);
+      usuarios.add(nuevoUsuario);
+    }
 
-    /**
-     * @param String nombre 
-     * @param String email 
-     * @return
-     */
-    public void autenticar(String nombre, String email) {
-        // TODO implement here
+    public boolean autenticar(String email) throws Exception {
+        Usuario usuario = buscarUsuario(email);
+        if (usuario == null) {
+        	throw new Exception("Usuario inexistente");
+        }
+        return usuario.autenticarse();
+    }
+
+    private Usuario buscarUsuario(String email) {
+        Usuario usuarioEncontrado = null;
+        for (Usuario u : usuarios) {
+            if (u.getEmail() == email){
+                usuarioEncontrado = u;
+            }
+        }
+        return usuarioEncontrado;
     }
 
 }
