@@ -1,28 +1,11 @@
 package adaptador.autenticar;
 
-import java.util.*;
-
-import modelos.Usuario;
-
-/**
- * 
- */
-public class AdapterAutenticador {
-
-    /**
-     * Default constructor
-     */
+public class AdapterAutenticador implements Autenticador {
     public AdapterAutenticador() {
     }
-
-    /**
-     * @param String email 
-     * @param String nombre 
-     * @return
-     */
-    public Usuario autenticarse(String email, String nombre) {
-        // TODO implement here
-        return null;
+    public boolean autenticarse(String email, String nombre) {
+    	System.out.print("El usuario se autenticó correctamente");
+        return true;
     }
 
 }
