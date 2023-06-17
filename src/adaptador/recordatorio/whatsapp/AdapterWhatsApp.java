@@ -1,8 +1,6 @@
 package adaptador.recordatorio.whatsapp;
 
 
-import java.util.*;
-
 import modelos.dtos.RecordatorioDTO;
 
 /**

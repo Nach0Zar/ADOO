@@ -12,7 +12,7 @@ public interface RecordatorioStrategy {
 
     /**
      * @param recordatorio 
-     * @return
+     * @return void
      */
     public void enviarRecordatorio(RecordatorioDTO recordatorio);
 
