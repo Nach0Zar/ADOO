@@ -8,50 +8,80 @@ import java.util.*;
  */
 public class ClienteAdoptante {
 
-    /**
-     * Default constructor
-     */
+    private String nombre;
+    private String apellido;
+    private String estadoCivil;
+    private String email;
+    private String telefono;
+    private String ocupacion;
+    private List<String> tipoDeAnimalesInteresados;
+    private int cantidadAdopciones;
+
     public ClienteAdoptante() {
     }
 
-    /**
-     * 
-     */
-    private String nombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    /**
-     * 
-     */
-    private String apellido;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-    /**
-     * 
-     */
-    private String estadoCivil;
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
 
-    /**
-     * 
-     */
-    private String email;
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    /**
-     * 
-     */
-    private String telefono;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-    /**
-     * 
-     */
-    private String ocupacion;
+    public void setOcupacion(String ocupacion) {
+        this.ocupacion = ocupacion;
+    }
 
-    /**
-     * 
-     */
-    private List<String> tipoDeAnimalesInteresados;
+    public void setTipoDeAnimalesInteresados(List<String> tipoDeAnimalesInteresados) {
+        this.tipoDeAnimalesInteresados = tipoDeAnimalesInteresados;
+    }
 
-    /**
-     * 
-     */
-    private int cantidadAdopciones;
+    public void setCantidadAdopciones(int cantidadAdopciones) {
+        this.cantidadAdopciones = cantidadAdopciones;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getOcupacion() {
+        return ocupacion;
+    }
+
+    public List<String> getTipoDeAnimalesInteresados() {
+        return tipoDeAnimalesInteresados;
+    }
+
+    public int getCantidadAdopciones() {
+        return cantidadAdopciones;
+    }
 
 }
