@@ -20,9 +20,7 @@ public class ExportacionPDF implements ExportacionStrategy {
 
     @Override
     public void exportarFichaMedica(FichaMedicaDTO fichaMedica) {
-        System.out.println(
-                "Se ha exportado la ficha medica en formato PDF"
-        );
+        this.adapter.exportarFichaMedica(fichaMedica);
     }
 
 }
