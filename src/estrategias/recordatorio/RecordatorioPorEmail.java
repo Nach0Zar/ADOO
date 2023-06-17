@@ -1,35 +1,23 @@
 package estrategias.recordatorio;
 
-
 import java.util.*;
 
 import adaptador.recordatorio.email.AdapterRecordadorEmail;
 import modelos.dtos.RecordatorioDTO;
 
-/**
- * 
- */
 public class RecordatorioPorEmail implements RecordatorioStrategy {
-
-    /**
-     * Default constructor
-     */
-    public RecordatorioPorEmail() {
+    public RecordatorioPorEmail(AdapterRecordadorEmail adapter) {
+        this.adapter = adapter;
     }
-
-    /**
-     * 
-     */
     private AdapterRecordadorEmail adapter;
 
     /**
      * @param recordatorio 
-     * @return
+     * @return void
      */
     @Override
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enviarRecordatorio'");
+        this.adapter.enviarRecordatorio(recordatorio);
     }
 
 }

@@ -1,19 +1,9 @@
-package adaptador.recordatorio.email;
-
-
-import java.util.*;
+package adaptador.recordatorio.whatsapp;
 
 import modelos.dtos.RecordatorioDTO;
 
-/**
- * 
- */
-public class AdapterEmail implements AdapterRecordadorEmail {
-
-    /**
-     * Default constructor
-     */
-    public AdapterEmail() {
+public class AdapterWhatsApp implements AdapterRecordadorWhatsApp {
+    public AdapterWhatsApp() {
     }
 
     /**
@@ -23,7 +13,7 @@ public class AdapterEmail implements AdapterRecordadorEmail {
     @Override
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
         System.out.println(
-                "Se ha enviado un mensaje por Email al correo " + recordatorio.getDestinatario().getEmail()
+                "Se ha enviado un mensaje por Whatsapp al numero " + recordatorio.getDestinatario().getTelefono()
                         + " del Cliente Adoptante " + recordatorio.getDestinatario().getNombre()
                         + " " + recordatorio.getDestinatario().getApellido() +
                         " en la fecha " + recordatorio.getFecha() + " con el mensaje: " + recordatorio.getMensaje()
