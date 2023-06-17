@@ -6,51 +6,26 @@ import java.util.*;
 import estrategias.recordatorio.RecordatorioStrategy;
 import modelos.dtos.RecordatorioDTO;
 
-/**
- * 
- */
 public class Recordador {
-
-    /**
-     * Default constructor
-     */
-    public Recordador() {
+    public Recordador(RecordatorioStrategy recordatorioStrategy) {
+        this.estrategiaRecordatorio = recordatorioStrategy;
     }
-
-    /**
-     * 
-     */
     private RecordatorioStrategy estrategiaRecordatorio;
 
     /**
-     * 
-     */
-    private String mensaje;
-
-    /**
-     * 
-     */
-    private Date fecha;
-
-    /**
-     * 
-     */
-    private String destinatario;
-
-    /**
      * @param recodatorio 
-     * @return
+     * @return void
      */
     public void enviarRecordatorio(RecordatorioDTO recodatorio) {
-        // TODO implement here
+        this.estrategiaRecordatorio.enviarRecordatorio(recodatorio);
     }
 
     /**
      * @param estrategiaRecordatorio 
-     * @return
+     * @return void
      */
     public void setEstrategia(RecordatorioStrategy estrategiaRecordatorio) {
-        // TODO implement here
+        this.estrategiaRecordatorio = estrategiaRecordatorio;
     }
 
 }
