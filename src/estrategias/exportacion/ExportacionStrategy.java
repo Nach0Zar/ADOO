@@ -1,13 +1,8 @@
 package estrategias.exportacion;
 
-
 import java.util.*;
 
 import modelos.dtos.FichaMedicaDTO;
-
-/**
- * 
- */
 public interface ExportacionStrategy {
 
     /**

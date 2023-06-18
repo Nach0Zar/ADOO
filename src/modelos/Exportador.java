@@ -1,32 +1,20 @@
 package modelos;
 
-
 import java.util.*;
 
 import estrategias.exportacion.ExportacionStrategy;
 import modelos.dtos.FichaMedicaDTO;
-
-/**
- * 
- */
 public class Exportador {
-
-    /**
-     * Default constructor
-     */
-    public Exportador() {
+    public Exportador(ExportacionStrategy estrategiaExportacion) {
+        this.estrategiaExportacion = estrategiaExportacion;
     }
-
-    /**
-     * 
-     */
     private ExportacionStrategy estrategiaExportacion;
 
     /**
      * @param fichaMedica
      */
     public void exportarFichaMedica(FichaMedicaDTO fichaMedica) {
-        // TODO implement here
+        this.estrategiaExportacion.exportarFichaMedica(fichaMedica);
     }
 
     /**
@@ -34,7 +22,7 @@ public class Exportador {
      * @return
      */
     public void setEstrategia(ExportacionStrategy estrategiaExportacion) {
-        // TODO implement here
+        this.estrategiaExportacion = estrategiaExportacion;
     }
 
 }
