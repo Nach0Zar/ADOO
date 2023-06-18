@@ -1,7 +1,5 @@
 package adaptador.exportador.excel;
 
-import java.util.*;
-
 import modelos.dtos.FichaMedicaDTO;
 
 public class AdapterExcel implements AdapterExportadorExcel {

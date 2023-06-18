@@ -1,7 +1,5 @@
 package adaptador.exportador.pdf;
 
-import java.util.*;
-
 import modelos.dtos.FichaMedicaDTO;
 
 public class AdapterPDF implements AdapterExportadorPDF {

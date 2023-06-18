@@ -1,7 +1,6 @@
 package modelos;
 
 import java.util.*;
-
 import estados.adoptante.Habilitado;
 import estados.adoptante.IEstadoAdoptante;
 

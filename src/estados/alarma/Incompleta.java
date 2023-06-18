@@ -11,15 +11,15 @@ import modelos.Alarma;
 public class Incompleta implements IEstadoAlarma {
 
     /**
+     * 
+     */
+    private Alarma alarma;
+
+    /**
      * Default constructor
      */
     public Incompleta() {
     }
-
-    /**
-     * 
-     */
-    private Alarma alarma;
 
     /**
      * @param Alarma alarma 
