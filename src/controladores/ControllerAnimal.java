@@ -1,56 +1,65 @@
 package controladores;
 
-
 import java.util.*;
 
+import enums.TipoAnimal;
 import modelos.Animal;
 import modelos.dtos.AnimalDTO;
 import modelos.dtos.FichaMedicaDTO;
 
-/**
- * 
- */
 public class ControllerAnimal {
 
-    /**
-     * Default constructor
-     */
+    private ArrayList<Animal> animales;
+    private static ControllerAnimal instancia;
+    public static int proximoLegajo = 1;    //de esta forma creo un legajo automatico
+
     public ControllerAnimal() {
+        animales = new ArrayList<Animal>();
     }
 
-    /**
-     * 
-     */
-    private List<Animal> animales;
+    public static ControllerAnimal getInstancia() {
+        if (instancia == null)
+            instancia = new ControllerAnimal();
+        return instancia;
+    }
 
-    /**
-     * @param String legajo 
-     * @return
-     */
+    public void ingresarAnimal(AnimalDTO animalDTO) {
+        Animal animal = new Animal(
+            animalDTO.getDomestico(), 
+            animalDTO.getAltura(), 
+            animalDTO.getPeso(),
+            animalDTO.getEdad(), 
+            animalDTO.getEstadoSaludableAnimal(), 
+            animalDTO.getTipoDeAnimal(),
+            animalDTO.getNombre(), 
+            proximoLegajo++ 
+        );
+        animal.crearFichaMedica();
+        animales.add(animal);
+    }
+ 
     public AnimalDTO obtenerAnimal(String legajo) {
-        // TODO implement here
-        return null;
+        Animal animalBuscar = null;
+
+        for (Animal animal : animales) {
+            if (animal.getLegajo().equals(legajo)) {
+                animalBuscar = animal;
+                break;
+            }
+        }
+        return animalBuscar.getDTO();
     }
 
-    /**
-     * @param String legajo 
-     * @return
-     */
+
     public FichaMedicaDTO obtenerFichaMedica(String legajo) {
-        // TODO implement here
-        return null;
+        Animal animal = obtenerAnimal(legajo);
+        return animal.getFichaMedica().getDTO();
     }
 
-    /**
-     * @param String tipo 
-     * @param Float altura 
-     * @param Float peso 
-     * @param Int edad 
-     * @param Boolean estadoAnimal 
-     * @return
-     */
-    public void ingresarAnimal(String tipo, Float altura, Float peso, int edad, Boolean estadoAnimal) {
-        // TODO implement here
+  
+    public void ingresarAnimal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoAnimal, TipoAnimal tipoDeAnimal, String nombre, String legajo) {
+        Animal animal = new Animal(domestico, altura, peso, edad, estadoAnimal, tipoDeAnimal, nombre, legajo);
+        animales.add(animal);
     }
 
 }
