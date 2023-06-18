@@ -7,24 +7,44 @@ import modelos.Exportador;
 import modelos.Tratamiento;
 
 public class FichaMedicaDTO {
-    /**
-     * Default constructor
-     */
+    
+    private Exportador exportador;
+    private List<Tratamiento> tratamientos;
+    private List<Alarma> alarmas;
+    
+
     public FichaMedicaDTO() {
     }
 
-    /**
-     * 
-     */
-    public Exportador exportador;
 
-    /**
-     * 
-     */
-    public List<Tratamiento> tratamientos;
+    public Exportador getExportador() {
+        return exportador;
+    }
 
-    /**
-     * 
-     */
-    public List<Alarma> alarmas;
+
+    public void setExportador(Exportador exportador) {
+        this.exportador = exportador;
+    }
+
+
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
+
+
+    public List<Alarma> getAlarmas() {
+        return alarmas;
+    }
+
+
+    public void setAlarmas(List<Alarma> alarmas) {
+        this.alarmas = alarmas;
+    }
+
+    
 }
