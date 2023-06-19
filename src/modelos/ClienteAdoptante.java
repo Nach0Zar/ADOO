@@ -3,6 +3,8 @@ package modelos;
 
 import java.util.*;
 
+import modelos.dtos.ClienteAdoptanteDTO;
+
 /**
  * 
  */
@@ -14,10 +16,25 @@ public class ClienteAdoptante {
     private String email;
     private String telefono;
     private String ocupacion;
-    private List<String> tipoDeAnimalesInteresados;
+    private ArrayList<String> tipoDeAnimalesInteresados;
     private int cantidadAdopciones;
 
-    public ClienteAdoptante() {
+    public  ClienteAdoptante( String nombre, String apellido, String estadoCivil, String email, String telefono, String ocupacion,
+            ArrayList <String> tipoDeAnimalesInteresados, int cantidadAdopciones) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.estadoCivil = estadoCivil;
+        this.email = email;
+        this.telefono = telefono;
+        this.ocupacion = ocupacion;
+        this.tipoDeAnimalesInteresados = tipoDeAnimalesInteresados;
+        this. cantidadAdopciones =  cantidadAdopciones;
+     
+    }
+
+    
+    public ClienteAdoptanteDTO ClienteAdoptanteDTO() {
+        return new ClienteAdoptanteDTO(nombre, apellido, estadoCivil, email, telefono, ocupacion, tipoDeAnimalesInteresados, cantidadAdopciones);
     }
 
     public void setNombre(String nombre) {
@@ -44,7 +61,7 @@ public class ClienteAdoptante {
         this.ocupacion = ocupacion;
     }
 
-    public void setTipoDeAnimalesInteresados(List<String> tipoDeAnimalesInteresados) {
+    public void setTipoDeAnimalesInteresados(ArrayList<String> tipoDeAnimalesInteresados) {
         this.tipoDeAnimalesInteresados = tipoDeAnimalesInteresados;
     }
 

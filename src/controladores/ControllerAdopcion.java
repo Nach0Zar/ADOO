@@ -1,11 +1,11 @@
 package controladores;
 
 import java.util.ArrayList;
+import enums.TipoNotificacion;
 import java.util.*;
 import modelos.Adopcion;
 import modelos.ClienteAdoptante;
 import modelos.Animal;
-import modelos.TipoNotificacion;
 
 public class ControllerAdopcion {
 
@@ -18,7 +18,7 @@ public class ControllerAdopcion {
         return instancia;
     }
 
-    public ControllerAdopcion() {
+    private ControllerAdopcion() {
         adopciones = new ArrayList<>();
     }
 
@@ -27,7 +27,8 @@ public class ControllerAdopcion {
                 animal,
                 clienteAdoptante,
                 motivoAdopcion(),
-                TipoNotificacion.SMS);
+                TipoNotificacion.SMS);//default en SMS
+                
 
         this.adopciones.add(adopcion);
         adopcionNueva(adopcion, clienteAdoptante, animal);
@@ -45,10 +46,10 @@ public class ControllerAdopcion {
         return motivoAdop;
     }
 
-    public Adopcion buscarAdopcion(int id) {
+    public Adopcion buscarAdopcion(int numero) {
         Adopcion adopcionBuscada = null;
         for (Adopcion adopcion : adopciones) {
-            if (adopcion.getId() == id) {
+            if (adopcion.getnumeroAdopcion() == numero) {
                 adopcionBuscada = adopcion;
             }
         }

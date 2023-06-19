@@ -1,70 +1,56 @@
 package modelos.dtos;
 
+import java.util.Date;
 import java.time.Duration;
-
-import adaptador.notificacion.INotificationPush;
 import estrategias.alarma.ITipoAlarma;
-import modelos.Animal;
 
 
 public class AlarmaDTO {
 
-    
+    private int numeroAlarma;
     private Duration periodicidad;
-    private Animal animal;
-    private Boolean estadoAlarma;
-    private INotificationPush notificacion;
+    private AnimalDTO animalDTO;
+    private boolean alarmaAtendida;
     private ITipoAlarma tipoAlarma;
-    
-    public AlarmaDTO(Duration periodicidad, Animal animal, Boolean estadoAlarma, INotificationPush notificacion,
-            ITipoAlarma tipoAlarma) {
+    private UsuarioDTO usuarioDTO;
+    private Date ultimaEjecucion;
+
+    public AlarmaDTO(int numeroAlarma, Duration periodicidad, AnimalDTO animalDTO, Boolean estadoAlarma,
+            ITipoAlarma tipoAlarma, UsuarioDTO usuarioDTO, Date ultimaEjecucion2) {
+        this.numeroAlarma = numeroAlarma;
         this.periodicidad = periodicidad;
-        this.animal = animal;
-        this.estadoAlarma = estadoAlarma;
-        this.notificacion = notificacion;
+        this.animalDTO = animalDTO;
+        this.alarmaAtendida = estadoAlarma;
         this.tipoAlarma = tipoAlarma;
+        this.usuarioDTO = usuarioDTO;
+        this.ultimaEjecucion = ultimaEjecucion2;
     }
 
-    public Duration getperiodicidad() {
+    public int getNumeroAlarma() {
+        return numeroAlarma;
+    }
+
+    public Duration getPeriodicidad() {
         return periodicidad;
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public AnimalDTO getAnimalDTO() {
+        return animalDTO;
     }
 
-    public Boolean getEstadoAlarma() {
-        return estadoAlarma;
-    }
-
-    public INotificationPush getNotificacion() {
-        return notificacion;
+    public boolean getAlarmaAtendida() {
+        return alarmaAtendida;
     }
 
     public ITipoAlarma getTipoAlarma() {
         return tipoAlarma;
     }
 
-    public void setperiodicidad(Duration periodicidad) {
-        this.periodicidad = periodicidad;
+    public UsuarioDTO getUsuarioDTO() {
+        return usuarioDTO;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
-
-    public void setEstadoAlarma(Boolean estadoAlarma) {
-        this.estadoAlarma = estadoAlarma;
-    }
-
-    public void setNotificacion(INotificationPush notificacion) {
-        this.notificacion = notificacion;
-    }
-
-    public void setTipoAlarma(ITipoAlarma tipoAlarma) {
-        this.tipoAlarma = tipoAlarma;
-    }
-
-    
-
+    public Date getUltimaEjecucion() {
+        return ultimaEjecucion;
+    }  
 }

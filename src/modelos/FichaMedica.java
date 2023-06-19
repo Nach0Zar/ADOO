@@ -4,15 +4,16 @@ import java.util.*;
 import modelos.dtos.FichaMedicaDTO;
 
 public class FichaMedica {
-    //ponemos la lista de alarmas aca?
     private Exportador exportador;
     private ArrayList <Tratamiento> tratamientos;
+    private ArrayList <Alarma> alarmas;
     private int legajo;
     private Animal animal;
 
 
     public FichaMedica(int legajo, Animal animal) {
         this.tratamientos = new ArrayList<Tratamiento>();
+        this.alarmas = new ArrayList<Alarma>();
         this.exportador = new Exportador();
         this.legajo = legajo;
         this.animal = animal;
@@ -44,6 +45,13 @@ public class FichaMedica {
         this.legajo = legajo;
     }
 
+    public ArrayList<Alarma> getAlarmas() {
+        return alarmas;
+    }
+
+    public void setAlarmas(ArrayList<Alarma> alarmas) {
+        this.alarmas = alarmas;
+    }
     //Fin getters y setters
 
     public void exportarFichaMedica(FichaMedicaDTO fichaMedicaDTO) {
@@ -52,10 +60,10 @@ public class FichaMedica {
 
     //Inicio Tratamientos
 
-    protected Tratamiento buscarTratamiento(int id) {
+    protected Tratamiento buscarTratamiento(int numeroTratamiento) {
         Tratamiento tratamiento = null;
         for (Tratamiento t : tratamientos) {
-            if (t.getIdTratamiento() == id) {
+            if (t.getNumeroTratamiento() == numeroTratamiento) {
                 tratamiento = t;
                 break;
             }
@@ -69,7 +77,7 @@ public class FichaMedica {
             tratamientos.add(tratamiento);
             animal.setEstadoSaludableAnimal(false);
             
-            System.out.println("Se ha creado el tratamiento: " + tratamiento.getNombre() + " con id: " + tratamiento.getIdTratamiento());
+            System.out.println("Se ha creado el tratamiento: " + tratamiento.getNombre() + " con id: " + tratamiento.getNumeroTratamiento());
         }else{
             System.out.println("Ya existe un tratamiento en curso, no se puede crear otro");
         }

@@ -2,34 +2,27 @@ package modelos;
 
 import java.util.*;
 import modelos.dtos.RecordatorioDTO;
+import enums.TipoNotificacion;
 
 public class Seguimiento {
 
-    private Date candenciaVisitas;
+    private static int numeradorSeguiemiento = 1;
+    
     private Boolean continuarSeguimiento;
-    private int idSeguimientoAnimal;
-    private TipoNotificacion tipoNotficacion;
+    private int numeroSeguimiento;
+    private TipoNotificacion tipoNotificacion;
     private Recordador tipoNotificacionNotificador;
     private Recordador recordador;
     private Date frecuenciaVisita;
     private Encuesta encuesta;
     private ArrayList<Visita> visitas;
 
-    public Seguimiento(int idSeguimiento, TipoNotificacion notif) {
-        this.idSeguimientoAnimal=idSeguimiento;
-        this.tipoNotficacion = notif;
+    public Seguimiento(TipoNotificacion notif) {
+        this.tipoNotificacion = notif;
         this.tipoNotificacionNotificador = new Recordador();
-        this.idSeguimientoAnimal = idSeguimiento;
+        this.numeroSeguimiento = numeradorSeguiemiento++;
         this.visitas = new ArrayList<Visita>();
 
-    }
-    
-    public Date getCandenciaVisitas() {
-        return candenciaVisitas;
-    }
-
-    public void setCandenciaVisitas(Date candenciaVisitas) {
-        this.candenciaVisitas = candenciaVisitas;
     }
 
     public Boolean getContinuarSeguimiento() {
@@ -40,21 +33,18 @@ public class Seguimiento {
         this.continuarSeguimiento = continuarSeguimiento;
     }
 
-    public int getIdSeguimientoAnimal() {
-        return idSeguimientoAnimal;
+    public int getNumeroSeguimientoAnimal() {
+        return numeroSeguimiento;
     }
 
-    public void setIdSeguimientoAnimal(int idSeguimientoAnimal) {
-        this.idSeguimientoAnimal = idSeguimientoAnimal;
+    public TipoNotificacion getTipoNotificacion() {
+        return tipoNotificacion;
     }
 
-    public TipoNotificacion getTipoNotficacion() {
-        return tipoNotficacion;
+    public void setTipoNotificacion(TipoNotificacion tipoNotificacion) {
+        this.tipoNotificacion = tipoNotificacion;
     }
-
-    public void setTipoNotficacion(TipoNotificacion tipoNotficacion) {
-        this.tipoNotficacion = tipoNotficacion;
-    }
+    
 
     public Recordador getTipoNotificacionNotificador() {
         return tipoNotificacionNotificador;
@@ -101,7 +91,7 @@ public class Seguimiento {
      * @return
      */
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        // TODO implement here
+        this.tipoNotificacionNotificador.enviarRecordatorio(recordatorio);
     }
 
 }

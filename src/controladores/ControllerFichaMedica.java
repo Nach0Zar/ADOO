@@ -16,7 +16,7 @@ public class ControllerFichaMedica {
     private ArrayList<FichaMedica> fichasMedicas;
     private static ControllerFichaMedica instancia;
 
-    public ControllerFichaMedica() {
+    private ControllerFichaMedica() {
         fichasMedicas = new ArrayList<FichaMedica>();
     }
 

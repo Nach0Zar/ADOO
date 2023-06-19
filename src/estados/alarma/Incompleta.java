@@ -6,19 +6,8 @@ import modelos.Alarma;
  * 
  */
 public class Incompleta implements IEstadoAlarma {
-
-    private Alarma alarma;
   
-    public Incompleta(Alarma alarma) {
-        this.alarma = alarma;
-    }
-
-    public Alarma getAlarma() {
-        return alarma;
-    }
-
-    public void setAlarma(Alarma alarma) {
-        this.alarma = alarma;
+    public Incompleta() {
     }
 
     /**
@@ -27,8 +16,8 @@ public class Incompleta implements IEstadoAlarma {
      */
     @Override
     public void atenderAlarma(Alarma alarma) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atenderAlarma'");
+        System.out.println("atendiendo alarma");
+        alarma.setEstadoAlarma(new Completa());
     }
 
 }

@@ -18,9 +18,8 @@ public class AdapterNotificacionPush implements INotificationPush {
      * @return
      */
     @Override
-    public void enviarNotificacion(AlarmaDTO alarmaNotf) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enviarNotificacion'");
+    public void enviarNotificacion(AlarmaDTO alarmaDTO) {
+        System.out.println("Enviando notificacion push del animal " + alarmaDTO.getAnimalDTO().getNombre());
     }
 
 }

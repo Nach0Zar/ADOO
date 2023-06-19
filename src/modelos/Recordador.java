@@ -1,8 +1,11 @@
 package modelos;
 
 import estrategias.recordatorio.RecordatorioPorWhatsApp;
+import estrategias.recordatorio.RecordatorioPorEmail;
+import estrategias.recordatorio.RecordatorioPorSMS;
 import estrategias.recordatorio.RecordatorioStrategy;
 import modelos.dtos.RecordatorioDTO;
+import enums.TipoNotificacion;
 
 public class Recordador {
     
@@ -19,12 +22,21 @@ public class Recordador {
         this.estrategiaRecordatorio.enviarRecordatorio(recodatorio);
     }
 
-    /**
-     * @param estrategiaRecordatorio 
-     * @return void
-     */
-    public void setEstrategia(RecordatorioStrategy estrategiaRecordatorio) {
-        this.estrategiaRecordatorio = estrategiaRecordatorio;
+   
+    public void setEstrategia(TipoNotificacion tipoNotificacion) {
+        //Los Recordatorios 
+        switch(tipoNotificacion){
+            case EMAIL:
+                this.estrategiaRecordatorio = new RecordatorioPorEmail();
+                break;
+            case SMS:
+                this.estrategiaRecordatorio = new RecordatorioPorSMS();
+                break;
+            case WHATSAPP:
+                this.estrategiaRecordatorio = new RecordatorioPorWhatsApp();
+                break;
+        }
+
     }
 
 }

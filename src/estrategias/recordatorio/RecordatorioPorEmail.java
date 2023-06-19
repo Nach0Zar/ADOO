@@ -1,13 +1,22 @@
 package estrategias.recordatorio;
 
+import adaptador.recordatorio.email.AdapterEmail;
 import adaptador.recordatorio.email.AdapterRecordadorEmail;
 import modelos.dtos.RecordatorioDTO;
 
 public class RecordatorioPorEmail implements RecordatorioStrategy {
+    
+    private AdapterRecordadorEmail adapter;
+    
+    public RecordatorioPorEmail() {
+        this.adapter = new AdapterEmail();
+    }
+
     public RecordatorioPorEmail(AdapterRecordadorEmail adapter) {
+        super();
         this.adapter = adapter;
     }
-    private AdapterRecordadorEmail adapter;
+    
 
     /**
      * @param recordatorio 

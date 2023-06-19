@@ -7,7 +7,7 @@ public class ControllerUsuario {
     private ArrayList<Usuario> usuarios;
     private static ControllerUsuario instancia;
 
-    public ControllerUsuario() {
+    private ControllerUsuario() {
         usuarios = new ArrayList<Usuario>();
     }
 
@@ -17,9 +17,8 @@ public class ControllerUsuario {
         return instancia;
     }
     
-    public void crearUsuario(String email, String nombre) {
-      Usuario nuevoUsuario = new Usuario(email, nombre);
-      usuarios.add(nuevoUsuario);
+    public void agregarUsuario(Usuario usuario) {
+        this.usuarios.add(usuario);
     }
 
     public boolean autenticar(String email) throws Exception {

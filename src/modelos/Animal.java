@@ -102,8 +102,7 @@ public class Animal {
         return this.fichaMedica;
     }
 
-
-    public AnimalDTO getDTO() {
+    public AnimalDTO toDTO() {
         return new AnimalDTO(this.domestico, this.altura, this.peso, this.edad, this.estadoSaludableAnimal, this.tipoDeAnimal, this.nombre, this.legajo, this.fichaMedica.getDTO());
     }
 }

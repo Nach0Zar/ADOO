@@ -1,15 +1,16 @@
 package modelos;
 
+import enums.TipoNotificacion;
 import estados.adoptante.Habilitado;
 import estados.adoptante.IEstadoAdoptante;
 
 public class Adopcion {
 
-    private static int idAutoIncremental = 0;
+    private static int numeradorAdopcion = 1;
 
     private Animal animal;
     private ClienteAdoptante cliente;
-    private int id;
+    private int numeroAdopcion;
     private String motivoAdopcion;
     private Seguimiento seguimiento;
     private IEstadoAdoptante estadoAdopcion;
@@ -17,9 +18,9 @@ public class Adopcion {
     public Adopcion(Animal animal, ClienteAdoptante cliente, String motivoAdopcion, TipoNotificacion notif) {
         this.animal = animal;
         this.cliente = cliente;
-        this.id = idAutoIncremental++;
+        this.numeroAdopcion = numeradorAdopcion++;
         this.motivoAdopcion = motivoAdopcion;
-        this.seguimiento = new Seguimiento(id, notif);// creamos el seguimiento cuando creamos la adopcion
+        this.seguimiento = new Seguimiento(notif);// creamos el seguimiento cuando creamos la adopcion
         this.estadoAdopcion = new Habilitado(); // Va estar hablitado
     }
 
@@ -33,10 +34,6 @@ public class Adopcion {
 
     public void setCliente(ClienteAdoptante cliente) {
         this.cliente = cliente;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setMotivoAdopcion(String motivoAdopcion) {
@@ -59,8 +56,8 @@ public class Adopcion {
         return cliente;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getnumeroAdopcion() {
+        return numeroAdopcion;
     }
 
     public String getMotivoAdopcion() {

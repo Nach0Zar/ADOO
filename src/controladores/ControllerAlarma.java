@@ -1,55 +1,44 @@
 package controladores;
 
-import modelos.Animal;
-import modelos.dtos.AlarmaDTO;
+import java.util.ArrayList;
+import modelos.Alarma;
 
-/**
- * 
- */
 public class ControllerAlarma {
     
-    private Animal animal;
-    private AlarmaDTO alarma;
-
-    /**
-     * Default constructor
-     */
+    private ArrayList<Alarma> alarmas;
     
-    public ControllerAlarma(Animal animal, AlarmaDTO alarma) {
-        this.animal = animal;
-        this.alarma = alarma;
+    private static ControllerAlarma instancia;
+
+    private ControllerAlarma() {
+        alarmas = new ArrayList<Alarma>();
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public static ControllerAlarma getInstancia(){
+        if (instancia == null)
+            instancia = new ControllerAlarma();
+        return instancia;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public void crearAlarma(Alarma alarma) {
+        this.alarmas.add(alarma);
+    }
+    
+    private Alarma buscarAlarma(int numeroAlarma) {
+        for (Alarma alarma : alarmas) {
+            if (alarma.soyAlarma(numeroAlarma)) {
+                return alarma;
+            }
+        }
+        return null;
     }
 
-    public AlarmaDTO getAlarma() {
-        return alarma;
+    public void atenderAlarma(int numeroAlarma) {
+        Alarma alarma = buscarAlarma(numeroAlarma);
+        alarma.atenderAlarma();
     }
 
-    public void setAlarma(AlarmaDTO alarma) {
-        this.alarma = alarma;
-    }
-
-    /**
-     * @param AlarmaDTO alarma 
-     * @return
-     */
-    public void crearAlarma(AlarmaDTO alarmaDTO) {
-        // TODO implement here
-    }
-
-    /**
-     * @param AlarmaDTO alarma 
-     * @return
-     */
-    public void atenderAlarma(AlarmaDTO alarmaDTO) {
-        // TODO implement here
-    }
-
+    public void enviarNotificacion(int numeroAlarma) {
+        Alarma alarma = buscarAlarma(numeroAlarma);
+        alarma.enviarNotificacion();
+    }    
 }

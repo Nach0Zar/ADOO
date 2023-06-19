@@ -14,7 +14,6 @@ public class AlarmaControl implements ITipoAlarma {
         acciones = new ArrayList<Accion>();
         crearAlarma();
     }
-
     
     public void crearAlarma() {
         System.out.println("Ingrese las acciones a realizar para esta alarma, utilize -1 para salir");
@@ -23,6 +22,7 @@ public class AlarmaControl implements ITipoAlarma {
             Scanner entradaNombre = new Scanner(System.in); 
             String nombreAccion = entradaNombre.nextLine();
             entradaNombre.close();
+
             if (nombreAccion.equals("-1")) {
                 break;
             }
@@ -35,9 +35,7 @@ public class AlarmaControl implements ITipoAlarma {
             acciones.add(accion);
 
         }
-        System.out.println("La alarma quedo seteada para el control del animal");
-            
-        
+        System.out.println("La alarma quedo seteada para el control del animal");     
     }
 
     public ArrayList<Accion> getAcciones() {

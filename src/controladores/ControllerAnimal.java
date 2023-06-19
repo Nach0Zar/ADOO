@@ -12,7 +12,7 @@ public class ControllerAnimal {
     private ArrayList<Animal> animales;
     private static ControllerAnimal instancia;
 
-    public ControllerAnimal() {
+    private ControllerAnimal() {
         animales = new ArrayList<Animal>();
     }
 
@@ -44,7 +44,7 @@ public class ControllerAnimal {
                 break;
             }
         }
-        return animalBuscar.getDTO();
+        return animalBuscar.toDTO();
     }
 
 

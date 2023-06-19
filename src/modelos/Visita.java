@@ -15,9 +15,8 @@ public class Visita {
     	this.fecha = new Date();
     }
     
-    public Encuesta completarEncuesta(Calificacion estadoAnimal, Calificacion limpieza, Calificacion ambiente) {
+    public void completarEncuesta(Calificacion estadoAnimal, Calificacion limpieza, Calificacion ambiente) {
     	this.encuesta = new Encuesta(estadoAnimal, limpieza, ambiente);
-    	return this.encuesta;
     }    
     
     public String getComentario () {
@@ -30,6 +29,26 @@ public class Visita {
     
     public Usuario getVisitador () {
     	return this.visitador;
+    }
+
+    public Encuesta getEncuesta () {
+    	return this.encuesta;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setVisitador(Usuario visitador) {
+        this.visitador = visitador;
+    }
+
+    public void setEncuesta(Encuesta encuesta) {
+        this.encuesta = encuesta;
     }
     
 }

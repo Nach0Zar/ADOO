@@ -17,6 +17,8 @@ public class Alarma {
     /**
      * Atributos
      */
+    private static int numeradorAlarma = 1;
+    private int numeroAlarma;
     private Duration periodicidad;
     private Animal animal;
     private IEstadoAlarma estadoAlarma;
@@ -28,15 +30,16 @@ public class Alarma {
     /**
      * Default constructor
      */
-    public Alarma(Duration periodicidad, Animal animal, IEstadoAlarma estadoAlarma, INotificationPush notificacion,
+    public Alarma(Duration periodicidad, Animal animal, INotificationPush notificacion,
             ITipoAlarma tipoAlarma, Usuario veterinario, Date ultimaEjecucion) {
         this.periodicidad = periodicidad;
         this.animal = animal;
-        this.estadoAlarma = estadoAlarma;
+        this.estadoAlarma = new estados.alarma.Incompleta(); // por default esta en incompleta
         this.notificacion = notificacion;
         this.tipoAlarma = tipoAlarma;
         this.veterinario = veterinario;
         this.ultimaEjecucion = ultimaEjecucion;
+        this.numeroAlarma = numeradorAlarma++;
     }
 
     // Getters y Setters
@@ -97,36 +100,39 @@ public class Alarma {
         this.ultimaEjecucion = ultimaEjecucion;
     }
 
+    public int getNumeroAlarma() {
+        return numeroAlarma;
+    }
+
     // Metodos
 
-    /**
-     * @param iAlarmaDTO alarmaNotf 
-     * @return
-     */
-    public void enviarNotificacion(AlarmaDTO alarmaNotf) {
-        // TODO implement here
-    }
-    /**
-     * @param AlarmaDTO alarma 
-     * @return
-     */
-    public void crearAlarma(AlarmaDTO alarma) {
-        // TODO implement here
+    public void enviarNotificacion() {
+        this.notificacion.enviarNotificacion(toDTO());
     }
 
-    /**
-     * @param IEstadoAlarma estadoAlarma  
-     * @return
-     */
-    public void cambiarEstadoAlarma(IEstadoAlarma estadoAlarma ) {
-        // TODO implement here
+    
+    public void crearAlarma(ITipoAlarma alarma) {
+        this.tipoAlarma = alarma;
+        this.tipoAlarma.crearAlarma();
     }
 
-    /**
-     * 
-     */
-    public void atenderAlarma() {
-        // TODO implement here
+    public void atenderAlarma() {//una vez completada , no puede volver a estar incompleta
+        this.estadoAlarma.atenderAlarma(this);
     }    
 
+    public boolean soyAlarma(int numeroAlarma) {
+        return this.numeroAlarma == numeroAlarma;
+    }
+
+    public AlarmaDTO toDTO() {
+
+        boolean alarmaAtendida;
+        if(this.estadoAlarma instanceof estados.alarma.Incompleta)
+            alarmaAtendida = false;
+        else
+            alarmaAtendida = true;
+
+        return new AlarmaDTO(this.numeroAlarma, this.periodicidad, this.animal.toDTO(), alarmaAtendida, this.tipoAlarma,
+        this.veterinario.toDTO(), this.ultimaEjecucion);
+    }
 }

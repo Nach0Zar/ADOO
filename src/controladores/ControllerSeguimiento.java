@@ -8,7 +8,7 @@ public class ControllerSeguimiento {
     private ArrayList <Seguimiento> seguimientos;
     private static ControllerSeguimiento instancia;
 	
-    public ControllerSeguimiento() {
+    private ControllerSeguimiento() {
         seguimientos = new ArrayList<Seguimiento>();
     }
 
@@ -23,7 +23,7 @@ public class ControllerSeguimiento {
         this.seguimientos.add(adopcion.getSeguimiento());
     }
 
- 
+
 
     
 }
