@@ -7,6 +7,8 @@ import estrategias.exportacion.ExportacionExcel;
 import estrategias.exportacion.ExportacionPDF;
 import modelos.FichaMedica;
 import modelos.Tratamiento;
+import modelos.Animal;
+import controladores.ControllerAnimal;
 
 /**
  * 
@@ -61,4 +63,23 @@ public class ControllerFichaMedica {
         fichaMedica.agregarTratamiento(new Tratamiento(nombre, descripcion, fechaInicio, fechaFin));
     }
 
+    public void crearTratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin , int legajo) {
+            Animal animal = ControllerAnimal.getInstancia().obtenerAnimal(legajo);
+            if(animal.getEstadoSaludableAnimal()){                                      //Siempre que el estado no sea saludable, tiene un tratamiento activo
+                Tratamiento tratamiento = new Tratamiento(nombre, descripcion, fechaInicio, fechaFin);
+                animal.getFichaMedica().agregarTratamiento(tratamiento);
+                ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, false);
+                System.out.println("Se ha creado el tratamiento: " + tratamiento.getNombre() + " con id: " + tratamiento.getNumeroTratamiento());
+            }else{
+                System.out.println("Ya existe un tratamiento en curso, no se puede crear otro");
+            }
+        }
+
+        public void finalizarTratamiento(int legajo, int numeroTratamiento) {
+            Animal animal = ControllerAnimal.getInstancia().obtenerAnimal(legajo);
+            Tratamiento tratamiento = animal.getFichaMedica().buscarTratamiento(numeroTratamiento);
+            tratamiento.setFinalizado(true);
+            ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, true);
+            System.out.println("Ha finalizado el tratamiento: " + tratamiento.getNombre());
+        }
 }

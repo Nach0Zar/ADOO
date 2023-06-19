@@ -6,8 +6,6 @@ import modelos.dtos.AnimalDTO;
 public class Animal {
 
     private static int contadorLegajo = 1;
-
-
     private Boolean domestico;
     private Float altura;
     private Float peso;
@@ -18,7 +16,8 @@ public class Animal {
     private int legajo;
     private FichaMedica fichaMedica;
 
-    public Animal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal, TipoAnimal tipoDeAnimal, String nombre) {
+    public Animal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal,
+            TipoAnimal tipoDeAnimal, String nombre) {
         this.domestico = domestico;
         this.altura = altura;
         this.peso = peso;
@@ -26,9 +25,9 @@ public class Animal {
         this.estadoSaludableAnimal = estadoSaludableAnimal;
         this.tipoDeAnimal = tipoDeAnimal;
         this.legajo = contadorLegajo++;
+        this.nombre = nombre;
         this.fichaMedica = new FichaMedica(this);
     }
-    
 
     public void setDomestico(Boolean domestico) {
         this.domestico = domestico;
@@ -37,7 +36,7 @@ public class Animal {
     public Boolean getDomestico() {
         return this.domestico;
     }
-        
+
     public void setAltura(Float altura) {
         this.altura = altura;
     }
@@ -49,7 +48,7 @@ public class Animal {
     public void setPeso(Float peso) {
         this.peso = peso;
     }
-    
+
     public Float getPeso() {
         return this.peso;
     }
@@ -103,7 +102,9 @@ public class Animal {
     }
 
     public AnimalDTO toDTO() {
-        return new AnimalDTO(this.domestico, this.altura, this.peso, this.edad, this.estadoSaludableAnimal, this.tipoDeAnimal,
-         this.nombre, this.legajo, this.fichaMedica.toDTO());
+        return new AnimalDTO(this.domestico, this.altura, this.peso, this.edad, this.estadoSaludableAnimal,
+                this.tipoDeAnimal,
+                this.nombre, this.legajo, this.fichaMedica.toDTO());
     }
+
 }

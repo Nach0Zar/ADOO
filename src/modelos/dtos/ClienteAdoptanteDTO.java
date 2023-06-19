@@ -3,6 +3,7 @@ package modelos.dtos;
 import java.util.ArrayList;
 
 import enums.TipoNotificacion;
+import enums.TipoAnimal;
 
 public class ClienteAdoptanteDTO {
      
@@ -12,14 +13,14 @@ public class ClienteAdoptanteDTO {
     private String email;
     private String telefono;
     private String ocupacion;
-    private ArrayList<String> tipoDeAnimalesInteresados;
+    private ArrayList<TipoAnimal> tipoDeAnimalesInteresados;
     private Boolean otrasMascotas;
     private String motivoAdopcion;
     private TipoNotificacion tipoNotificacion;
     private int cantidadAdopciones;
     
     public ClienteAdoptanteDTO(String nombre, String apellido, String estadoCivil, String email, String telefono,String ocupacion,
-    ArrayList<String> tipoDeAnimalesInteresados, Boolean otrasMascotas, TipoNotificacion tipoNotificacion, String motivoAdopcion, int cantidadAdopciones) {
+    ArrayList<TipoAnimal> tipoDeAnimalesInteresados, Boolean otrasMascotas, TipoNotificacion tipoNotificacion, String motivoAdopcion, int cantidadAdopciones) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.estadoCivil = estadoCivil;
@@ -81,11 +82,11 @@ public class ClienteAdoptanteDTO {
         this.ocupacion = ocupacion;
     }
 
-    public ArrayList<String> getTipoDeAnimalesInteresados() {
+    public ArrayList<TipoAnimal> getTipoDeAnimalesInteresados() {
         return tipoDeAnimalesInteresados;
     }
 
-    public void setTipoDeAnimalesInteresados(ArrayList<String> tipoDeAnimalesInteresados) {
+    public void setTipoDeAnimalesInteresados(ArrayList<TipoAnimal> tipoDeAnimalesInteresados) {
         this.tipoDeAnimalesInteresados = tipoDeAnimalesInteresados;
     }
 

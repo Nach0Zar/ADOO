@@ -5,6 +5,7 @@ import java.util.*;
 
 import enums.TipoNotificacion;
 import modelos.dtos.ClienteAdoptanteDTO;
+import enums.TipoAnimal;
 
 /**
  * 
@@ -17,14 +18,14 @@ public class ClienteAdoptante {
     private String email;
     private String telefono;
     private String ocupacion;
-    private ArrayList<String> tipoDeAnimalesInteresados;
+    private ArrayList<TipoAnimal> tipoDeAnimalesInteresados;
     private Boolean otrasMascotas;
     private TipoNotificacion tipoNotificacion;
     private String motivoAdopcion;
     private int cantidadAdopciones;
 
     public  ClienteAdoptante( String nombre, String apellido, String estadoCivil, String email, String telefono, String ocupacion,
-            ArrayList <String> tipoDeAnimalesInteresados, Boolean otrasMascotas, TipoNotificacion tipoNotificacion, String motivoAdopcion, int cantidadAdopciones) {
+            ArrayList <TipoAnimal> tipoDeAnimalesInteresados, Boolean otrasMascotas, TipoNotificacion tipoNotificacion, String motivoAdopcion, int cantidadAdopciones) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.estadoCivil = estadoCivil;
@@ -68,7 +69,7 @@ public class ClienteAdoptante {
         this.ocupacion = ocupacion;
     }
 
-    public void setTipoDeAnimalesInteresados(ArrayList<String> tipoDeAnimalesInteresados) {
+    public void setTipoDeAnimalesInteresados(ArrayList<TipoAnimal> tipoDeAnimalesInteresados) {
         this.tipoDeAnimalesInteresados = tipoDeAnimalesInteresados;
     }
 
@@ -104,7 +105,7 @@ public class ClienteAdoptante {
         return this.ocupacion;
     }
 
-    public List<String> getTipoDeAnimalesInteresados() {
+    public ArrayList<TipoAnimal> getTipoDeAnimalesInteresados() {
         return this.tipoDeAnimalesInteresados;
     }
 

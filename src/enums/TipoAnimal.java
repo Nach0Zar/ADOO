@@ -1,6 +1,7 @@
 package enums;
 
 public enum TipoAnimal {
-    DOMESTICO,
-    SALVAJE
+    PERRO,
+    GATO,
+    TORTUGA
 }

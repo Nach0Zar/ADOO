@@ -22,37 +22,23 @@ public class ControllerAdopcion {
         adopciones = new ArrayList<>();
     }
 
-    public void crearAdopcion(Animal animal, ClienteAdoptante clienteAdoptante, String motivoDeAdopcion) {
+    public int crearAdopcion(int animal, String emailCliente, String motivoDeAdopcion) {
         Adopcion adopcion = new Adopcion(
-                animal,
-                clienteAdoptante,
-                this.motivoAdopcion()
-                );
-                
-
+                ControllerAnimal.getInstancia().obtenerAnimal(animal),
+                ControllerClienteAdoptante.getInstancia().buscarClienteAdoptante(emailCliente),
+                motivoDeAdopcion);
         this.adopciones.add(adopcion);
-        adopcionNueva(adopcion, clienteAdoptante, animal);
+        return adopcion.getnumeroAdopcion();
     }
 
-    public void enviarNotificacion(int numeroAdopcion ){
+    public void enviarNotificacion(int numeroAdopcion) {
         Adopcion adopcion = this.buscarAdopcion(numeroAdopcion);
-        RecordatorioDTO recordatorioDTO = new RecordatorioDTO(this.mensajeRecordatorio(), new Date(),adopcion.getCliente().toDTO());
+        RecordatorioDTO recordatorioDTO = new RecordatorioDTO(this.mensajeRecordatorio(), new Date(),
+                adopcion.getCliente().toDTO());
         adopcion.enviarNotificacion(recordatorioDTO);
     }
 
-    private void adopcionNueva(Adopcion adopcion, ClienteAdoptante clienteAdoptante, Animal animal) {
-        adopcion.adopcionNueva(clienteAdoptante, animal);
-    }
-
-    private String motivoAdopcion() {
-        System.out.println("Motivo de adopcion :");
-        Scanner entradaScanner = new Scanner(System.in);
-        String motivoAdop = entradaScanner.nextLine();
-        entradaScanner.close();
-        return motivoAdop;
-    }
-
-     private String mensajeRecordatorio() {
+    private String mensajeRecordatorio() {
         System.out.println("Mensaje de recordatorio  :");
         Scanner entradaScanner = new Scanner(System.in);
         String mensajeRecordatorio = entradaScanner.nextLine();
