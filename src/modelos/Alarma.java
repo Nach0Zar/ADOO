@@ -6,6 +6,7 @@ import java.util.*;
 
 import adaptador.notificacion.INotificationPush;
 import estados.alarma.IEstadoAlarma;
+import estrategias.alarma.ITipoAlarma;
 import modelos.dtos.AlarmaDTO;
 
 /**

@@ -42,7 +42,6 @@ public class ControllerFichaMedica {
     //acá esta tipoExportacion es un String, no un enum. Hay que cambiarlo
     public void exportarFichaMedica(String legajo, String tipoExportacion) {
         FichaMedica ficha = buscarFichaMedica(legajo);
-        //Por que me agrega anObject?
         //Hay que crear los export
         if (tipoExportacion.equals("Excel")) {
             ficha.getExportador().setEstrategiaExportacion(new ExportarExcel());

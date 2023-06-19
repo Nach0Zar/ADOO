@@ -11,10 +11,10 @@ public class Animal {
     private Boolean estadoSaludableAnimal;
     private TipoAnimal tipoDeAnimal;
     private String nombre;
-    private String legajo;
+    private int legajo;
     private FichaMedica fichaMedica;
 
-    public Animal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal, TipoAnimal tipoDeAnimal, String nombre, String legajo) {
+    public Animal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal, TipoAnimal tipoDeAnimal, String nombre, int legajo) {
         this.domestico = domestico;
         this.altura = altura;
         this.peso = peso;

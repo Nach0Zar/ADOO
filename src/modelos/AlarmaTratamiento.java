@@ -3,6 +3,7 @@ package modelos;
 
 import java.util.*;
 
+import estrategias.alarma.ITipoAlarma;
 import modelos.dtos.AlarmaDTO;
 
 /**

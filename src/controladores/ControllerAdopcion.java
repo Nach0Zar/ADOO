@@ -51,6 +51,7 @@ public class ControllerAdopcion {
         System.out.println("Motivo de adopcion :");
         Scanner entradaScanner = new Scanner(System.in);
         String motivoAdop = entradaScanner.nextLine();
+        entradaScanner.close();
         return motivoAdop;
     }
 

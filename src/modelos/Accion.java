@@ -3,25 +3,15 @@ package modelos;
 
 import java.util.*;
 
-/**
- * 
- */
+
 public class Accion {
 
-    /**
-     * Default constructor
-     */
+    private String nombre;
+    private String descripcion;
+
     public Accion() {
     }
 
-    /**
-     * 
-     */
-    private String nombre;
 
-    /**
-     * 
-     */
-    private String descripcion;
 
 }

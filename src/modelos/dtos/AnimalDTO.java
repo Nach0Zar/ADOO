@@ -1,7 +1,5 @@
 package modelos.dtos;
 
-
-import java.util.*;
 import enums.TipoAnimal;
 
 import modelos.FichaMedica;
