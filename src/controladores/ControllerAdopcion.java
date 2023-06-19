@@ -1,9 +1,10 @@
 package controladores;
 
-import java.util.ArrayList;
 import java.util.*;
 import modelos.Adopcion;
 import modelos.ClienteAdoptante;
+import modelos.dtos.AdopcionDTO;
+import modelos.dtos.ClienteAdoptanteDTO;
 import modelos.dtos.RecordatorioDTO;
 import modelos.Animal;
 
@@ -56,4 +57,14 @@ public class ControllerAdopcion {
         return adopcionBuscada;
     }
 
-}
+    public AdopcionDTO buscarAdopcionDTO(int numeroAdopcion) {
+        Adopcion adopcion = this.buscarAdopcion(numeroAdopcion);
+        if(adopcion instanceof Adopcion){
+            return adopcion.toDTO();
+        }
+        return null;
+    }
+
+      
+    }
+

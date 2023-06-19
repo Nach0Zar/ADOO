@@ -2,7 +2,9 @@ package modelos;
 
 import estados.adoptante.Habilitado;
 import estados.adoptante.IEstadoAdoptante;
+import modelos.dtos.ClienteAdoptanteDTO;
 import modelos.dtos.RecordatorioDTO;
+import modelos.dtos.AdopcionDTO;
 
 public class Adopcion {
 
@@ -74,6 +76,10 @@ public class Adopcion {
 
     public void enviarNotificacion(RecordatorioDTO recordatorio) {
         this.seguimiento.enviarRecordatorio(recordatorio);
+    }
+
+    public AdopcionDTO toDTO() {
+        return new AdopcionDTO(this.animal.toDTO(), this.cliente.toDTO(), this.numeroAdopcion, this.motivoAdopcion);
     }
 
 }

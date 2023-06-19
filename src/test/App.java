@@ -45,11 +45,21 @@ public class App {
                 + animalEncontrado2.getLegajo());
 
         // adoptar un animal
-        int numeroAdopcion = controladorAdopcion.crearAdopcion(legajo2, clienteEncontrado.getEmail(),
+        int numeroAdopcion = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(),
                 "Por que quiero una mascota");
-        Adopcion adopcionEncontrada = controladorAdopcion.buscarAdopcion(numeroAdopcion);
-        System.out.println("Se cargo la adopcion del animal " + adopcionEncontrada.getAnimal().getNombre()
-                + " del cliente : " + adopcionEncontrada.getCliente().getNombre());
+        AdopcionDTO adopcionEncontrada = controladorAdopcion.buscarAdopcionDTO(numeroAdopcion);
+        System.out.println("Se cargo la adopcion del animal " +
+                adopcionEncontrada.getAnimalDTO().getNombre()
+                + " del cliente : " + adopcionEncontrada.getClienteDTO().getNombre());
 
+        // crear usuario visitador y autenticar
+        System.out.println("Crear y autenticar usuario visitador: ");
+        controladorUsuario.agregarUsuario("Lucas", "lumolina@uade.edu.ar", TipoUsuario.VISITADOR);
+        controladorUsuario.autenticar("lumolina@uade.edu.ar");
+
+        // crear usuario veterinario y autenticar
+        System.out.println("Crear y autenticar usuario veterinario: ");
+        controladorUsuario.agregarUsuario("Candela", "caesquivel@uade.edu.ar", TipoUsuario.VETERINARIO);
+        controladorUsuario.autenticar("caesquivel@uade.edu.ar");
     }
 }

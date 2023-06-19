@@ -6,31 +6,30 @@ import modelos.dtos.UsuarioDTO;
 import enums.TipoUsuario;
 
 public class Usuario {
-	private AdapterAutenticador adaptadorAuntentidor ;
-    private Boolean autenticacion = false;
-    private String nombre;
-    private String email;
-    private TipoUsuario tipoUsuario;
-    
-    
-    public Usuario(String nombre, String email, TipoUsuario tipoUsuario) {
-    	this.adaptadorAuntentidor = new Autenticador();
-    	this.nombre = nombre;
-    	this.email = email;
-    	this.tipoUsuario = tipoUsuario;
-    }
-       
-    public boolean autenticarse() {
-    	this.autenticacion = this.adaptadorAuntentidor.autenticarse(this.email, this.nombre);
-        return this.autenticacion;
-    }	
-    
-    public UsuarioDTO toDTO() {
-    	return new UsuarioDTO(this.nombre, this.email, this.tipoUsuario);
-    }
+	private AdapterAutenticador adaptadorAuntentidor;
+	private Boolean autenticacion = false;
+	private String nombre;
+	private String email;
+	private TipoUsuario tipoUsuario;
+
+	public Usuario(String nombre, String email, TipoUsuario tipoUsuario) {
+		this.adaptadorAuntentidor = new Autenticador();
+		this.nombre = nombre;
+		this.email = email;
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	public boolean autenticarse() {
+		this.autenticacion = this.adaptadorAuntentidor.autenticarse(this.email, this.nombre);
+		return this.autenticacion;
+	}
+
+	public UsuarioDTO toDTO() {
+		return new UsuarioDTO(this.nombre, this.email, this.tipoUsuario, this.autenticacion);
+	}
 
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -38,7 +37,7 @@ public class Usuario {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -46,11 +45,10 @@ public class Usuario {
 	}
 
 	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
+		return this.tipoUsuario;
 	}
 
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-
 }
