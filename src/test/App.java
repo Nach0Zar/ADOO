@@ -46,20 +46,41 @@ public class App {
 
         // adoptar un animal
         int numeroAdopcion = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(),
-                "Por que quiero una mascota");
+                "Por que quiero una mascota", "lumolina@uade.edu.ar");
         AdopcionDTO adopcionEncontrada = controladorAdopcion.buscarAdopcionDTO(numeroAdopcion);
         System.out.println("Se cargo la adopcion del animal " +
                 adopcionEncontrada.getAnimalDTO().getNombre()
                 + " del cliente : " + adopcionEncontrada.getClienteDTO().getNombre());
 
+        //
+
         // crear usuario visitador y autenticar
         System.out.println("Crear y autenticar usuario visitador: ");
-        controladorUsuario.agregarUsuario("Lucas", "lumolina@uade.edu.ar", TipoUsuario.VISITADOR);
+        String emailVisitador = controladorUsuario.agregarUsuario("Lucas", "lumolina@uade.edu.ar",
+                TipoUsuario.VISITADOR);
         controladorUsuario.autenticar("lumolina@uade.edu.ar");
 
         // crear usuario veterinario y autenticar
         System.out.println("Crear y autenticar usuario veterinario: ");
         controladorUsuario.agregarUsuario("Candela", "caesquivel@uade.edu.ar", TipoUsuario.VETERINARIO);
         controladorUsuario.autenticar("caesquivel@uade.edu.ar");
+
+        // Creo un seguimiento para el animal
+
+        Seguimiento seguimientoEncontrado = controladorSeguimiento
+                .agregarSeguimientoAnimal(adopcionEncontrada.getNumeroAdopcion());
+        System.out.println(" Se agrego el seguimiento de la adopcion " + seguimientoEncontrado.getNumeroSeguimiento());
+
+        // enviar una notificacion
+        RecordatorioDTO recordatorio = controladorAdopcion.enviarNotificacion(numeroAdopcion);
+        System.out.println("Recordatorio creado para destinatario : " + recordatorio.getDestinatario().getNombre());
+
+        // crear una visita y una encuesta posterior
+
+        controladorSeguimiento.agregarVisita(seguimientoEncontrado.getNumeroSeguimiento(), "El animal está mejorando.",
+        Calificacion.BUENO, Calificacion.MALO, Calificacion.REGULAR);
+
+        controladorSeguimiento.agregarVisita(seguimientoEncontrado.getNumeroSeguimiento(), "El animal está mal.",
+        Calificacion.MALO, Calificacion.MALO, Calificacion.REGULAR);
     }
 }

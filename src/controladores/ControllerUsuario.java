@@ -2,6 +2,7 @@ package controladores;
 
 import java.util.*;
 import modelos.Usuario;
+import modelos.dtos.UsuarioDTO;
 import enums.TipoUsuario;
 
 public class ControllerUsuario {
@@ -18,9 +19,10 @@ public class ControllerUsuario {
         return instancia;
     }
 
-    public void agregarUsuario(String email, String nombre, TipoUsuario tipoDeUsuario) {
+    public String agregarUsuario(String email, String nombre, TipoUsuario tipoDeUsuario) {
         Usuario usuario = new Usuario(email, nombre, tipoDeUsuario);
         this.usuarios.add(usuario);
+        return email;
     }
 
     public boolean autenticar(String email) throws Exception {
@@ -31,7 +33,7 @@ public class ControllerUsuario {
         return usuario.autenticarse();
     }
 
-    private Usuario buscarUsuario(String email) {
+    protected Usuario buscarUsuario(String email) {
         Usuario usuarioEncontrado = null;
         for (Usuario u : usuarios) {
             if (u.getEmail() == email) {
@@ -39,6 +41,11 @@ public class ControllerUsuario {
             }
         }
         return usuarioEncontrado;
+    }
+
+    public UsuarioDTO buscarUsuarioDTO(String email) {
+        Usuario usuario = this.buscarUsuario(email);
+        return usuario.toDTO();
     }
 
 }

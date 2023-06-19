@@ -3,9 +3,11 @@ package controladores;
 import java.util.*;
 import modelos.Adopcion;
 import modelos.ClienteAdoptante;
+import modelos.Usuario;
 import modelos.dtos.AdopcionDTO;
 import modelos.dtos.ClienteAdoptanteDTO;
 import modelos.dtos.RecordatorioDTO;
+import modelos.dtos.UsuarioDTO;
 import modelos.Animal;
 
 public class ControllerAdopcion {
@@ -23,20 +25,25 @@ public class ControllerAdopcion {
         adopciones = new ArrayList<>();
     }
 
-    public int crearAdopcion(int animal, String emailCliente, String motivoDeAdopcion) {
+    public int crearAdopcion(int animal, String emailCliente, String motivoDeAdopcion, String emailVisitador) {
         Adopcion adopcion = new Adopcion(
                 ControllerAnimal.getInstancia().obtenerAnimal(animal),
                 ControllerClienteAdoptante.getInstancia().buscarClienteAdoptante(emailCliente),
                 motivoDeAdopcion);
+
+        Usuario visitador = ControllerUsuario.getInstancia().buscarUsuario(emailVisitador);
+        adopcion.getSeguimiento().setVisitador(visitador);
+
         this.adopciones.add(adopcion);
         return adopcion.getnumeroAdopcion();
     }
 
-    public void enviarNotificacion(int numeroAdopcion) {
+    public RecordatorioDTO enviarNotificacion(int numeroAdopcion) {
         Adopcion adopcion = this.buscarAdopcion(numeroAdopcion);
         RecordatorioDTO recordatorioDTO = new RecordatorioDTO(this.mensajeRecordatorio(), new Date(),
                 adopcion.getCliente().toDTO());
         adopcion.enviarNotificacion(recordatorioDTO);
+        return recordatorioDTO;
     }
 
     private String mensajeRecordatorio() {
@@ -59,12 +66,10 @@ public class ControllerAdopcion {
 
     public AdopcionDTO buscarAdopcionDTO(int numeroAdopcion) {
         Adopcion adopcion = this.buscarAdopcion(numeroAdopcion);
-        if(adopcion instanceof Adopcion){
+        if (adopcion instanceof Adopcion) {
             return adopcion.toDTO();
         }
         return null;
     }
 
-      
-    }
-
+}
