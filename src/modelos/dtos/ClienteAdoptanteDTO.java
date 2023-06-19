@@ -1,20 +1,25 @@
 package modelos.dtos;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import enums.TipoNotificacion;
 
 public class ClienteAdoptanteDTO {
      
-    public String nombre;
-    public String apellido;
-    public String estadoCivil;
-    public String email;
-    public String telefono;
-    public String ocupacion;
-    public List<String> tipoDeAnimalesInteresados;
-    public int cantidadAdopciones;
+    private String nombre;
+    private String apellido;
+    private String estadoCivil;
+    private String email;
+    private String telefono;
+    private String ocupacion;
+    private ArrayList<String> tipoDeAnimalesInteresados;
+    private Boolean otrasMascotas;
+    private String motivoAdopcion;
+    private TipoNotificacion tipoNotificacion;
+    private int cantidadAdopciones;
     
-    public ClienteAdoptanteDTO(String nombre, String apellido, String estadoCivil, String email, String telefono,
-            String ocupacion, List<String> tipoDeAnimalesInteresados, int cantidadAdopciones) {
+    public ClienteAdoptanteDTO(String nombre, String apellido, String estadoCivil, String email, String telefono,String ocupacion,
+    ArrayList<String> tipoDeAnimalesInteresados, Boolean otrasMascotas, TipoNotificacion tipoNotificacion, String motivoAdopcion, int cantidadAdopciones) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.estadoCivil = estadoCivil;
@@ -22,6 +27,9 @@ public class ClienteAdoptanteDTO {
         this.telefono = telefono;
         this.ocupacion = ocupacion;
         this.tipoDeAnimalesInteresados = tipoDeAnimalesInteresados;
+        this.otrasMascotas = otrasMascotas;
+        this.motivoAdopcion = motivoAdopcion;
+        this.tipoNotificacion = tipoNotificacion;
         this.cantidadAdopciones = cantidadAdopciones;
     }
 
@@ -73,22 +81,44 @@ public class ClienteAdoptanteDTO {
         this.ocupacion = ocupacion;
     }
 
-    public List<String> getTipoDeAnimalesInteresados() {
+    public ArrayList<String> getTipoDeAnimalesInteresados() {
         return tipoDeAnimalesInteresados;
     }
 
-    public void setTipoDeAnimalesInteresados(List<String> tipoDeAnimalesInteresados) {
+    public void setTipoDeAnimalesInteresados(ArrayList<String> tipoDeAnimalesInteresados) {
         this.tipoDeAnimalesInteresados = tipoDeAnimalesInteresados;
     }
 
-    public int getCantidadAdopciones() {
-        return cantidadAdopciones;
+    public Boolean getOtrasMascotas() {
+        return otrasMascotas;
     }
 
-    public void setCantidadAdopciones(int cantidadAdopciones) {
+    public void setOtrasMascotas(Boolean otrasMascotas) {
+        this.otrasMascotas = otrasMascotas;
+    }
+
+    public String getMotivoAdopcion(){
+        return motivoAdopcion;
+    }
+
+    public void setMotivoAdopcion(String motivoAdopcion){
+        this.motivoAdopcion = motivoAdopcion;
+    }
+
+    public TipoNotificacion getTipoNotificacion(){
+        return this.tipoNotificacion;
+    }
+
+    public void setTipoNotificacion(TipoNotificacion tipoNotificacion){
+        this.tipoNotificacion = tipoNotificacion;
+    }
+
+    public int getCantidadAdopciones(){
+        return this.cantidadAdopciones;
+    }
+
+    public void setCantidadAdopciones(int cantidadAdopciones){
         this.cantidadAdopciones = cantidadAdopciones;
     }
-
-    
 
 }

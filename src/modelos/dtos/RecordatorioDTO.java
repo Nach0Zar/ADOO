@@ -4,16 +4,16 @@ import java.util.*;
 
 public class RecordatorioDTO {
 
-    private ClienteAdoptanteDTO destinatario;
+    private ClienteAdoptanteDTO clienteAdoptanteDTO;
     private String mensaje;
     private Date fecha;
-    public RecordatorioDTO(String mensaje, Date fecha, ClienteAdoptanteDTO destinatario) {
+    public RecordatorioDTO(String mensaje, Date fecha, ClienteAdoptanteDTO clienteAdoptanteDTO) {
         this.mensaje = mensaje;
         this.fecha = fecha;
-        this.destinatario = destinatario;
+        this.clienteAdoptanteDTO = clienteAdoptanteDTO;
     }
     public ClienteAdoptanteDTO getDestinatario() {
-        return destinatario;
+        return clienteAdoptanteDTO;
     }
     public String getMensaje() {
         return mensaje;
@@ -21,8 +21,8 @@ public class RecordatorioDTO {
     public Date getFecha() {
         return fecha;
     }
-    public void setDestinatario(ClienteAdoptanteDTO destinatario) {
-        this.destinatario = destinatario;
+    public void setDestinatario(ClienteAdoptanteDTO clienteAdoptanteDTO) {
+        this.clienteAdoptanteDTO = clienteAdoptanteDTO;
     }
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;

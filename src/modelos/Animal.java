@@ -26,7 +26,7 @@ public class Animal {
         this.estadoSaludableAnimal = estadoSaludableAnimal;
         this.tipoDeAnimal = tipoDeAnimal;
         this.legajo = contadorLegajo++;
-        this.fichaMedica = new FichaMedica(this.legajo, this);
+        this.fichaMedica = new FichaMedica(this);
     }
     
 
@@ -103,6 +103,7 @@ public class Animal {
     }
 
     public AnimalDTO toDTO() {
-        return new AnimalDTO(this.domestico, this.altura, this.peso, this.edad, this.estadoSaludableAnimal, this.tipoDeAnimal, this.nombre, this.legajo, this.fichaMedica.getDTO());
+        return new AnimalDTO(this.domestico, this.altura, this.peso, this.edad, this.estadoSaludableAnimal, this.tipoDeAnimal,
+         this.nombre, this.legajo, this.fichaMedica.toDTO());
     }
 }

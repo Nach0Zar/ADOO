@@ -50,7 +50,7 @@ public class ControllerAnimal {
 
     public FichaMedicaDTO obtenerFichaMedica(int legajo) {
         Animal animal = obtenerAnimal(legajo);
-        return animal.getFichaMedica().getDTO();
+        return animal.getFichaMedica().toDTO();
     }
 
 

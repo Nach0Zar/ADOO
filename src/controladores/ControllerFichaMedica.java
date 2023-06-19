@@ -30,7 +30,7 @@ public class ControllerFichaMedica {
         fichasMedicas.add(fichaMedica);
     }
 
-    protected FichaMedica buscarFichaMedica(int legajo) {
+    protected FichaMedica buscarFichaMedica(int legajo ) {
         FichaMedica fichaM = null;
         for (FichaMedica FichaMedica : fichasMedicas) {
             if (FichaMedica.getLegajo() == (legajo)) {

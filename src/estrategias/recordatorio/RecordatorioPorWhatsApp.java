@@ -11,11 +11,6 @@ public class RecordatorioPorWhatsApp implements RecordatorioStrategy {
     public RecordatorioPorWhatsApp() {
         this.adapter = new AdapterWhatsApp();
     }
-
-    public RecordatorioPorWhatsApp(AdapterRecordadorWhatsApp adapter) {
-        super();
-        this.adapter = adapter;
-    }
  
     /**
      * @param recordatorio

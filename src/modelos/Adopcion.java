@@ -1,8 +1,8 @@
 package modelos;
 
-import enums.TipoNotificacion;
 import estados.adoptante.Habilitado;
 import estados.adoptante.IEstadoAdoptante;
+import modelos.dtos.RecordatorioDTO;
 
 public class Adopcion {
 
@@ -15,12 +15,12 @@ public class Adopcion {
     private Seguimiento seguimiento;
     private IEstadoAdoptante estadoAdopcion;
 
-    public Adopcion(Animal animal, ClienteAdoptante cliente, String motivoAdopcion, TipoNotificacion notif) {
+    public Adopcion(Animal animal, ClienteAdoptante cliente, String motivoAdopcion) {
         this.animal = animal;
         this.cliente = cliente;
         this.numeroAdopcion = numeradorAdopcion++;
         this.motivoAdopcion = motivoAdopcion;
-        this.seguimiento = new Seguimiento(notif);// creamos el seguimiento cuando creamos la adopcion
+        this.seguimiento = new Seguimiento();// creamos el seguimiento cuando creamos la adopcion
         this.estadoAdopcion = new Habilitado(); // Va estar hablitado
     }
 
@@ -49,27 +49,31 @@ public class Adopcion {
     }
 
     public Animal getAnimal() {
-        return animal;
+        return this.animal;
     }
 
     public ClienteAdoptante getCliente() {
-        return cliente;
+        return this.cliente;
     }
 
     public Integer getnumeroAdopcion() {
-        return numeroAdopcion;
+        return this.numeroAdopcion;
     }
 
     public String getMotivoAdopcion() {
-        return motivoAdopcion;
+        return this.motivoAdopcion;
     }
 
     public Seguimiento getSeguimiento() {
-        return seguimiento;
+        return this.seguimiento;
     }
 
     public IEstadoAdoptante getEstadoAdopcion() {
-        return estadoAdopcion;
+        return this.estadoAdopcion;
+    }
+
+    public void enviarNotificacion(RecordatorioDTO recordatorio) {
+        this.seguimiento.enviarRecordatorio(recordatorio);
     }
 
 }

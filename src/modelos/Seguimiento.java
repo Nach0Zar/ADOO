@@ -2,7 +2,9 @@ package modelos;
 
 import java.util.*;
 import modelos.dtos.RecordatorioDTO;
-import enums.TipoNotificacion;
+import estrategias.recordatorio.RecordatorioPorEmail;
+import estrategias.recordatorio.RecordatorioPorWhatsApp;
+import estrategias.recordatorio.RecordatorioPorSMS;
 
 public class Seguimiento {
 
@@ -10,16 +12,13 @@ public class Seguimiento {
     
     private Boolean continuarSeguimiento;
     private int numeroSeguimiento;
-    private TipoNotificacion tipoNotificacion;
-    private Recordador tipoNotificacionNotificador;
     private Recordador recordador;
     private Date frecuenciaVisita;
     private Encuesta encuesta;
     private ArrayList<Visita> visitas;
 
-    public Seguimiento(TipoNotificacion notif) {
-        this.tipoNotificacion = notif;
-        this.tipoNotificacionNotificador = new Recordador();
+    public Seguimiento() {
+        this.recordador = new Recordador(new RecordatorioPorSMS());
         this.numeroSeguimiento = numeradorSeguiemiento++;
         this.visitas = new ArrayList<Visita>();
 
@@ -35,23 +34,6 @@ public class Seguimiento {
 
     public int getNumeroSeguimientoAnimal() {
         return numeroSeguimiento;
-    }
-
-    public TipoNotificacion getTipoNotificacion() {
-        return tipoNotificacion;
-    }
-
-    public void setTipoNotificacion(TipoNotificacion tipoNotificacion) {
-        this.tipoNotificacion = tipoNotificacion;
-    }
-    
-
-    public Recordador getTipoNotificacionNotificador() {
-        return tipoNotificacionNotificador;
-    }
-
-    public void setTipoNotificacionNotificador(Recordador tipoNotificacionNotificador) {
-        this.tipoNotificacionNotificador = tipoNotificacionNotificador;
     }
 
     public Recordador getRecordador() {
@@ -91,7 +73,18 @@ public class Seguimiento {
      * @return
      */
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        this.tipoNotificacionNotificador.enviarRecordatorio(recordatorio);
+        switch(recordatorio.getDestinatario().getTipoNotificacion()){
+            case EMAIL:
+                recordador.setEstrategia(new RecordatorioPorEmail());
+                break;
+            case SMS:
+                recordador.setEstrategia(new RecordatorioPorSMS());
+                break;
+            case WHATSAPP:
+                recordador.setEstrategia(new RecordatorioPorWhatsApp());
+                break;
+        }
+        this.recordador.enviarRecordatorio(recordatorio);
     }
 
 }

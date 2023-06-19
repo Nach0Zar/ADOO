@@ -3,6 +3,8 @@ package modelos;
 
 import java.util.*;
 
+import modelos.dtos.TratamientoDTO;
+
 /**
  * 
  */
@@ -77,4 +79,7 @@ public class Tratamiento {
         this.descripcion = descripcion;
     }
 
+    public TratamientoDTO toDTO() {
+        return new TratamientoDTO(this.finalizado, this.numeroTratamiento, this.fechaInicio, this.fechaFin, this.nombre, this.descripcion);
+    }
 }

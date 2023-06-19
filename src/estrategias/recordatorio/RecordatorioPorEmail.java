@@ -12,12 +12,6 @@ public class RecordatorioPorEmail implements RecordatorioStrategy {
         this.adapter = new AdapterEmail();
     }
 
-    public RecordatorioPorEmail(AdapterRecordadorEmail adapter) {
-        super();
-        this.adapter = adapter;
-    }
-    
-
     /**
      * @param recordatorio 
      * @return void

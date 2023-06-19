@@ -1,10 +1,10 @@
 package controladores;
 
 import java.util.ArrayList;
-import enums.TipoNotificacion;
 import java.util.*;
 import modelos.Adopcion;
 import modelos.ClienteAdoptante;
+import modelos.dtos.RecordatorioDTO;
 import modelos.Animal;
 
 public class ControllerAdopcion {
@@ -26,12 +26,18 @@ public class ControllerAdopcion {
         Adopcion adopcion = new Adopcion(
                 animal,
                 clienteAdoptante,
-                motivoAdopcion(),
-                TipoNotificacion.SMS);//default en SMS
+                this.motivoAdopcion()
+                );
                 
 
         this.adopciones.add(adopcion);
         adopcionNueva(adopcion, clienteAdoptante, animal);
+    }
+
+    public void enviarNotificacion(int numeroAdopcion ){
+        Adopcion adopcion = this.buscarAdopcion(numeroAdopcion);
+        RecordatorioDTO recordatorioDTO = new RecordatorioDTO(this.mensajeRecordatorio(), new Date(),adopcion.getCliente().toDTO());
+        adopcion.enviarNotificacion(recordatorioDTO);
     }
 
     private void adopcionNueva(Adopcion adopcion, ClienteAdoptante clienteAdoptante, Animal animal) {
@@ -44,6 +50,14 @@ public class ControllerAdopcion {
         String motivoAdop = entradaScanner.nextLine();
         entradaScanner.close();
         return motivoAdop;
+    }
+
+     private String mensajeRecordatorio() {
+        System.out.println("Mensaje de recordatorio  :");
+        Scanner entradaScanner = new Scanner(System.in);
+        String mensajeRecordatorio = entradaScanner.nextLine();
+        entradaScanner.close();
+        return mensajeRecordatorio;
     }
 
     public Adopcion buscarAdopcion(int numero) {

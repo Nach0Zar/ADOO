@@ -1,22 +1,21 @@
 package modelos;
 
 import java.util.*;
-import modelos.dtos.FichaMedicaDTO;
+import modelos.dtos.*;
 
 public class FichaMedica {
+    
+
     private Exportador exportador;
     private ArrayList <Tratamiento> tratamientos;
     private ArrayList <Alarma> alarmas;
-    private int legajo;
     private Animal animal;
 
 
-    public FichaMedica(int legajo, Animal animal) {
+    public FichaMedica(Animal animal) {
         this.tratamientos = new ArrayList<Tratamiento>();
         this.alarmas = new ArrayList<Alarma>();
         this.exportador = new Exportador();
-        this.legajo = legajo;
-        this.animal = animal;
     }
 
     //getters y setters
@@ -35,14 +34,6 @@ public class FichaMedica {
 
     public void setTratamientos(ArrayList<Tratamiento> tratamientos) {
         this.tratamientos = tratamientos;
-    }
-
-    public int getLegajo() {
-        return legajo;
-    }
-
-    public void setLegajo(int legajo) {
-        this.legajo = legajo;
     }
 
     public ArrayList<Alarma> getAlarmas() {
@@ -71,6 +62,11 @@ public class FichaMedica {
         return tratamiento;
     }
 
+    //
+    //
+    // TODO TIENE QUE ESTAR EN ANIMAL
+    //
+    //
     public void crearTratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin) {
         if(animal.getEstadoSaludableAnimal()){                                      //Siempre que el estado no sea saludable, tiene un tratamiento activo
             Tratamiento tratamiento = new Tratamiento(nombre, descripcion, fechaInicio, fechaFin);
@@ -83,10 +79,6 @@ public class FichaMedica {
         }
     }
 
-    public void agregarTratamiento(Tratamiento tratamiento) {
-        tratamientos.add(tratamiento);
-    }
-
     public void finalizarTratamiento(int id) {
         Tratamiento tratamiento = buscarTratamiento(id);
         tratamiento.setFinalizado(true);
@@ -94,8 +86,27 @@ public class FichaMedica {
         System.out.println("Ha finalizado el tratamiento: " + tratamiento.getNombre());
     }
 
-    public FichaMedicaDTO getDTO() {
-        return null;
+    //
+    //
+    //TIENE QUE ESTAR EN ANIMAL
+    //
+    //
+
+    public void agregarTratamiento(Tratamiento tratamiento) {
+        tratamientos.add(tratamiento);
+    }
+
+    public FichaMedicaDTO toDTO() {
+        ArrayList<TratamientoDTO> tratamientosDTO = new ArrayList<TratamientoDTO>();
+        ArrayList<AlarmaDTO> alarmasDTO = new ArrayList<AlarmaDTO>();
+        AnimalDTO animalDTO = animal.toDTO();
+        for (Tratamiento t : tratamientos) {
+            tratamientosDTO.add(t.toDTO());
+        }
+        for (Alarma a : alarmas) {
+            alarmasDTO.add(a.toDTO());
+        }
+        return new FichaMedicaDTO(tratamientosDTO, alarmasDTO, animalDTO);
     }
 
     //Fin tratamientos

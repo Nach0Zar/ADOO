@@ -11,12 +11,6 @@ public class RecordatorioPorSMS implements RecordatorioStrategy {
         this.adapter = new AdapterSMS();
     }
 
-    public RecordatorioPorSMS(AdapterRecordadorSMS adapter) {
-        super();
-        this.adapter = adapter;
-    }
-    
-
     /**
      * @param recordatorio 
      * @return void
