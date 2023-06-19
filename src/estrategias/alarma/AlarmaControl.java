@@ -1,13 +1,51 @@
 package estrategias.alarma;
 
-import modelos.dtos.AlarmaDTO;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AlarmaControl implements ITipoAlarma {
-
-    @Override
-    public void crearAlarma(AlarmaDTO alarma) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'crearAlarma'");
-    }
     
+    //atributos
+    private ArrayList<Accion> acciones;    
+
+    //constructor
+    public AlarmaControl() {
+        
+        acciones = new ArrayList<Accion>();
+        crearAlarma();
+    }
+
+    
+    public void crearAlarma() {
+        System.out.println("Ingrese las acciones a realizar para esta alarma, utilize -1 para salir");
+        while (true){
+            System.out.println("Ingrese el nombre de la accion");
+            Scanner entradaNombre = new Scanner(System.in); 
+            String nombreAccion = entradaNombre.nextLine();
+            entradaNombre.close();
+            if (nombreAccion.equals("-1")) {
+                break;
+            }
+
+            System.out.println("Ingrese la descripcion de la accion");
+            String descripcionAccion = entradaNombre.nextLine();
+
+
+            Accion accion = new Accion(nombreAccion, descripcionAccion);
+            acciones.add(accion);
+
+        }
+        System.out.println("La alarma quedo seteada para el control del animal");
+            
+        
+    }
+
+    public ArrayList<Accion> getAcciones() {
+        return acciones;
+    }
+
+    public void setAcciones(ArrayList<Accion> acciones) {
+        this.acciones = acciones;
+    }
+
 }

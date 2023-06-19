@@ -95,15 +95,14 @@ public class Seguimiento {
     public void setVisitas(ArrayList<Visita> visitas) {
         this.visitas = visitas;
     }
-
-
-
+    
     /**
      * @param recordatorio
      * @return
      */
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        // TODO implement here
+        //no se como hacerlo
+        
     }
 
 }
