@@ -101,8 +101,7 @@ public class Seguimiento {
      * @return
      */
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        //no se como hacerlo
-        
+        // TODO implement here
     }
 
 }
