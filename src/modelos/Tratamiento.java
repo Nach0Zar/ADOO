@@ -8,6 +8,8 @@ import java.util.*;
  */
 public class Tratamiento {
 
+    private static int id = 1;
+
     private Boolean finalizado; //Estado del tratamiento
     private int idTratamiento;
     private Date fechaInicio;
@@ -17,8 +19,8 @@ public class Tratamiento {
 
 
 
-    public Tratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin, int idTratamiento) {
-        this.idTratamiento = idTratamiento;
+    public Tratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin) {
+        this.idTratamiento = id++;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.nombre = nombre;

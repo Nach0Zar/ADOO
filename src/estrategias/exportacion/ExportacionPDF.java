@@ -1,18 +1,17 @@
 package estrategias.exportacion;
 
-import java.util.*;
-
-import adaptador.exportador.excel.AdapterExportadorExcel;
+import adaptador.exportador.pdf.AdapterExportadorPDF;
+import adaptador.exportador.pdf.AdapterPDF;
 import modelos.dtos.FichaMedicaDTO;
 
 public class ExportacionPDF implements ExportacionStrategy {
 
-    public ExportacionPDF(AdapterExportadorExcel adapter) {
-        this.adapter = adapter;
+    AdapterExportadorPDF adapter;
+
+    public ExportacionPDF() {
+        this.adapter = new AdapterPDF();
     }
-
-    AdapterExportadorExcel adapter;
-
+    
     /**
      * @param fichaMedica 
      * @return

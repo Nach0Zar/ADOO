@@ -3,6 +3,7 @@ package adaptador.exportador.excel;
 import modelos.dtos.FichaMedicaDTO;
 
 public class AdapterExcel implements AdapterExportadorExcel {
+    
     public AdapterExcel() {
     }
 

@@ -1,7 +1,5 @@
 package estados.adoptante;
 
-import java.util.*;
-
 import modelos.Animal;
 import modelos.ClienteAdoptante;
 import modelos.Adopcion;

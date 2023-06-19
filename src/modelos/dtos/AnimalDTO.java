@@ -2,8 +2,6 @@ package modelos.dtos;
 
 import enums.TipoAnimal;
 
-import modelos.FichaMedica;
-
 
 public class AnimalDTO {
 
@@ -14,10 +12,10 @@ public class AnimalDTO {
     private Boolean estadoSaludableAnimal;
     private TipoAnimal tipoDeAnimal;
     private String nombre;
-    private String legajo;
-    private FichaMedica fichaMedica;
+    private int legajo;
+    private FichaMedicaDTO fichaMedica;
 
-    public AnimalDTO(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal, TipoAnimal tipoDeAnimal, String nombre, String legajo, FichaMedica fichaMedica) {
+    public AnimalDTO(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal, TipoAnimal tipoDeAnimal, String nombre, int legajo, FichaMedicaDTO fichaMedica) {
         this.domestico = domestico;
         this.altura = altura;
         this.peso = peso;
@@ -85,19 +83,19 @@ public class AnimalDTO {
         return this.nombre;
     }
 
-    public void setLegajo(String legajo) {
+    public void setLegajo(int legajo) {
         this.legajo = legajo;
     }
 
-    public String getLegajo() {
+    public int getLegajo() {
         return this.legajo;
     }
 
-    public void setFichaMedica(FichaMedica fichaMedica) {
+    public void setFichaMedica(FichaMedicaDTO fichaMedica) {
         this.fichaMedica = fichaMedica;
     }
 
-    public FichaMedica getFichaMedica() {
+    public FichaMedicaDTO getFichaMedica() {
         return this.fichaMedica;
     }
 

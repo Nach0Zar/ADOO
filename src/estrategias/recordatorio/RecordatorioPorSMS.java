@@ -1,8 +1,5 @@
 package estrategias.recordatorio;
 
-
-import java.util.*;
-
 import adaptador.recordatorio.sms.AdapterRecordadorSMS;
 import modelos.dtos.RecordatorioDTO;
 public class RecordatorioPorSMS implements RecordatorioStrategy {

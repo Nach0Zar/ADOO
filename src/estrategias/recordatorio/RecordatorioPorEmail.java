@@ -1,7 +1,5 @@
 package estrategias.recordatorio;
 
-import java.util.*;
-
 import adaptador.recordatorio.email.AdapterRecordadorEmail;
 import modelos.dtos.RecordatorioDTO;
 

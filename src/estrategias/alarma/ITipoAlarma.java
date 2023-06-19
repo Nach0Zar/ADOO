@@ -1,7 +1,5 @@
 package estrategias.alarma;
 
-import java.util.*;
-
 import modelos.dtos.AlarmaDTO;
 
 /**

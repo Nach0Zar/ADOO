@@ -1,7 +1,6 @@
 package modelos;
 import adaptador.autenticar.AdapterAutenticador;
 import adaptador.autenticar.Autenticador;
-import modelos.dtos.UsuarioDTO;
 
 public class Usuario {
 	private AdapterAutenticador adaptadorAuntentidor ;

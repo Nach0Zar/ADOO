@@ -1,17 +1,16 @@
 package modelos;
 
-
-import java.util.*;
-
+import estrategias.recordatorio.RecordatorioPorWhatsApp;
 import estrategias.recordatorio.RecordatorioStrategy;
 import modelos.dtos.RecordatorioDTO;
 
 public class Recordador {
-    public Recordador(RecordatorioStrategy recordatorioStrategy) {
-        this.estrategiaRecordatorio = recordatorioStrategy;
-    }
+    
     private RecordatorioStrategy estrategiaRecordatorio;
 
+    public Recordador() {
+        this.estrategiaRecordatorio = new RecordatorioPorWhatsApp();
+    }
     /**
      * @param recodatorio 
      * @return void

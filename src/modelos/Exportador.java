@@ -1,14 +1,16 @@
 package modelos;
 
-import java.util.*;
-
+import estrategias.exportacion.ExportacionPDF;
 import estrategias.exportacion.ExportacionStrategy;
 import modelos.dtos.FichaMedicaDTO;
+
 public class Exportador {
-    public Exportador(ExportacionStrategy estrategiaExportacion) {
-        this.estrategiaExportacion = estrategiaExportacion;
-    }
+    
     private ExportacionStrategy estrategiaExportacion;
+
+    public Exportador() {
+        this.estrategiaExportacion = new ExportacionPDF();
+    }
 
     /**
      * @param fichaMedica

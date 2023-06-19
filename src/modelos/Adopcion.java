@@ -1,22 +1,23 @@
 package modelos;
 
-import java.util.*;
 import estados.adoptante.Habilitado;
 import estados.adoptante.IEstadoAdoptante;
 
 public class Adopcion {
 
+    private static int idAutoIncremental = 0;
+
     private Animal animal;
     private ClienteAdoptante cliente;
-    private Integer id;
+    private int id;
     private String motivoAdopcion;
     private Seguimiento seguimiento;
     private IEstadoAdoptante estadoAdopcion;
 
-    public Adopcion(Animal animal, ClienteAdoptante cliente, int id, String motivoAdopcion, TipoNotificacion notif) {
+    public Adopcion(Animal animal, ClienteAdoptante cliente, String motivoAdopcion, TipoNotificacion notif) {
         this.animal = animal;
         this.cliente = cliente;
-        this.id = id;
+        this.id = idAutoIncremental++;
         this.motivoAdopcion = motivoAdopcion;
         this.seguimiento = new Seguimiento(id, notif);// creamos el seguimiento cuando creamos la adopcion
         this.estadoAdopcion = new Habilitado(); // Va estar hablitado
@@ -34,7 +35,7 @@ public class Adopcion {
         this.cliente = cliente;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

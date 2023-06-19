@@ -3,7 +3,6 @@ package modelos.dtos;
 import java.time.Duration;
 
 import adaptador.notificacion.INotificationPush;
-import estados.alarma.IEstadoAlarma;
 import estrategias.alarma.ITipoAlarma;
 import modelos.Animal;
 

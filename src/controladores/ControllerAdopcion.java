@@ -23,11 +23,9 @@ public class ControllerAdopcion {
     }
 
     public void crearAdopcion(Animal animal, ClienteAdoptante clienteAdoptante, String motivoDeAdopcion) {
-        int id = generarId();
         Adopcion adopcion = new Adopcion(
                 animal,
                 clienteAdoptante,
-                id,
                 motivoAdopcion(),
                 TipoNotificacion.SMS);
 
@@ -37,14 +35,6 @@ public class ControllerAdopcion {
 
     private void adopcionNueva(Adopcion adopcion, ClienteAdoptante clienteAdoptante, Animal animal) {
         adopcion.adopcionNueva(clienteAdoptante, animal);
-    }
-
-    private int generarId() {
-        int legajo = 0;
-        for (Adopcion adopcion : adopciones) {
-            legajo = legajo + 1;
-        }
-        return legajo + 1;
     }
 
     private String motivoAdopcion() {

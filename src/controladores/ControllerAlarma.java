@@ -1,5 +1,4 @@
 package controladores;
-import java.util.*;
 
 import modelos.Animal;
 import modelos.dtos.AlarmaDTO;
@@ -8,22 +7,34 @@ import modelos.dtos.AlarmaDTO;
  * 
  */
 public class ControllerAlarma {
+    
+    private Animal animal;
+    private AlarmaDTO alarma;
 
     /**
      * Default constructor
      */
-    public ControllerAlarma() {
+    
+    public ControllerAlarma(Animal animal, AlarmaDTO alarma) {
+        this.animal = animal;
+        this.alarma = alarma;
     }
 
-    /**
-     * 
-     */
-    private Animal animal;
+    public Animal getAnimal() {
+        return animal;
+    }
 
-    /**
-     * 
-     */
-    private AlarmaDTO alarma;
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public AlarmaDTO getAlarma() {
+        return alarma;
+    }
+
+    public void setAlarma(AlarmaDTO alarma) {
+        this.alarma = alarma;
+    }
 
     /**
      * @param AlarmaDTO alarma 

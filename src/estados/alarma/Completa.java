@@ -1,8 +1,5 @@
 package estados.alarma;
 
-
-import java.util.*;
-
 import modelos.Alarma;
 
 /**
@@ -10,15 +7,19 @@ import modelos.Alarma;
  */
 public class Completa implements IEstadoAlarma {
 
-    /**
-     * 
-     */
     private Alarma alarma;
 
-    /**
-     * Default constructor
-     */
-    public Completa() {
+
+    public Completa(Alarma alarma) {
+        this.alarma = alarma;
+    }
+
+    public Alarma getAlarma() {
+        return alarma;
+    }
+
+    public void setAlarma(Alarma alarma) {
+        this.alarma = alarma;
     }
 
     /**
