@@ -1,7 +1,6 @@
 package controladores;
 
 import java.util.ArrayList;
-import java.util.Date;
 import modelos.Seguimiento;
 import modelos.Adopcion;
 

@@ -1,8 +1,12 @@
 package modelos;
 
 import enums.TipoAnimal;
+import modelos.dtos.AnimalDTO;
 
 public class Animal {
+
+    private static int contadorLegajo = 1;
+
 
     private Boolean domestico;
     private Float altura;
@@ -11,19 +15,20 @@ public class Animal {
     private Boolean estadoSaludableAnimal;
     private TipoAnimal tipoDeAnimal;
     private String nombre;
-    private String legajo;
+    private int legajo;
     private FichaMedica fichaMedica;
 
-    public Animal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal, TipoAnimal tipoDeAnimal, String nombre, String legajo) {
+    public Animal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal, TipoAnimal tipoDeAnimal, String nombre) {
         this.domestico = domestico;
         this.altura = altura;
         this.peso = peso;
         this.edad = edad;
         this.estadoSaludableAnimal = estadoSaludableAnimal;
         this.tipoDeAnimal = tipoDeAnimal;
-        this.nombre = nombre;
-        this.legajo = legajo;
+        this.legajo = contadorLegajo++;
+        this.fichaMedica = new FichaMedica(this.legajo, this);
     }
+    
 
     public void setDomestico(Boolean domestico) {
         this.domestico = domestico;
@@ -81,11 +86,11 @@ public class Animal {
         return this.nombre;
     }
 
-    public void setLegajo(String legajo) {
+    public void setLegajo(int legajo) {
         this.legajo = legajo;
     }
 
-    public String getLegajo() {
+    public int getLegajo() {
         return this.legajo;
     }
 
@@ -98,13 +103,7 @@ public class Animal {
     }
 
 
-    /*
-    public void crearEstadoAnimal() {
-        
+    public AnimalDTO getDTO() {
+        return new AnimalDTO(this.domestico, this.altura, this.peso, this.edad, this.estadoSaludableAnimal, this.tipoDeAnimal, this.nombre, this.legajo, this.fichaMedica.getDTO());
     }
-
-    public void cambiarEstadoAnimal() {
-        
-    }
-*/
 }

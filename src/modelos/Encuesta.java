@@ -1,7 +1,5 @@
 package modelos;
 
-import java.util.*;
-
 import enums.Calificacion;
 
 public class Encuesta {

@@ -3,8 +3,10 @@ package controladores;
 
 import java.util.*;
 
+import estrategias.exportacion.ExportacionExcel;
+import estrategias.exportacion.ExportacionPDF;
 import modelos.FichaMedica;
-import modelos.dtos.FichaMedicaDTO;
+import modelos.Tratamiento;
 
 /**
  * 
@@ -28,10 +30,10 @@ public class ControllerFichaMedica {
         fichasMedicas.add(fichaMedica);
     }
 
-    protected FichaMedica buscarFichaMedica(String legajo) {
+    protected FichaMedica buscarFichaMedica(int legajo) {
         FichaMedica fichaM = null;
         for (FichaMedica FichaMedica : fichasMedicas) {
-            if (FichaMedica.getLegajo().equals(legajo)) {
+            if (FichaMedica.getLegajo() == (legajo)) {
                 fichaM = FichaMedica;
                 break;
             }
@@ -40,24 +42,23 @@ public class ControllerFichaMedica {
     }
 
     //acá esta tipoExportacion es un String, no un enum. Hay que cambiarlo
-    public void exportarFichaMedica(String legajo, String tipoExportacion) {
+    public void exportarFichaMedica(int legajo, String tipoExportacion) {
         FichaMedica ficha = buscarFichaMedica(legajo);
-        //Por que me agrega anObject?
         //Hay que crear los export
         if (tipoExportacion.equals("Excel")) {
-            ficha.getExportador().setEstrategiaExportacion(new ExportarExcel());
+            ficha.getExportador().setEstrategia(new ExportacionExcel());
             System.out.println("Se ha exportado en Excel");
         }
         if (tipoExportacion.equals("PDF")) {
-            ficha.getExportador().setEstrategiaExportacion(new ExportarPDF());
+            ficha.getExportador().setEstrategia(new ExportacionPDF());
             System.out.println("Se ha exportado en PDF");
         }
 
     }
 
-    public void agregarTratamiento(String legajo, String nombre, String descripcion, Date fechaInicio, Date fechaFin) {
-        FichaMedica ficha = buscarFichaMedica(legajo);
-        fichaMedica.agregarTratamiento(nombre, descripcion, fechaInicio, fechaFin);
+    public void agregarTratamiento(int legajoFichaMedica, String nombre, String descripcion, Date fechaInicio, Date fechaFin) {
+        FichaMedica fichaMedica = buscarFichaMedica(legajoFichaMedica);
+        fichaMedica.agregarTratamiento(new Tratamiento(nombre, descripcion, fechaInicio, fechaFin));
     }
 
 }

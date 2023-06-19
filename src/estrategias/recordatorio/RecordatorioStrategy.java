@@ -1,8 +1,5 @@
 package estrategias.recordatorio;
 
-
-import java.util.*;
-
 import modelos.dtos.RecordatorioDTO;
 
 /**

@@ -2,7 +2,6 @@ package controladores;
 
 import java.util.*;
 import modelos.Usuario;
-import modelos.dtos.UsuarioDTO;
 
 public class ControllerUsuario {
     private ArrayList<Usuario> usuarios;

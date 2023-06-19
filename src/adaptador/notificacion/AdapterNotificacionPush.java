@@ -1,8 +1,5 @@
 package adaptador.notificacion;
 
-
-import java.util.*;
-
 import modelos.dtos.AlarmaDTO;
 
 /**

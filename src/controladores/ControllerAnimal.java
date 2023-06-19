@@ -11,7 +11,6 @@ public class ControllerAnimal {
 
     private ArrayList<Animal> animales;
     private static ControllerAnimal instancia;
-    public static int proximoLegajo = 1;    //de esta forma creo un legajo automatico
 
     public ControllerAnimal() {
         animales = new ArrayList<Animal>();
@@ -31,18 +30,16 @@ public class ControllerAnimal {
             animalDTO.getEdad(), 
             animalDTO.getEstadoSaludableAnimal(), 
             animalDTO.getTipoDeAnimal(),
-            animalDTO.getNombre(), 
-            proximoLegajo++ 
+            animalDTO.getNombre()
         );
-        animal.crearFichaMedica();
         animales.add(animal);
     }
- 
-    public AnimalDTO obtenerAnimal(String legajo) {
+
+    public AnimalDTO obtenerAnimalDTO(int legajo) {
         Animal animalBuscar = null;
 
         for (Animal animal : animales) {
-            if (animal.getLegajo().equals(legajo)) {
+            if (animal.getLegajo() == legajo) {
                 animalBuscar = animal;
                 break;
             }
@@ -51,14 +48,22 @@ public class ControllerAnimal {
     }
 
 
-    public FichaMedicaDTO obtenerFichaMedica(String legajo) {
+    public FichaMedicaDTO obtenerFichaMedica(int legajo) {
         Animal animal = obtenerAnimal(legajo);
         return animal.getFichaMedica().getDTO();
     }
 
+
+    private Animal obtenerAnimal(int legajo){
+        for (Animal animal : animales)
+            if (animal.getLegajo() == legajo)
+                return animal;
+        return null;
+    }
+
   
     public void ingresarAnimal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoAnimal, TipoAnimal tipoDeAnimal, String nombre, String legajo) {
-        Animal animal = new Animal(domestico, altura, peso, edad, estadoAnimal, tipoDeAnimal, nombre, legajo);
+        Animal animal = new Animal(domestico, altura, peso, edad, estadoAnimal, tipoDeAnimal, nombre);
         animales.add(animal);
     }
 

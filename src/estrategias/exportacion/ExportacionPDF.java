@@ -1,21 +1,17 @@
 package estrategias.exportacion;
 
-
-import java.util.*;
-
+import adaptador.exportador.pdf.AdapterExportadorPDF;
+import adaptador.exportador.pdf.AdapterPDF;
 import modelos.dtos.FichaMedicaDTO;
 
-/**
- * 
- */
 public class ExportacionPDF implements ExportacionStrategy {
 
-    /**
-     * Default constructor
-     */
-    public ExportacionPDF() {
-    }
+    AdapterExportadorPDF adapter;
 
+    public ExportacionPDF() {
+        this.adapter = new AdapterPDF();
+    }
+    
     /**
      * @param fichaMedica 
      * @return
@@ -23,8 +19,7 @@ public class ExportacionPDF implements ExportacionStrategy {
 
     @Override
     public void exportarFichaMedica(FichaMedicaDTO fichaMedica) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exportarFichaMedica'");
+        this.adapter.exportarFichaMedica(fichaMedica);
     }
 
 }

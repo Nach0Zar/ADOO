@@ -1,29 +1,24 @@
 package estrategias.exportacion;
 
-
-import java.util.*;
-
+import adaptador.exportador.excel.AdapterExcel;
+import adaptador.exportador.excel.AdapterExportadorExcel;
 import modelos.dtos.FichaMedicaDTO;
 
-/**
- * 
- */
 public class ExportacionExcel implements ExportacionStrategy {
 
-    /**
-     * Default constructor
-     */
+    AdapterExportadorExcel adapter;
+
     public ExportacionExcel() {
+        this.adapter = new AdapterExcel();
     }
 
     /**
      * @param fichaMedica 
-     * @return
+     * @return void
      */
     @Override
     public void exportarFichaMedica(FichaMedicaDTO fichaMedica) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'exportarFichaMedica'");
+        this.adapter.exportarFichaMedica(fichaMedica);
     }
 
 }

@@ -23,11 +23,9 @@ public class ControllerAdopcion {
     }
 
     public void crearAdopcion(Animal animal, ClienteAdoptante clienteAdoptante, String motivoDeAdopcion) {
-        int id = generarId();
         Adopcion adopcion = new Adopcion(
                 animal,
                 clienteAdoptante,
-                id,
                 motivoAdopcion(),
                 TipoNotificacion.SMS);
 
@@ -39,18 +37,11 @@ public class ControllerAdopcion {
         adopcion.adopcionNueva(clienteAdoptante, animal);
     }
 
-    private int generarId() {
-        int legajo = 0;
-        for (Adopcion adopcion : adopciones) {
-            legajo = legajo + 1;
-        }
-        return legajo + 1;
-    }
-
     private String motivoAdopcion() {
         System.out.println("Motivo de adopcion :");
         Scanner entradaScanner = new Scanner(System.in);
         String motivoAdop = entradaScanner.nextLine();
+        entradaScanner.close();
         return motivoAdop;
     }
 

@@ -1,4 +1,4 @@
-package modelos;
+package estrategias.alarma;
 
 public class Accion {
 
