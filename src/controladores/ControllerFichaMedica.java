@@ -9,7 +9,6 @@ import modelos.FichaMedica;
 import modelos.Tratamiento;
 import modelos.Animal;
 import modelos.dtos.FichaMedicaDTO;
-import controladores.ControllerAnimal;
 import enums.TipoExportacion;
 
 /**

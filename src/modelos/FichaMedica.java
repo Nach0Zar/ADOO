@@ -3,8 +3,6 @@ package modelos;
 import java.util.*;
 import modelos.dtos.*;
 import enums.TipoExportacion;
-import estrategias.exportacion.ExportacionExcel;
-import estrategias.exportacion.ExportacionPDF;
 
 public class FichaMedica {
     

@@ -2,13 +2,9 @@ package controladores;
 
 import java.util.*;
 import modelos.Adopcion;
-import modelos.ClienteAdoptante;
 import modelos.Usuario;
 import modelos.dtos.AdopcionDTO;
-import modelos.dtos.ClienteAdoptanteDTO;
 import modelos.dtos.RecordatorioDTO;
-import modelos.dtos.UsuarioDTO;
-import modelos.Animal;
 
 public class ControllerAdopcion {
 
