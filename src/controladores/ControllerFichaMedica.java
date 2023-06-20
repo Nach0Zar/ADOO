@@ -48,6 +48,7 @@ public class ControllerFichaMedica {
     //acá esta tipoExportacion es un String, no un enum. Hay que cambiarlo
     public void exportarFichaMedica(int legajo, TipoExportacion tipoExportacion) {
         FichaMedica ficha = buscarFichaMedica(legajo);
+        
         //Hay que crear los export
         switch(tipoExportacion){
             case PDF:

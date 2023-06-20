@@ -59,6 +59,7 @@ public class ControllerAnimal {
             TipoAnimal tipoDeAnimal, String nombre) {
         Animal animal = new Animal(domestico, altura, peso, edad, estadoAnimal, tipoDeAnimal, nombre);
         animales.add(animal);
+        ControllerFichaMedica.getInstancia().agregarFichaMedica(animal.getFichaMedica());
         return animal.getLegajo();
     }
 

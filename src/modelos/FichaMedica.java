@@ -80,7 +80,7 @@ public class FichaMedica {
         for (Alarma a : alarmas) {
             alarmasDTO.add(a.toDTO());
         }
-        return new FichaMedicaDTO(tratamientosDTO, alarmasDTO, this.animal);
+        return new FichaMedicaDTO(tratamientosDTO, alarmasDTO, this.animal, this.legajo);
     }
 
     public int getLegajo(){

@@ -85,8 +85,10 @@ public class App {
 
         // exportar ficha medica en ambos formatos
 
-        controladorFichaMedica.exportarFichaMedica(numeroAdopcion, TipoExportacion.EXCEL);
-        //controladorFichaMedica.exportarFichaMedica(numeroAdopcion, TipoExportacion.PDF);
+        FichaMedicaDTO fichaMedicaDTO1 = controladorFichaMedica.obtenerFichaMedicaDTO(legajo);
+        FichaMedicaDTO fichaMedicaDTO2 = controladorFichaMedica.obtenerFichaMedicaDTO(legajo2);
+        controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO1.getLegajo(), TipoExportacion.EXCEL);
+        controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO2.getLegajo(), TipoExportacion.PDF);
 
     }
 }
