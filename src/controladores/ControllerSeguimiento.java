@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 import enums.Calificacion;
 import modelos.Seguimiento;
-import modelos.Usuario;
-import modelos.Visita;
-import modelos.dtos.UsuarioDTO;
 import modelos.Adopcion;
 
 public class ControllerSeguimiento {
