@@ -4,6 +4,7 @@ import java.util.*;
 import enums.Calificacion;
 
 public class Visita {
+    
     private String comentario;
     private Date fecha;
     private Usuario visitador;

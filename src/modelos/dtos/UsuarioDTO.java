@@ -2,6 +2,7 @@ package modelos.dtos;
 import enums.TipoUsuario;
 
 public class UsuarioDTO {
+    
     private String nombre;
     private String email;
     private TipoUsuario tipoUsuario;

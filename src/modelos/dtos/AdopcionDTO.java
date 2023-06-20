@@ -2,24 +2,24 @@ package modelos.dtos;
 
 public class AdopcionDTO {
 
-    private AnimalDTO animal;
-    private ClienteAdoptanteDTO cliente;
+    private AnimalDTO animalDTO;
+    private ClienteAdoptanteDTO clienteAdoptanteDTO;
     private int numeroAdopcion;
     private String motivoAdopcion;
 
     public AdopcionDTO(AnimalDTO animal, ClienteAdoptanteDTO cliente, int numeroAdopcion, String motivoAdopcion) {
-        this.animal = animal;
-        this.cliente = cliente;
+        this.animalDTO = animal;
+        this.clienteAdoptanteDTO = cliente;
         this.numeroAdopcion = numeroAdopcion;
         this.motivoAdopcion = motivoAdopcion;
     }
 
     public AnimalDTO getAnimalDTO() {
-        return animal;
+        return animalDTO;
     }
 
     public ClienteAdoptanteDTO getClienteDTO() {
-        return cliente;
+        return clienteAdoptanteDTO;
     }
 
     public int getNumeroAdopcion() {

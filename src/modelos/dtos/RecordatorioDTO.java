@@ -7,6 +7,7 @@ public class RecordatorioDTO {
     private ClienteAdoptanteDTO clienteAdoptanteDTO;
     private String mensaje;
     private Date fecha;
+    
     public RecordatorioDTO(String mensaje, Date fecha, ClienteAdoptanteDTO clienteAdoptanteDTO) {
         this.mensaje = mensaje;
         this.fecha = fecha;

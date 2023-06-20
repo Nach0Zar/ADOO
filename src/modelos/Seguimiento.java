@@ -31,8 +31,8 @@ public class Seguimiento {
         visitaNueva.completarEncuesta(estadoAnimal, limpieza, ambiente);
         visitas.add(visitaNueva);
         // solo para probar
-        System.out.println("Se creo la visita  con el comentario =   " + visitaNueva.getComentario()
-                + "tenes esta cantidad de visitas : " + cantidadVisitas());
+        System.out.println("Se creo la visita  con el comentario = " + visitaNueva.getComentario()
+                + " Tenes esta cantidad de visitas : " + cantidadVisitas());
     }
 
     public Boolean getContinuarSeguimiento() {

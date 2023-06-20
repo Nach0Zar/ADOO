@@ -13,7 +13,7 @@ public class AnimalDTO {
     private TipoAnimal tipoDeAnimal;
     private String nombre;
     private int legajo;
-    private FichaMedicaDTO fichaMedica;
+    private FichaMedicaDTO fichaMedicaDTO;
 
     public AnimalDTO(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal, TipoAnimal tipoDeAnimal, String nombre, int legajo, FichaMedicaDTO fichaMedica) {
         this.domestico = domestico;
@@ -24,7 +24,7 @@ public class AnimalDTO {
         this.tipoDeAnimal = tipoDeAnimal;
         this.nombre = nombre;
         this.legajo = legajo;
-        this.fichaMedica = fichaMedica;
+        this.fichaMedicaDTO = fichaMedica;
     }
 
     public void setDomestico(Boolean domestico) {
@@ -92,11 +92,11 @@ public class AnimalDTO {
     }
 
     public void setFichaMedica(FichaMedicaDTO fichaMedica) {
-        this.fichaMedica = fichaMedica;
+        this.fichaMedicaDTO = fichaMedica;
     }
 
     public FichaMedicaDTO getFichaMedica() {
-        return this.fichaMedica;
+        return this.fichaMedicaDTO;
     }
 
 }

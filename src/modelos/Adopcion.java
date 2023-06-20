@@ -2,7 +2,6 @@ package modelos;
 
 import estados.adoptante.Habilitado;
 import estados.adoptante.IEstadoAdoptante;
-import modelos.dtos.ClienteAdoptanteDTO;
 import modelos.dtos.RecordatorioDTO;
 import modelos.dtos.AdopcionDTO;
 
@@ -30,6 +29,19 @@ public class Adopcion {
         estadoAdopcion.adopcionAnimal(animal, cliente, this);
     }
 
+    public void cambiarEstado(IEstadoAdoptante estadoAdopcion) {
+        this.estadoAdopcion = estadoAdopcion;
+    }
+
+    public void enviarNotificacion(RecordatorioDTO recordatorio) {
+        this.seguimiento.enviarRecordatorio(recordatorio);
+    }
+
+    public AdopcionDTO toDTO() {
+        return new AdopcionDTO(this.animal.toDTO(), this.cliente.toDTO(), this.numeroAdopcion, this.motivoAdopcion);
+    }
+    //TODO REVISAR PERO ENTIENDO QUE NO SE PUEDE MODIFICAR EL ANIMAL NI EL CLIENTE DE UNA ADOPCION
+/*  
     public void setAnimal(Animal animal) {
         this.animal = animal;
     }
@@ -37,17 +49,13 @@ public class Adopcion {
     public void setCliente(ClienteAdoptante cliente) {
         this.cliente = cliente;
     }
-
+ */
     public void setMotivoAdopcion(String motivoAdopcion) {
         this.motivoAdopcion = motivoAdopcion;
     }
 
     public void setSeguimiento(Seguimiento seguimiento) {
         this.seguimiento = seguimiento;
-    }
-
-    public void cambiarEstado(IEstadoAdoptante estadoAdopcion) {
-        this.estadoAdopcion = estadoAdopcion;
     }
 
     public Animal getAnimal() {
@@ -73,13 +81,4 @@ public class Adopcion {
     public IEstadoAdoptante getEstadoAdopcion() {
         return this.estadoAdopcion;
     }
-
-    public void enviarNotificacion(RecordatorioDTO recordatorio) {
-        this.seguimiento.enviarRecordatorio(recordatorio);
-    }
-
-    public AdopcionDTO toDTO() {
-        return new AdopcionDTO(this.animal.toDTO(), this.cliente.toDTO(), this.numeroAdopcion, this.motivoAdopcion);
-    }
-
 }

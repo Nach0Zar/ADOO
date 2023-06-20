@@ -8,7 +8,9 @@ import estrategias.exportacion.ExportacionPDF;
 import modelos.FichaMedica;
 import modelos.Tratamiento;
 import modelos.Animal;
+import modelos.dtos.FichaMedicaDTO;
 import controladores.ControllerAnimal;
+import enums.TipoExportacion;
 
 /**
  * 
@@ -44,18 +46,18 @@ public class ControllerFichaMedica {
     }
 
     //acá esta tipoExportacion es un String, no un enum. Hay que cambiarlo
-    public void exportarFichaMedica(int legajo, String tipoExportacion) {
+    public void exportarFichaMedica(int legajo, TipoExportacion tipoExportacion) {
         FichaMedica ficha = buscarFichaMedica(legajo);
         //Hay que crear los export
-        if (tipoExportacion.equals("Excel")) {
-            ficha.getExportador().setEstrategia(new ExportacionExcel());
-            System.out.println("Se ha exportado en Excel");
+        switch(tipoExportacion){
+            case PDF:
+                ficha.getExportador().setEstrategia(new ExportacionPDF());
+                break;
+            case EXCEL:
+                ficha.getExportador().setEstrategia(new ExportacionExcel());
+                break;
         }
-        if (tipoExportacion.equals("PDF")) {
-            ficha.getExportador().setEstrategia(new ExportacionPDF());
-            System.out.println("Se ha exportado en PDF");
-        }
-
+        ficha.exportarFichaMedica();
     }
 
     public void agregarTratamiento(int legajoFichaMedica, String nombre, String descripcion, Date fechaInicio, Date fechaFin) {
@@ -81,5 +83,22 @@ public class ControllerFichaMedica {
             tratamiento.setFinalizado(true);
             ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, true);
             System.out.println("Ha finalizado el tratamiento: " + tratamiento.getNombre());
+        }
+
+        protected FichaMedica obtenerFichaMedica(int legajo){
+            for (FichaMedica fichaMedica : fichasMedicas){
+                if (fichaMedica.getLegajo() == legajo){
+                    return fichaMedica;
+                }
+            }
+        return null;
+        }
+        
+        public FichaMedicaDTO obtenerFichaMedicaDTO(int legajo){
+            FichaMedica fichaMedica = this.obtenerFichaMedica(legajo);
+            if(fichaMedica instanceof FichaMedica){
+                return fichaMedica.toDTO();
+            }
+            return null;
         }
 }

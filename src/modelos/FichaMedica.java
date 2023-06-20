@@ -2,6 +2,9 @@ package modelos;
 
 import java.util.*;
 import modelos.dtos.*;
+import enums.TipoExportacion;
+import estrategias.exportacion.ExportacionExcel;
+import estrategias.exportacion.ExportacionPDF;
 
 public class FichaMedica {
     
@@ -10,6 +13,7 @@ public class FichaMedica {
     private ArrayList <Tratamiento> tratamientos;
     private ArrayList <Alarma> alarmas;
     private Animal animal;
+    private TipoExportacion tipoExportacion;
 
     public FichaMedica(Animal animal) {
         this.animal = animal;
@@ -46,8 +50,8 @@ public class FichaMedica {
     }
     //Fin getters y setters
 
-    public void exportarFichaMedica(FichaMedicaDTO fichaMedicaDTO) {
-        this.exportador.exportarFichaMedica(fichaMedicaDTO);
+    public void exportarFichaMedica() {
+        this.exportador.exportarFichaMedica(this.toDTO());
     }
 
     //Inicio Tratamientos
@@ -63,8 +67,6 @@ public class FichaMedica {
         return tratamiento;
     }
 
-  
-
     public void agregarTratamiento(Tratamiento tratamiento) {
         tratamientos.add(tratamiento);
     }
@@ -78,7 +80,7 @@ public class FichaMedica {
         for (Alarma a : alarmas) {
             alarmasDTO.add(a.toDTO());
         }
-        return new FichaMedicaDTO(tratamientosDTO, alarmasDTO);
+        return new FichaMedicaDTO(tratamientosDTO, alarmasDTO, this.animal);
     }
 
     public int getLegajo(){

@@ -1,22 +1,15 @@
 package modelos;
 
-
 import java.time.Duration;
 import java.util.*;
-
 import adaptador.notificacion.INotificationPush;
 import estados.alarma.IEstadoAlarma;
 import estrategias.alarma.ITipoAlarma;
 import modelos.dtos.AlarmaDTO;
 
-/**
- * 
- */
 public class Alarma {
 
-    /**
-     * Atributos
-     */
+    // Atributos
     private static int numeradorAlarma = 1;
     private int numeroAlarma;
     private Duration periodicidad;
@@ -27,9 +20,7 @@ public class Alarma {
     private Usuario veterinario;
     private Date ultimaEjecucion;
 
-    /**
-     * Default constructor
-     */
+    // Constructor
     public Alarma(Duration periodicidad, Animal animal, INotificationPush notificacion,
             ITipoAlarma tipoAlarma, Usuario veterinario, Date ultimaEjecucion) {
         this.periodicidad = periodicidad;
@@ -40,68 +31,6 @@ public class Alarma {
         this.veterinario = veterinario;
         this.ultimaEjecucion = ultimaEjecucion;
         this.numeroAlarma = numeradorAlarma++;
-    }
-
-    // Getters y Setters
-
-    public Duration getPeriodicidad() {
-        return periodicidad;
-    }
-
-    public void setPeriodicidad(Duration periodicidad) {
-        this.periodicidad = periodicidad;
-    }
-
-    public Animal getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
-
-    public IEstadoAlarma getEstadoAlarma() {
-        return estadoAlarma;
-    }
-
-    public void setEstadoAlarma(IEstadoAlarma estadoAlarma) {
-        this.estadoAlarma = estadoAlarma;
-    }
-
-    public INotificationPush getNotificacion() {
-        return notificacion;
-    }
-
-    public void setNotificacion(INotificationPush notificacion) {
-        this.notificacion = notificacion;
-    }
-
-    public ITipoAlarma getTipoAlarma() {
-        return tipoAlarma;
-    }
-
-    public void setTipoAlarma(ITipoAlarma tipoAlarma) {
-        this.tipoAlarma = tipoAlarma;
-    }
-
-    public Usuario getVeterinario() {
-        return veterinario;
-    }
-
-    public void setVeterinario(Usuario veterinario) {
-        this.veterinario = veterinario;
-    }
-
-    public Date getUltimaEjecucion() {
-        return ultimaEjecucion;
-    }
-
-    public void setUltimaEjecucion(Date ultimaEjecucion) {
-        this.ultimaEjecucion = ultimaEjecucion;
-    }
-
-    public int getNumeroAlarma() {
-        return numeroAlarma;
     }
 
     // Metodos
@@ -135,4 +64,69 @@ public class Alarma {
         return new AlarmaDTO(this.numeroAlarma, this.periodicidad, this.animal.toDTO(), alarmaAtendida, this.tipoAlarma,
         this.veterinario.toDTO(), this.ultimaEjecucion);
     }
+
+    // Getters
+    public Duration getPeriodicidad() {
+        return periodicidad;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public IEstadoAlarma getEstadoAlarma() {
+        return estadoAlarma;
+    }
+
+    public INotificationPush getNotificacion() {
+        return notificacion;
+    }
+
+    public ITipoAlarma getTipoAlarma() {
+        return tipoAlarma;
+    }
+
+    public Usuario getVeterinario() {
+        return veterinario;
+    }
+
+    public Date getUltimaEjecucion() {
+        return ultimaEjecucion;
+    }
+
+    public int getNumeroAlarma() {
+        return numeroAlarma;
+    }
+
+    //Setters 
+    //TODO REVISAR
+    /* ENTIENDO QUE NO SE PUEDEN MODIFICAR EL ANIMAL DE LA ALARMA
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+    */
+    public void setEstadoAlarma(IEstadoAlarma estadoAlarma) {
+        this.estadoAlarma = estadoAlarma;
+    }
+
+    public void setPeriodicidad(Duration periodicidad) {
+        this.periodicidad = periodicidad;
+    }
+
+    public void setNotificacion(INotificationPush notificacion) {
+        this.notificacion = notificacion;
+    }
+
+    public void setTipoAlarma(ITipoAlarma tipoAlarma) {
+        this.tipoAlarma = tipoAlarma;
+    }
+
+    public void setVeterinario(Usuario veterinario) {
+        this.veterinario = veterinario;
+    }
+
+    public void setUltimaEjecucion(Date ultimaEjecucion) {
+        this.ultimaEjecucion = ultimaEjecucion;
+    }
+
 }

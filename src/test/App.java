@@ -82,5 +82,11 @@ public class App {
 
         controladorSeguimiento.agregarVisita(seguimientoEncontrado.getNumeroSeguimiento(), "El animal está mal.",
         Calificacion.MALO, Calificacion.MALO, Calificacion.REGULAR);
+
+        // exportar ficha medica en ambos formatos
+
+        controladorFichaMedica.exportarFichaMedica(numeroAdopcion, TipoExportacion.EXCEL);
+        //controladorFichaMedica.exportarFichaMedica(numeroAdopcion, TipoExportacion.PDF);
+
     }
 }
