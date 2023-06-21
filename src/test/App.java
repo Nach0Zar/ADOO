@@ -1,6 +1,8 @@
 package test;
 
-import java.util.ArrayList;
+import java.util.*;
+
+import java.time.Duration;
 
 import controladores.*;
 import modelos.*;
@@ -31,19 +33,46 @@ public class App {
         System.out.println(
                 "El cliente " + clienteEncontrado.getNombre() + " " + clienteEncontrado.getApellido() + " fue cargado");
 
-        // Crear un animal
+        // crear usuario visitador y autenticar
+        System.out.println("Crear y autenticar usuario visitador: ");
+        String emailVisitador = controladorUsuario.agregarUsuario( "lumolina@uade.edu.ar","Lucas",
+                TipoUsuario.VISITADOR);
+        controladorUsuario.autenticar(emailVisitador);
+
+        // crear usuario veterinario y autenticar
+        System.out.println("Crear y autenticar usuario veterinario: ");
+        controladorUsuario.agregarUsuario( "caesquivel@uade.edu.ar","Candela", TipoUsuario.VETERINARIO);
+        controladorUsuario.autenticar("caesquivel@uade.edu.ar");
+
+        // Crear 3 animales
 
         int legajo = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 5, true, TipoAnimal.GATO,
                 "Shona");
-        int legajo2 = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 5, true, TipoAnimal.PERRO,
+        int legajo2 = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 2, true, TipoAnimal.PERRO,
                 "Panchito");
+        int legajo3 = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 3, true, TipoAnimal.GATO,
+                "Luna");
         AnimalDTO animalEncontrado = controladorAnimal.obtenerAnimalDTO(legajo);
         System.out.println("El animal " + animalEncontrado.getNombre() + " fue cargado con el legajo : "
                 + animalEncontrado.getLegajo());
         AnimalDTO animalEncontrado2 = controladorAnimal.obtenerAnimalDTO(legajo2);
         System.out.println("El animal " + animalEncontrado2.getNombre() + " fue cargado con el legajo : "
                 + animalEncontrado2.getLegajo());
+        AnimalDTO animalEncontrado3 = controladorAnimal.obtenerAnimalDTO(legajo3);
+        System.out.println("El animal " + animalEncontrado3.getNombre() + " fue cargado con el legajo : "
+                + animalEncontrado3.getLegajo());
 
+        // Cargar tratamiento al animal 3
+
+        int numeroDeTratamiento = controladorFichaMedica.crearTratamiento("Vacuna", "Vacuna contra la rabia",new Date(),new Date(), legajo3);
+       
+        // Crear una alarma de tratamiento para el animal 3
+        Duration preriodicidad = Duration.ofDays(1);
+        controladorAlarma.crearAlarma(preriodicidad, legajo3, "lumolina@uade.edu.ar", numeroDeTratamiento);
+
+        // Crear una alarma de control para el animal 2
+        controladorAlarma.crearAlarma(preriodicidad, legajo3, "lumolina@uade.edu.ar");
+ 
         // adoptar un animal
         int numeroAdopcion = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(),
                 "Por que quiero una mascota", "lumolina@uade.edu.ar");
@@ -52,18 +81,14 @@ public class App {
                 adopcionEncontrada.getAnimalDTO().getNombre()
                 + " del cliente : " + adopcionEncontrada.getClienteDTO().getNombre());
 
-        //
+        //adoptar segundo animal
 
-        // crear usuario visitador y autenticar
-        System.out.println("Crear y autenticar usuario visitador: ");
-        String emailVisitador = controladorUsuario.agregarUsuario("Lucas", "lumolina@uade.edu.ar",
-                TipoUsuario.VISITADOR);
-        controladorUsuario.autenticar("lumolina@uade.edu.ar");
-
-        // crear usuario veterinario y autenticar
-        System.out.println("Crear y autenticar usuario veterinario: ");
-        controladorUsuario.agregarUsuario("Candela", "caesquivel@uade.edu.ar", TipoUsuario.VETERINARIO);
-        controladorUsuario.autenticar("caesquivel@uade.edu.ar");
+        int numeroAdopcion2 = controladorAdopcion.crearAdopcion(legajo2, clienteEncontrado.getEmail(),
+                "Por que quiero otra mascota", "lumolina@uade.edu.ar");
+        AdopcionDTO adopcionEncontrada2 = controladorAdopcion.buscarAdopcionDTO(numeroAdopcion2);
+        System.out.println("Se cargo la adopcion del animal " +
+                adopcionEncontrada2.getAnimalDTO().getNombre()
+                + " del cliente : " + adopcionEncontrada2.getClienteDTO().getNombre());
 
         // Creo un seguimiento para el animal
 

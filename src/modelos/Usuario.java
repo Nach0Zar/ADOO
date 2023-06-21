@@ -12,7 +12,7 @@ public class Usuario {
 	private String email;
 	private TipoUsuario tipoUsuario;
 
-	public Usuario(String nombre, String email, TipoUsuario tipoUsuario) {
+	public Usuario(String email,String nombre,TipoUsuario tipoUsuario) {
 		this.adaptadorAuntentidor = new Autenticador();
 		this.nombre = nombre;
 		this.email = email;

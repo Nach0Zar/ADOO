@@ -50,7 +50,7 @@ public class ControllerAdopcion {
         return mensajeRecordatorio;
     }
 
-    public Adopcion buscarAdopcion(int numero) {
+    protected Adopcion buscarAdopcion(int numero) {
         Adopcion adopcionBuscada = null;
         for (Adopcion adopcion : adopciones) {
             if (adopcion.getnumeroAdopcion() == numero) {

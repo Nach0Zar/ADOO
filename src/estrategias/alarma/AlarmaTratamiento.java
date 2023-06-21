@@ -19,13 +19,13 @@ public class AlarmaTratamiento implements ITipoAlarma{
     
     public void crearAlarma() {
         System.out.println("Ingrese las acciones a realizar para esta alarma, utilize -1 para salir");
+        Scanner entradaNombre = new Scanner(System.in); 
         while (true){
             System.out.println("Ingrese el nombre de la accion");
-            Scanner entradaNombre = new Scanner(System.in); 
             String nombreAccion = entradaNombre.nextLine();
-            entradaNombre.close();
 
-            if (nombreAccion.equals("-1")) {
+            //TODO: fix this            
+            if (nombreAccion == "-1") {
                 break;
             }
 
@@ -34,8 +34,8 @@ public class AlarmaTratamiento implements ITipoAlarma{
 
             Accion accion = new Accion(nombreAccion, descripcionAccion);
             acciones.add(accion);
-
         }
+        entradaNombre.close();
         System.out.println("La alarma quedo seteada para el control del animal");        
     }
 

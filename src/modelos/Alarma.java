@@ -2,6 +2,8 @@ package modelos;
 
 import java.time.Duration;
 import java.util.*;
+
+import adaptador.notificacion.AdapterNotificacionPush;
 import adaptador.notificacion.INotificationPush;
 import estados.alarma.IEstadoAlarma;
 import estrategias.alarma.ITipoAlarma;
@@ -17,19 +19,19 @@ public class Alarma {
     private IEstadoAlarma estadoAlarma;
     private INotificationPush notificacion;
     private ITipoAlarma tipoAlarma;
-    private Usuario veterinario;
+    private Usuario veterinario; // TODO: revisar si es necesario o si en realidad es el usuario que la creo
     private Date ultimaEjecucion;
 
     // Constructor
-    public Alarma(Duration periodicidad, Animal animal, INotificationPush notificacion,
-            ITipoAlarma tipoAlarma, Usuario veterinario, Date ultimaEjecucion) {
+    public Alarma(Duration periodicidad, Animal animal,
+            ITipoAlarma tipoAlarma, Usuario veterinario) {
         this.periodicidad = periodicidad;
         this.animal = animal;
         this.estadoAlarma = new estados.alarma.Incompleta(); // por default esta en incompleta
-        this.notificacion = notificacion;
+        this.notificacion = new AdapterNotificacionPush();
         this.tipoAlarma = tipoAlarma;
         this.veterinario = veterinario;
-        this.ultimaEjecucion = ultimaEjecucion;
+        this.ultimaEjecucion = new Date();
         this.numeroAlarma = numeradorAlarma++;
     }
 
@@ -39,7 +41,6 @@ public class Alarma {
         this.notificacion.enviarNotificacion(toDTO());
     }
 
-    
     public void crearAlarma(ITipoAlarma alarma) {
         this.tipoAlarma = alarma;
         this.tipoAlarma.crearAlarma();

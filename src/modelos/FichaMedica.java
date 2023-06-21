@@ -2,16 +2,14 @@ package modelos;
 
 import java.util.*;
 import modelos.dtos.*;
-import enums.TipoExportacion;
 
 public class FichaMedica {
     
-    private int legajo;
-    private Exportador exportador;
     private ArrayList <Tratamiento> tratamientos;
     private ArrayList <Alarma> alarmas;
+    private int legajo;
+    private Exportador exportador;
     private Animal animal;
-    private TipoExportacion tipoExportacion;
 
     public FichaMedica(Animal animal) {
         this.animal = animal;
@@ -21,32 +19,29 @@ public class FichaMedica {
         this.exportador = new Exportador();
     }
 
-    //getters y setters
-
+    //Getters
     public Exportador getExportador() {
         return exportador;
-    }
-
-    public void setExportador(Exportador exportador) {
-        this.exportador = exportador;
     }
 
     public ArrayList<Tratamiento> getTratamientos() {
         return tratamientos;
     }
 
-    public void setTratamientos(ArrayList<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
-    }
-
     public ArrayList<Alarma> getAlarmas() {
         return alarmas;
+    }
+    //Fin Getters
+    
+    //Setters
+    public void setExportador(Exportador exportador) {
+        this.exportador = exportador;
     }
 
     public void setAlarmas(ArrayList<Alarma> alarmas) {
         this.alarmas = alarmas;
     }
-    //Fin getters y setters
+    //Fin Setters
 
     public void exportarFichaMedica() {
         this.exportador.exportarFichaMedica(this.toDTO());
@@ -89,4 +84,12 @@ public class FichaMedica {
         this.legajo = legajo;
     }
     //Fin tratamientos
+
+	public boolean getEstadoSaludableAnimal() {
+		return this.animal.getEstadoSaludableAnimal();
+	}
+
+	public Tratamiento getTratamientoActivo() {
+        return this.tratamientos.get(this.tratamientos.size() - 1);
+	}
 }

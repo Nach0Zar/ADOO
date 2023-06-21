@@ -46,34 +46,32 @@ public class ControllerFichaMedica {
 
     //acá esta tipoExportacion es un String, no un enum. Hay que cambiarlo
     public void exportarFichaMedica(int legajo, TipoExportacion tipoExportacion) {
-        FichaMedica ficha = buscarFichaMedica(legajo);
-        
-        //Hay que crear los export
+        FichaMedica fichaMedica = buscarFichaMedica(legajo);
+
         switch(tipoExportacion){
             case PDF:
-                ficha.getExportador().setEstrategia(new ExportacionPDF());
+                fichaMedica.getExportador().setEstrategia(new ExportacionPDF());
                 break;
             case EXCEL:
-                ficha.getExportador().setEstrategia(new ExportacionExcel());
+                fichaMedica.getExportador().setEstrategia(new ExportacionExcel());
                 break;
         }
-        ficha.exportarFichaMedica();
+
+        fichaMedica.exportarFichaMedica();
     }
 
-    public void agregarTratamiento(int legajoFichaMedica, String nombre, String descripcion, Date fechaInicio, Date fechaFin) {
-        FichaMedica fichaMedica = buscarFichaMedica(legajoFichaMedica);
-        fichaMedica.agregarTratamiento(new Tratamiento(nombre, descripcion, fechaInicio, fechaFin));
-    }
-
-    public void crearTratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin , int legajo) {
-            Animal animal = ControllerAnimal.getInstancia().obtenerAnimal(legajo);
-            if(animal.getEstadoSaludableAnimal()){                                      //Siempre que el estado no sea saludable, tiene un tratamiento activo
+    public int crearTratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin , int legajo) {
+        FichaMedica fichaMedica = buscarFichaMedica(legajo);
+            if(fichaMedica.getEstadoSaludableAnimal()){                                      //Siempre que el estado no sea saludable, tiene un tratamiento activo
                 Tratamiento tratamiento = new Tratamiento(nombre, descripcion, fechaInicio, fechaFin);
-                animal.getFichaMedica().agregarTratamiento(tratamiento);
+                fichaMedica.agregarTratamiento(tratamiento);
+                //TODO estado saludable en animal o en ficha medica? o solo se verifica que no tenga un tratamiento activo?
                 ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, false);
                 System.out.println("Se ha creado el tratamiento: " + tratamiento.getNombre() + " con id: " + tratamiento.getNumeroTratamiento());
+                return tratamiento.getNumeroTratamiento();
             }else{
                 System.out.println("Ya existe un tratamiento en curso, no se puede crear otro");
+                return fichaMedica.getTratamientoActivo().getNumeroTratamiento();
             }
         }
 
