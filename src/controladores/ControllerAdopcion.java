@@ -2,8 +2,11 @@ package controladores;
 
 import java.util.*;
 import modelos.Adopcion;
+import modelos.Animal;
+import modelos.ClienteAdoptante;
 import modelos.Usuario;
 import modelos.dtos.AdopcionDTO;
+import modelos.dtos.ClienteAdoptanteDTO;
 import modelos.dtos.RecordatorioDTO;
 
 public class ControllerAdopcion {
@@ -22,16 +25,31 @@ public class ControllerAdopcion {
     }
 
     public int crearAdopcion(int animal, String emailCliente, String motivoDeAdopcion, String emailVisitador) {
-        Adopcion adopcion = new Adopcion(
-                ControllerAnimal.getInstancia().obtenerAnimal(animal),
-                ControllerClienteAdoptante.getInstancia().buscarClienteAdoptante(emailCliente),
-                motivoDeAdopcion);
+        ClienteAdoptante cliente1 = ControllerClienteAdoptante.getInstancia().buscarClienteAdoptante(emailCliente);
+        Animal animal1 = ControllerAnimal.getInstancia().obtenerAnimal(animal);
 
-        Usuario visitador = ControllerUsuario.getInstancia().buscarUsuario(emailVisitador);
-        adopcion.getSeguimiento().setVisitador(visitador);
+        if (cliente1.getCantidadAdopciones() == 2) {
+            System.out.println("El cliente ya tiene 2 adopciones , no se puede adoptar");
+        } else {
+            if (animal1.getEstadoSaludableAnimal()) {
+                Adopcion adopcion = new Adopcion(
+                        animal1,
+                        cliente1,
+                        motivoDeAdopcion);
+                cliente1.setCantidadAdopciones(cliente1.getCantidadAdopciones() + 1);
+                Usuario visitador = ControllerUsuario.getInstancia().buscarUsuario(emailVisitador);
+                adopcion.getSeguimiento().setVisitador(visitador);
+                this.adopciones.add(adopcion);
+                System.out.println("El animal fue adoptado!");
+                return adopcion.getnumeroAdopcion();
 
-        this.adopciones.add(adopcion);
-        return adopcion.getnumeroAdopcion();
+            } else {
+                System.out.println("El animal NO esta saludable , no se puede adoptar");
+            }
+
+        }
+
+        return -1;
     }
 
     public RecordatorioDTO enviarNotificacion(int numeroAdopcion) {

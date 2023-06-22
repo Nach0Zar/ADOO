@@ -4,26 +4,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AlarmaControl implements ITipoAlarma {
-    
-    //atributos
-    private ArrayList<Accion> acciones;    
 
-    //constructor
+    // atributos
+    private ArrayList<Accion> acciones;
+
+    // constructor
     public AlarmaControl() {
-        
+
         acciones = new ArrayList<Accion>();
         crearAlarma();
     }
-    
+
     public void crearAlarma() {
-        System.out.println("Ingrese las acciones a realizar para esta alarma, utilize -1 para salir");
-        Scanner entradaNombre = new Scanner(System.in); 
-        while (true){
-            System.out.println("Ingrese el nombre de la accion");
+        System.out.println("Ingrese las acciones a realizar para esta alarma de control");
+        Scanner entradaNombre = new Scanner(System.in);
+        while (true) {
+            System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
             String nombreAccion = entradaNombre.nextLine();
 
-            //TODO: fix this
-            if (nombreAccion == "-1") {
+            if (nombreAccion.equals("x")) {
                 break;
             }
 
@@ -31,11 +30,10 @@ public class AlarmaControl implements ITipoAlarma {
             String descripcionAccion = entradaNombre.nextLine();
 
             Accion accion = new Accion(nombreAccion, descripcionAccion);
-            acciones.add(accion);
-
+            acciones.add(accion);// aca guardamos las acciones de la alarma tratamiento
         }
         entradaNombre.close();
-        System.out.println("La alarma quedo seteada para el control del animal");     
+        System.out.println("La alarma quedo seteada para el CONTROL del animal");
     }
 
     public ArrayList<Accion> getAcciones() {

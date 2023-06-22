@@ -42,10 +42,6 @@ public class AlarmaDTO {
         return alarmaAtendida;
     }
 
-    public ITipoAlarma getTipoAlarma() {
-        return tipoAlarma;
-    }
-
     public UsuarioDTO getUsuarioDTO() {
         return usuarioDTO;
     }
@@ -53,4 +49,6 @@ public class AlarmaDTO {
     public Date getUltimaEjecucion() {
         return ultimaEjecucion;
     }  
+
+    
 }

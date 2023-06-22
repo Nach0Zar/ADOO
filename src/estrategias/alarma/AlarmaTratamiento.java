@@ -5,27 +5,26 @@ import java.util.Scanner;
 
 import modelos.Tratamiento;
 
-public class AlarmaTratamiento implements ITipoAlarma{
-    //atributos
+public class AlarmaTratamiento implements ITipoAlarma {
+    // atributos
     private ArrayList<Accion> acciones;
     private Tratamiento tratamiento;
 
-    //constructor
-    public AlarmaTratamiento(Tratamiento tratamiento) {        
+    // constructor
+    public AlarmaTratamiento(Tratamiento tratamiento) {
         acciones = new ArrayList<Accion>();
         this.tratamiento = tratamiento;
         crearAlarma();
     }
-    
+
     public void crearAlarma() {
-        System.out.println("Ingrese las acciones a realizar para esta alarma, utilize -1 para salir");
-        Scanner entradaNombre = new Scanner(System.in); 
-        while (true){
-            System.out.println("Ingrese el nombre de la accion");
+        System.out.println("Ingrese las acciones a realizar para esta alarma de tratamiento");
+        Scanner entradaNombre = new Scanner(System.in);
+        while (true) {
+            System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
             String nombreAccion = entradaNombre.nextLine();
 
-            //TODO: fix this            
-            if (nombreAccion == "-1") {
+            if (nombreAccion.equals("x")) {
                 break;
             }
 
@@ -33,10 +32,10 @@ public class AlarmaTratamiento implements ITipoAlarma{
             String descripcionAccion = entradaNombre.nextLine();
 
             Accion accion = new Accion(nombreAccion, descripcionAccion);
-            acciones.add(accion);
+            acciones.add(accion);// aca guardamos las acciones de la alarma tratamiento
         }
         entradaNombre.close();
-        System.out.println("La alarma quedo seteada para el control del animal");        
+        System.out.println("La alarma quedo seteada para el TRATAMIENTO del animal");
     }
 
     public ArrayList<Accion> getAcciones() {
@@ -54,5 +53,5 @@ public class AlarmaTratamiento implements ITipoAlarma{
     public void setTratamiento(Tratamiento tratamiento) {
         this.tratamiento = tratamiento;
     }
-        
+
 }
