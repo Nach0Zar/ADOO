@@ -6,7 +6,7 @@ import modelos.Animal;
 import modelos.ClienteAdoptante;
 import modelos.Usuario;
 import modelos.dtos.AdopcionDTO;
-import modelos.dtos.ClienteAdoptanteDTO;
+//import modelos.dtos.ClienteAdoptanteDTO;
 import modelos.dtos.RecordatorioDTO;
 
 public class ControllerAdopcion {
@@ -29,7 +29,7 @@ public class ControllerAdopcion {
         Animal animal1 = ControllerAnimal.getInstancia().obtenerAnimal(animal);
 
         if (cliente1.getCantidadAdopciones() == 2) {
-            System.out.println("El cliente ya tiene 2 adopciones , no se puede adoptar");
+            System.out.println("El cliente " + cliente1.getNombre() + " " + cliente1.getApellido() + " ya tiene 2 adopciones , no se puede adoptar");
         } else {
             if (animal1.getEstadoSaludableAnimal()) {
                 Adopcion adopcion = new Adopcion(
@@ -40,11 +40,11 @@ public class ControllerAdopcion {
                 Usuario visitador = ControllerUsuario.getInstancia().buscarUsuario(emailVisitador);
                 adopcion.getSeguimiento().setVisitador(visitador);
                 this.adopciones.add(adopcion);
-                System.out.println("El animal fue adoptado!");
+                System.out.println("El animal "+ animal1.getNombre() + " fue adoptado!");
                 return adopcion.getnumeroAdopcion();
 
             } else {
-                System.out.println("El animal NO esta saludable , no se puede adoptar");
+                System.out.println("El animal " + animal1.getNombre() + " NO esta saludable , no se puede adoptar");
             }
 
         }
@@ -62,9 +62,7 @@ public class ControllerAdopcion {
 
     private String mensajeRecordatorio() {
         System.out.println("Mensaje de recordatorio  :");
-        Scanner entradaScanner = new Scanner(System.in);
-        String mensajeRecordatorio = entradaScanner.nextLine();
-        entradaScanner.close();
+        String mensajeRecordatorio = ControllerScanner.getInstancia().proxLinea();
         return mensajeRecordatorio;
     }
 
