@@ -34,7 +34,10 @@ public class AlarmaTratamiento implements ITipoAlarma {
             Accion accion = new Accion(nombreAccion, descripcionAccion);
             acciones.add(accion);// aca guardamos las acciones de la alarma tratamiento
         }
-        System.out.println("La alarma quedo seteada para el TRATAMIENTO del animal");
+        if (acciones.size() > 0)
+            System.out.println("La alarma quedo seteada para el TRATAMIENTO del animal");
+        else
+            System.out.println("La alarma sin acciones no puede ser creada");
     }
 
     public ArrayList<Accion> getAcciones() {

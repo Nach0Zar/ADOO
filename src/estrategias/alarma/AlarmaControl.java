@@ -18,7 +18,7 @@ public class AlarmaControl implements ITipoAlarma {
     }
 
     private void crearAlarma() {
-        System.out.println("Ingrese las acciones a realizar para esta alarma de tratamiento");
+        System.out.println("Ingrese las acciones a realizar para esta alarma de control");
         while (true) {
             System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
             String nombreAccion = ControllerScanner.getInstancia().proxLinea();
@@ -31,9 +31,12 @@ public class AlarmaControl implements ITipoAlarma {
             String descripcionAccion = ControllerScanner.getInstancia().proxLinea();
 
             Accion accion = new Accion(nombreAccion, descripcionAccion);
-            acciones.add(accion);// aca guardamos las acciones de la alarma tratamiento
+            acciones.add(accion);// aca guardamos las acciones de la alarma control
         }
-        System.out.println("La alarma quedo seteada para el TRATAMIENTO del animal");
+        if (acciones.size() > 0)
+            System.out.println("La alarma quedo seteada para el CONTROL del animal");
+        else
+            System.out.println("La alarma sin acciones no puede ser creada");
     }
 
 
