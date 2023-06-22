@@ -41,11 +41,13 @@ public class Alarma {
         this.notificacion.enviarNotificacion(toDTO());
     }
 
+    /*
     public void crearAlarma(ITipoAlarma alarma) {
         this.tipoAlarma = alarma;
         this.tipoAlarma.crearAlarma();
     }
-
+    */
+   
     public void atenderAlarma() {//una vez completada , no puede volver a estar incompleta
         this.estadoAlarma.atenderAlarma(this);
     }    

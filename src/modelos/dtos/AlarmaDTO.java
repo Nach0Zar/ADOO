@@ -1,5 +1,6 @@
 package modelos.dtos;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.time.Duration;
 import estrategias.alarma.ITipoAlarma;
@@ -50,5 +51,15 @@ public class AlarmaDTO {
         return ultimaEjecucion;
     }  
 
+    public ArrayList<AccionDTO> getAcciones() {
+        return tipoAlarma.getAccionesDTO();
+    }
+
+    public void printAcciones() {
+        for (AccionDTO accion : tipoAlarma.getAccionesDTO()) {
+            System.out.println("Nombre: " + accion.getNombre() );
+            System.out.println("Descripcion: " + accion.getDescripcion() );
+        }
+    }
     
 }

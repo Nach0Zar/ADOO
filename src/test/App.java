@@ -87,23 +87,33 @@ public class App {
 
                 int numeroAdopcion44 = controladorAdopcion.crearAdopcion(legajo2, clienteEncontrado.getEmail(),
                 "Quiero ", "lumolina@uade.edu.ar");
+                 
            
                 int numeroAdopcion = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(),
                 "Quiero ", "lumolina@uade.edu.ar");
 
-                
-                 // Crear una alarma de tratamiento para el animal 3
+                 
+                // Crear una alarma de tratamiento para el animal 3
                 Duration preriodicidad = Duration.ofDays(1);
                 int numeroAlarmaTratamiento = controladorAlarma.crearAlarma(preriodicidad, legajo3, "lumolina@uade.edu.ar", numeroDeTratamiento);
 
                 AlarmaDTO alarmaDTO = controladorAlarma.obtenerAlarmaDTO(numeroAlarmaTratamiento);
-                System.out.println(alarmaDTO);
-                 
-               
+                alarmaDTO.printAcciones();
+                
+             
 
-                // Crear una alarma de control para el animal 2
+                /* FALTA ARREGLAR LO DEL SCANNER 
+                  // Crear una alarma de control para el animal 2
                 Duration periodicidad = Duration.ofDays(1);
                 controladorAlarma.crearAlarma(periodicidad, legajo3, "lumolina@uade.edu.ar");
+
+                 */
+                
+                
+ 
+               
+
+            
       
 
         /*

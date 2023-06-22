@@ -3,6 +3,8 @@ package estrategias.alarma;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import modelos.dtos.AccionDTO;
+
 public class AlarmaControl implements ITipoAlarma {
 
     // atributos
@@ -15,8 +17,8 @@ public class AlarmaControl implements ITipoAlarma {
         crearAlarma();
     }
 
-    public void crearAlarma() {
-        System.out.println("Ingrese las acciones a realizar para esta alarma de control");
+    private void crearAlarma() {
+        System.out.println("Ingrese las acciones a realizar para esta alarma de tratamiento");
         Scanner entradaNombre = new Scanner(System.in);
         while (true) {
             System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
@@ -33,11 +35,19 @@ public class AlarmaControl implements ITipoAlarma {
             acciones.add(accion);// aca guardamos las acciones de la alarma tratamiento
         }
         entradaNombre.close();
-        System.out.println("La alarma quedo seteada para el CONTROL del animal");
+        System.out.println("La alarma quedo seteada para el TRATAMIENTO del animal");
     }
 
-    public ArrayList<Accion> getAcciones() {
-        return acciones;
+
+    @Override
+    public ArrayList<AccionDTO> getAccionesDTO() {
+        ArrayList<AccionDTO> accionesDTO = new ArrayList<AccionDTO>();
+        for (Accion accion : acciones) {
+            AccionDTO accionDTO = new AccionDTO(accion.getNombre(), accion.getDescripcion());
+            accionesDTO.add(accionDTO);
+        }
+        return accionesDTO;
     }
 
+  
 }

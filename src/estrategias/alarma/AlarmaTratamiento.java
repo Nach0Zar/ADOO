@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import modelos.Tratamiento;
+import modelos.dtos.AccionDTO;
 
 public class AlarmaTratamiento implements ITipoAlarma {
     // atributos
@@ -17,7 +18,7 @@ public class AlarmaTratamiento implements ITipoAlarma {
         crearAlarma();
     }
 
-    public void crearAlarma() {
+    private void crearAlarma() {
         System.out.println("Ingrese las acciones a realizar para esta alarma de tratamiento");
         Scanner entradaNombre = new Scanner(System.in);
         while (true) {
@@ -40,6 +41,16 @@ public class AlarmaTratamiento implements ITipoAlarma {
 
     public ArrayList<Accion> getAcciones() {
         return acciones;
+    }
+
+    
+    public ArrayList<AccionDTO> getAccionesDTO() {
+        ArrayList<AccionDTO> accionesDTO = new ArrayList<AccionDTO>();
+        for (Accion accion : acciones) {
+            AccionDTO accionDTO = new AccionDTO(accion.getNombre(), accion.getDescripcion());
+            accionesDTO.add(accionDTO);
+        }
+        return accionesDTO;
     }
 
     public void setAcciones(ArrayList<Accion> acciones) {
