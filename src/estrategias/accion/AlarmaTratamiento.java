@@ -22,32 +22,49 @@ public class AlarmaTratamiento implements ITipoAlarma {
     public void atenderAlarma() {
         System.out.println("Ejecutando alarma de tratamiento");
         for (Accion accion : acciones) {
-            System.out.println("Ejecutando accion: " + accion.getNombre());
-            System.out.println("Descripcion: " + accion.getDescripcion());
+            accion.atenderAccion();
         }
-        System.out.println("Alarma de tratamiento atendida");
+        if(accionesTerminadas()){
+            tratamiento.setFinalizado(true);
+            System.out.println("Alarma de tratamiento atendida");
+        }
+    }
+
+    private boolean accionesTerminadas() {
+        boolean terminadas = true;
+        for (Accion accion : acciones) {
+            if(!accion.getFinalizada()){
+                terminadas = false;
+                break;
+            }
+        }
+        return terminadas;
     }
 
     private void crearAlarma() {
         System.out.println("Ingrese las acciones a realizar para esta alarma de tratamiento");
-        while (true) {
-            System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
-            String nombreAccion = Escaner.getInstancia().proxLinea();
 
-            if (nombreAccion.equals("x")) {
-                break;
-            }
+        System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
+        String nombreAccion = Escaner.getInstancia().proxLinea();
+
+        while (nombreAccion.equals("x")) {
+            System.out.println("La alarma sin acciones no puede ser creada");
+            System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
+            nombreAccion = Escaner.getInstancia().proxLinea();
+        }
+
+        while (!nombreAccion.equals("x")) {
 
             System.out.println("Ingrese la descripcion de la accion");
             String descripcionAccion = Escaner.getInstancia().proxLinea();
 
             Accion accion = new Accion(nombreAccion, descripcionAccion);
-            acciones.add(accion);// aca guardamos las acciones de la alarma tratamiento
+            acciones.add(accion);// aca guardamos las acciones de la alarma control
+
+            System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
+            nombreAccion = Escaner.getInstancia().proxLinea();
         }
-        if (acciones.size() > 0)
-            System.out.println("La alarma quedo seteada para el TRATAMIENTO del animal");
-        else
-            System.out.println("La alarma sin acciones no puede ser creada");
+        System.out.println("La alarma quedo seteada para el TRATAMIENTO del animal");
     }
 
     public ArrayList<Accion> getAcciones() {

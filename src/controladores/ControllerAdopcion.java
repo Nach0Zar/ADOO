@@ -29,22 +29,26 @@ public class ControllerAdopcion {
         ClienteAdoptante cliente1 = ControllerClienteAdoptante.getInstancia().buscarClienteAdoptante(emailCliente);
         Animal animal1 = ControllerAnimal.getInstancia().obtenerAnimal(animal);
 
-        if (cliente1.getCantidadAdopciones() == 2)
-            System.out.println("El cliente " + cliente1.getNombre() + " " + cliente1.getApellido() + " ya tiene 2 adopciones , no se puede adoptar");
+        //if (cliente1.getCantidadAdopciones() == 2)
+        //    System.out.println("El cliente " + cliente1.getNombre() + " " + cliente1.getApellido() + " ya tiene 2 adopciones , no se puede adoptar");
 
-        else if (animal1.getAdoptado() == true)
+        if (animal1.getAdoptado() == true)
             System.out.println("El animal " + animal1.getNombre() + " ya fue adoptado previamente, no se puede adoptar");
 
         else if (animal1.getEstadoSaludableAnimal() == false)
-            System.out.println("El animal " + animal1.getNombre() + " NO esta saludable , no se puede adoptar");
+            System.out.println("El animal " + animal1.getNombre() + " NO esta saludable, no se puede adoptar");
+            
+        else if (animal1.getDomestico() == false)
+            System.out.println("El animal " + animal1.getNombre() + " NO es un animal domestico, no se puede adoptar");
         
         else {
-            Adopcion adopcion = new Adopcion(
-                    animal1,
-                    cliente1,
-                    motivoDeAdopcion);
+            //si falla
+            Adopcion adopcion = cliente1.adopcionNueva(cliente1, animal1, motivoDeAdopcion);
+            if (adopcion == null) {
+                System.out.println("El cliente " + cliente1.getNombre() + " " + cliente1.getApellido() + " ya tiene 2 adopciones , no se puede adoptar");
+                return -1;
+            }
             animal1.setAdoptado(true);
-            cliente1.setCantidadAdopciones(cliente1.getCantidadAdopciones() + 1);
             Usuario visitador = ControllerUsuario.getInstancia().buscarUsuario(emailVisitador);
             adopcion.getSeguimiento().setVisitador(visitador);
             this.adopciones.add(adopcion);

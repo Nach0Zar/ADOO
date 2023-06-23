@@ -5,10 +5,10 @@ import modelos.dtos.*;
 
 public class FichaMedica {
     
-    private ArrayList <Tratamiento> tratamientos;
-    private ArrayList <Alarma> alarmas;
     private int legajo;
     private Exportador exportador;
+    private ArrayList <Tratamiento> tratamientos;
+    private ArrayList <Alarma> alarmas;
     private Animal animal;
 
     public FichaMedica(Animal animal) {
@@ -92,4 +92,8 @@ public class FichaMedica {
 	public Tratamiento getTratamientoActivo() {
         return this.tratamientos.get(this.tratamientos.size() - 1);
 	}
+
+    public void agregarAlarma(Alarma alarma) {
+        this.alarmas.add(alarma);
+    }
 }

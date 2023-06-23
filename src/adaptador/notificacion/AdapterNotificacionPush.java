@@ -19,7 +19,7 @@ public class AdapterNotificacionPush implements INotificationPush {
      */
     @Override
     public void enviarNotificacion(AlarmaDTO alarmaDTO) {
-        System.out.println("Enviando notificacion push del animal " + alarmaDTO.getAnimalDTO().getNombre());
+        System.out.println("Enviando notificacion push del animal " + alarmaDTO.getAnimalDTO().getNombre() + " a todos los usuarios conectados.");
     }
 
 }

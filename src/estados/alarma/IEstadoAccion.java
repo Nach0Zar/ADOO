@@ -7,6 +7,8 @@ import estrategias.accion.Accion;
  */
 public interface IEstadoAccion {
 
-    public void atenderAlarma(Accion Accion);
+    public void atenderAccion(Accion Accion);
+
+    public boolean getFinalizada();
 
 }

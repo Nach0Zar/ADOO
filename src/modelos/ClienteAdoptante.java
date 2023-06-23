@@ -4,12 +4,11 @@ package modelos;
 import java.util.*;
 
 import enums.TipoNotificacion;
+import estados.adoptante.IEstadoAdoptante;
 import modelos.dtos.ClienteAdoptanteDTO;
 import enums.TipoAnimal;
+import estados.adoptante.Habilitado;
 
-/**
- * 
- */
 public class ClienteAdoptante {
 
     private String nombre;
@@ -23,6 +22,7 @@ public class ClienteAdoptante {
     private TipoNotificacion tipoNotificacion;
     private String motivoAdopcion;
     private int cantidadAdopciones;
+    private IEstadoAdoptante estadoAdoptante;
 
     public  ClienteAdoptante( String nombre, String apellido, String estadoCivil, String email, String telefono, String ocupacion,
             ArrayList <TipoAnimal> tipoDeAnimalesInteresados, Boolean otrasMascotas, TipoNotificacion tipoNotificacion, String motivoAdopcion, int cantidadAdopciones) {
@@ -37,8 +37,16 @@ public class ClienteAdoptante {
         this.tipoNotificacion = tipoNotificacion;
         this.motivoAdopcion = motivoAdopcion;
         this.cantidadAdopciones = cantidadAdopciones;
+        this.estadoAdoptante = new Habilitado();
     }
 
+    public Adopcion adopcionNueva(ClienteAdoptante cliente, Animal animal, String motivoAdopcion) {
+        return estadoAdoptante.adopcionAnimal(animal, cliente, motivoAdopcion);
+    }
+
+    public void cambiarEstado(IEstadoAdoptante estadoAdoptante) {
+        this.estadoAdoptante = estadoAdoptante;
+    }
     
     public ClienteAdoptanteDTO toDTO() {
         return new ClienteAdoptanteDTO(this.nombre, this.apellido, this.estadoCivil, this.email, this.telefono, 
@@ -81,6 +89,10 @@ public class ClienteAdoptante {
         this.tipoNotificacion = tipoNotificacion;
     }
 
+    public void setCantidadAdopciones(int cantidadAdopciones){
+        this.cantidadAdopciones = cantidadAdopciones;
+    }
+
     public String getNombre() {
         return this.nombre;
     }
@@ -121,7 +133,4 @@ public class ClienteAdoptante {
         return this.cantidadAdopciones;
     }
 
-    public void setCantidadAdopciones(int cantidadAdopciones){
-        this.cantidadAdopciones = cantidadAdopciones;
-    }
 }

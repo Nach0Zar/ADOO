@@ -75,7 +75,7 @@ public class App {
 
                 // adoptar animal 3 en tratamiento
 
-                int numeroAdopcion0 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
+                controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
                                 "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
                 // Finalizar el tratamiento del animal 3
@@ -83,34 +83,50 @@ public class App {
 
                 // Ahora que esta sano , adoptamos !
 
+                //Adoptamos a Luna
                 int numeroAdopcion1 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
                                 "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
                 // Intento adoptar el mismo animal
-
-                int numeroAdopcion2 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
+                //Intento volver a adoptar a Luna
+                controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
                                 "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
                 // adopto hasta 3 animales y NO me deja , solo adopta 2.
-
+                //Adopto a Panchito
                 int numeroAdopcion3 = controladorAdopcion.crearAdopcion(legajo2, clienteEncontrado.getEmail(),
                                 "Quiero ", "lumolina@uade.edu.ar");
 
-                int numeroAdopcion4 = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(), "Quiero ",
+                //Intento Adoptar a Shona
+                controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(), "Quiero ",
                                 "lumolina@uade.edu.ar");
 
                 // Crear una alarma de tratamiento para el animal 3
                 Duration preriodicidad = Duration.ofDays(1);
-                int numeroAlarmaTratamiento = controladorAlarma.crearAlarma(preriodicidad, legajo3,
-                                "lumolina@uade.edu.ar", numeroDeTratamiento);
+                int numeroAlarmaTratamiento = controladorAlarma.crearAlarma(preriodicidad, legajo3, numeroDeTratamiento);
+
+                controladorAlarma.enviarNotificacion(numeroAlarmaTratamiento);
 
                 AlarmaDTO alarmaDTO = controladorAlarma.obtenerAlarmaDTO(numeroAlarmaTratamiento);
                 alarmaDTO.printAcciones();
 
+                //atender alarma de tratamiento 
+                controladorAlarma.atenderAlarma(alarmaDTO.getNumeroAlarma(), "lumolina@uade.edu.ar");
+
+                controladorAlarma.atenderAlarma(alarmaDTO.getNumeroAlarma(), "lumolina@uade.edu.ar");
+
+
                 // Crear una alarma de control para el animal 2
                 Duration periodicidad = Duration.ofDays(1);
-                controladorAlarma.crearAlarma(periodicidad, legajo3, "lumolina@uade.edu.ar");
+                int numeroAlarmaControl = controladorAlarma.crearAlarma(periodicidad, legajo3);
+                AlarmaDTO alarmaControlDTO = controladorAlarma.obtenerAlarmaDTO(numeroAlarmaControl);
 
+                controladorAlarma.enviarNotificacion(numeroAlarmaTratamiento);
+
+                // atender alarma de control
+                controladorAlarma.atenderAlarma(alarmaControlDTO.getNumeroAlarma(), "lumolina@uade.edu.ar");    
+                controladorAlarma.atenderAlarma(alarmaControlDTO.getNumeroAlarma(), "lumolina@uade.edu.ar");
+                
                 // adoptar un animal
                 // int numeroAdopcion9 = controladorAdopcion.crearAdopcion(legajo,
                 // clienteEncontrado.getEmail(),"Por que quiero una mascota",
@@ -158,9 +174,12 @@ public class App {
                 controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO1.getLegajo(), TipoExportacion.EXCEL);
                 controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO2.getLegajo(), TipoExportacion.PDF);
 
+                //finalizar un seguimiento
+
+                controladorSeguimiento.finalizarSeguimiento(seguimientoEncontrado.getNumeroSeguimiento());
+
                 controladorScanner.cerrarScanner();
 
-                //atender alarma
-                //
+               
         }
 }

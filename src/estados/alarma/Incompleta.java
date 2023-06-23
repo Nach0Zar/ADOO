@@ -15,9 +15,15 @@ public class Incompleta implements IEstadoAccion {
      * @return
      */
     @Override
-    public void atenderAlarma(Accion accion) {
-        System.out.println("atendiendo alarma");
+    public void atenderAccion(Accion accion) {
+        System.out.println("Atendiendo accion: " + accion.getNombre());
         accion.setEstadoAlarma(new Completa());
+    }
+
+    @Override
+    public boolean getFinalizada() {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

@@ -11,8 +11,14 @@ public class Completa implements IEstadoAccion {
     }
 
     @Override
-    public void atenderAlarma(Accion accion) {
-        System.out.println("Alarma ya atendida");
+    public void atenderAccion(Accion accion) {
+        System.out.println("Acción ya atendida");
+    }
+
+    @Override
+    public boolean getFinalizada() {
+        // TODO Auto-generated method stub
+        return true;
     }
 
 }

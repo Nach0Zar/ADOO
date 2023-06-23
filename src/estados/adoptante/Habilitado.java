@@ -1,8 +1,8 @@
 package estados.adoptante;
 
+import modelos.Adopcion;
 import modelos.Animal;
 import modelos.ClienteAdoptante;
-import modelos.Adopcion;
 
 /**
  * 
@@ -10,14 +10,15 @@ import modelos.Adopcion;
 public class Habilitado implements IEstadoAdoptante {
 
     @Override
-    public void adopcionAnimal(Animal animal, ClienteAdoptante clienteAdoptante, Adopcion adopcion) {
-        if (clienteAdoptante.getCantidadAdopciones() >= 2 || !animal.getDomestico() || animal.getEstadoSaludableAnimal() == true || animal.getAdoptado() == true) {
-            adopcion.cambiarEstado(new NoHabilitado());// cambio del estado
-            System.out.println("Adopcion en estado NO habilitada");
-        } else {
-            clienteAdoptante.setCantidadAdopciones(clienteAdoptante.getCantidadAdopciones() + 1);
-            System.out.println("Adopcion confirmada!");
-        }
+    public Adopcion adopcionAnimal(Animal animal, ClienteAdoptante clienteAdoptante, String motivoDeAdopcion) {
+        Adopcion adopcion = new Adopcion(
+            animal,
+            clienteAdoptante,
+            motivoDeAdopcion);
+        clienteAdoptante.setCantidadAdopciones(clienteAdoptante.getCantidadAdopciones() + 1);
+        if (clienteAdoptante.getCantidadAdopciones() >= 2)
+            clienteAdoptante.cambiarEstado(new NoHabilitado());
+        return adopcion;
     }
 
 }
