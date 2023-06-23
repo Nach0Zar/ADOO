@@ -1,50 +1,35 @@
 package modelos.dtos;
 
-import java.util.List;
-
-import modelos.Alarma;
-import modelos.Exportador;
-import modelos.Tratamiento;
+import java.util.ArrayList;
+import modelos.Animal;
 
 public class FichaMedicaDTO {
     
-    private Exportador exportador;
-    private List<Tratamiento> tratamientos;
-    private List<Alarma> alarmas;
+    private ArrayList<TratamientoDTO> tratamientosDTO;
+    private ArrayList<AlarmaDTO> alarmasDTO;
+    private Animal animal;
+    private int legajo;
+
+    public FichaMedicaDTO(ArrayList<TratamientoDTO> tratamientosDTO, ArrayList<AlarmaDTO> alarmasDTO, Animal animal, int legajo) {
+        this.tratamientosDTO = tratamientosDTO;
+        this.alarmasDTO = alarmasDTO;
+        this.animal = animal;
+        this.legajo = legajo;
+    }
     
-
-    public FichaMedicaDTO() {
+    public ArrayList<TratamientoDTO> getTratamientosDTO() {
+        return tratamientosDTO;
     }
 
-
-    public Exportador getExportador() {
-        return exportador;
+    public ArrayList<AlarmaDTO> getAlarmasDTO() {
+        return alarmasDTO;
     }
 
-
-    public void setExportador(Exportador exportador) {
-        this.exportador = exportador;
+    public Animal getAnimal(){
+        return animal;
     }
 
-
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
+    public int getLegajo(){
+        return legajo;
     }
-
-
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
-    }
-
-
-    public List<Alarma> getAlarmas() {
-        return alarmas;
-    }
-
-
-    public void setAlarmas(List<Alarma> alarmas) {
-        this.alarmas = alarmas;
-    }
-
-    
 }

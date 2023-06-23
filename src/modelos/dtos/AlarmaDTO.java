@@ -1,70 +1,60 @@
 package modelos.dtos;
 
+import java.util.ArrayList;
+import java.util.Date;
+
+import estrategias.accion.ITipoAlarma;
+
 import java.time.Duration;
-
-import adaptador.notificacion.INotificationPush;
-import estrategias.alarma.ITipoAlarma;
-import modelos.Animal;
-
 
 public class AlarmaDTO {
 
-    
+    private int numeroAlarma;
     private Duration periodicidad;
-    private Animal animal;
-    private Boolean estadoAlarma;
-    private INotificationPush notificacion;
+    private AnimalDTO animalDTO;
     private ITipoAlarma tipoAlarma;
-    
-    public AlarmaDTO(Duration periodicidad, Animal animal, Boolean estadoAlarma, INotificationPush notificacion,
-            ITipoAlarma tipoAlarma) {
+    private UsuarioDTO usuarioDTO;
+    private Date ultimaEjecucion;
+
+    public AlarmaDTO(int numeroAlarma, Duration periodicidad, AnimalDTO animalDTO,
+            ITipoAlarma tipoAlarma, UsuarioDTO usuarioDTO, Date ultimaEjecucion2) {
+        this.numeroAlarma = numeroAlarma;
         this.periodicidad = periodicidad;
-        this.animal = animal;
-        this.estadoAlarma = estadoAlarma;
-        this.notificacion = notificacion;
+        this.animalDTO = animalDTO;
         this.tipoAlarma = tipoAlarma;
+        this.usuarioDTO = usuarioDTO;
+        this.ultimaEjecucion = ultimaEjecucion2;
     }
 
-    public Duration getperiodicidad() {
+    public int getNumeroAlarma() {
+        return numeroAlarma;
+    }
+
+    public Duration getPeriodicidad() {
         return periodicidad;
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public AnimalDTO getAnimalDTO() {
+        return animalDTO;
     }
 
-    public Boolean getEstadoAlarma() {
-        return estadoAlarma;
+    public UsuarioDTO getUsuarioDTO() {
+        return usuarioDTO;
     }
 
-    public INotificationPush getNotificacion() {
-        return notificacion;
+    public Date getUltimaEjecucion() {
+        return ultimaEjecucion;
     }
 
-    public ITipoAlarma getTipoAlarma() {
-        return tipoAlarma;
+    public ArrayList<AccionDTO> getAcciones() {
+        return tipoAlarma.getAccionesDTO();
     }
 
-    public void setperiodicidad(Duration periodicidad) {
-        this.periodicidad = periodicidad;
+    public void printAcciones() {
+        for (AccionDTO accion : tipoAlarma.getAccionesDTO()) {
+            System.out.println("Nombre: " + accion.getNombre());
+            System.out.println("Descripcion: " + accion.getDescripcion());
+        }
     }
-
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
-
-    public void setEstadoAlarma(Boolean estadoAlarma) {
-        this.estadoAlarma = estadoAlarma;
-    }
-
-    public void setNotificacion(INotificationPush notificacion) {
-        this.notificacion = notificacion;
-    }
-
-    public void setTipoAlarma(ITipoAlarma tipoAlarma) {
-        this.tipoAlarma = tipoAlarma;
-    }
-
-    
 
 }

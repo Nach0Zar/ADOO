@@ -1,11 +1,14 @@
 package controladores;
 
-import java.util.ArrayList;
 import java.util.*;
 import modelos.Adopcion;
-import modelos.ClienteAdoptante;
 import modelos.Animal;
-import modelos.TipoNotificacion;
+import modelos.ClienteAdoptante;
+import modelos.Usuario;
+import modelos.dtos.AdopcionDTO;
+//import modelos.dtos.ClienteAdoptanteDTO;
+import modelos.dtos.RecordatorioDTO;
+import singleton.Escaner;
 
 public class ControllerAdopcion {
 
@@ -18,41 +21,69 @@ public class ControllerAdopcion {
         return instancia;
     }
 
-    public ControllerAdopcion() {
+    private ControllerAdopcion() {
         adopciones = new ArrayList<>();
     }
 
-    public void crearAdopcion(Animal animal, ClienteAdoptante clienteAdoptante, String motivoDeAdopcion) {
-        Adopcion adopcion = new Adopcion(
-                animal,
-                clienteAdoptante,
-                motivoAdopcion(),
-                TipoNotificacion.SMS);
+    public int crearAdopcion(int animal, String emailCliente, String motivoDeAdopcion, String emailVisitador) {
+        ClienteAdoptante cliente1 = ControllerClienteAdoptante.getInstancia().buscarClienteAdoptante(emailCliente);
+        Animal animal1 = ControllerAnimal.getInstancia().obtenerAnimal(animal);
 
-        this.adopciones.add(adopcion);
-        adopcionNueva(adopcion, clienteAdoptante, animal);
+        if (cliente1.getCantidadAdopciones() == 2)
+            System.out.println("El cliente " + cliente1.getNombre() + " " + cliente1.getApellido() + " ya tiene 2 adopciones , no se puede adoptar");
+
+        else if (animal1.getAdoptado() == true)
+            System.out.println("El animal " + animal1.getNombre() + " ya fue adoptado previamente, no se puede adoptar");
+
+        else if (animal1.getEstadoSaludableAnimal() == false)
+            System.out.println("El animal " + animal1.getNombre() + " NO esta saludable , no se puede adoptar");
+        
+        else {
+            Adopcion adopcion = new Adopcion(
+                    animal1,
+                    cliente1,
+                    motivoDeAdopcion);
+            animal1.setAdoptado(true);
+            cliente1.setCantidadAdopciones(cliente1.getCantidadAdopciones() + 1);
+            Usuario visitador = ControllerUsuario.getInstancia().buscarUsuario(emailVisitador);
+            adopcion.getSeguimiento().setVisitador(visitador);
+            this.adopciones.add(adopcion);
+            System.out.println("El animal "+ animal1.getNombre() + " fue adoptado!");
+            return adopcion.getnumeroAdopcion();
+        }
+        return -1;
     }
 
-    private void adopcionNueva(Adopcion adopcion, ClienteAdoptante clienteAdoptante, Animal animal) {
-        adopcion.adopcionNueva(clienteAdoptante, animal);
+    public RecordatorioDTO enviarNotificacion(int numeroAdopcion) {
+        Adopcion adopcion = this.buscarAdopcion(numeroAdopcion);
+        RecordatorioDTO recordatorioDTO = new RecordatorioDTO(this.mensajeRecordatorio(), new Date(),
+                adopcion.getCliente().toDTO());
+        adopcion.enviarNotificacion(recordatorioDTO);
+        return recordatorioDTO;
     }
 
-    private String motivoAdopcion() {
-        System.out.println("Motivo de adopcion :");
-        Scanner entradaScanner = new Scanner(System.in);
-        String motivoAdop = entradaScanner.nextLine();
-        entradaScanner.close();
-        return motivoAdop;
+    private String mensajeRecordatorio() {
+        System.out.println("Mensaje de recordatorio  :");
+        String mensajeRecordatorio = Escaner.getInstancia().proxLinea();
+        return mensajeRecordatorio;
     }
 
-    public Adopcion buscarAdopcion(int id) {
+    protected Adopcion buscarAdopcion(int numero) {
         Adopcion adopcionBuscada = null;
         for (Adopcion adopcion : adopciones) {
-            if (adopcion.getId() == id) {
+            if (adopcion.getnumeroAdopcion() == numero) {
                 adopcionBuscada = adopcion;
             }
         }
         return adopcionBuscada;
+    }
+
+    public AdopcionDTO buscarAdopcionDTO(int numeroAdopcion) {
+        Adopcion adopcion = this.buscarAdopcion(numeroAdopcion);
+        if (adopcion instanceof Adopcion) {
+            return adopcion.toDTO();
+        }
+        return null;
     }
 
 }

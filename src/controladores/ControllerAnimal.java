@@ -12,7 +12,7 @@ public class ControllerAnimal {
     private ArrayList<Animal> animales;
     private static ControllerAnimal instancia;
 
-    public ControllerAnimal() {
+    private ControllerAnimal() {
         animales = new ArrayList<Animal>();
     }
 
@@ -24,47 +24,50 @@ public class ControllerAnimal {
 
     public void ingresarAnimal(AnimalDTO animalDTO) {
         Animal animal = new Animal(
-            animalDTO.getDomestico(), 
-            animalDTO.getAltura(), 
-            animalDTO.getPeso(),
-            animalDTO.getEdad(), 
-            animalDTO.getEstadoSaludableAnimal(), 
-            animalDTO.getTipoDeAnimal(),
-            animalDTO.getNombre()
-        );
+                animalDTO.getDomestico(),
+                animalDTO.getAltura(),
+                animalDTO.getPeso(),
+                animalDTO.getEdad(),
+                animalDTO.getEstadoSaludableAnimal(),
+                animalDTO.getTipoDeAnimal(),
+                animalDTO.getNombre());
         animales.add(animal);
     }
-
-    public AnimalDTO obtenerAnimalDTO(int legajo) {
-        Animal animalBuscar = null;
-
-        for (Animal animal : animales) {
-            if (animal.getLegajo() == legajo) {
-                animalBuscar = animal;
-                break;
-            }
-        }
-        return animalBuscar.getDTO();
-    }
-
 
     public FichaMedicaDTO obtenerFichaMedica(int legajo) {
         Animal animal = obtenerAnimal(legajo);
-        return animal.getFichaMedica().getDTO();
+        return animal.getFichaMedica().toDTO();
     }
 
-
-    private Animal obtenerAnimal(int legajo){
+    protected Animal obtenerAnimal(int legajo){
         for (Animal animal : animales)
-            if (animal.getLegajo() == legajo)
+            if (animal.getLegajo() == legajo){
                 return animal;
+            }
         return null;
     }
 
-  
-    public void ingresarAnimal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoAnimal, TipoAnimal tipoDeAnimal, String nombre, String legajo) {
+    public AnimalDTO obtenerAnimalDTO(int legajo) {
+        Animal animal = this.obtenerAnimal(legajo);
+        if (animal instanceof Animal) {
+            return animal.toDTO();
+        }
+        return null;
+    }
+
+    public int ingresarAnimal(boolean domestico, Float altura, Float peso, int edad, boolean estadoAnimal,
+            TipoAnimal tipoDeAnimal, String nombre) {
         Animal animal = new Animal(domestico, altura, peso, edad, estadoAnimal, tipoDeAnimal, nombre);
         animales.add(animal);
+        ControllerFichaMedica.getInstancia().agregarFichaMedica(animal.getFichaMedica());
+        return animal.getLegajo();
+    }
+
+    public void setEstadoSaludableAnimal(int legajo, boolean estadoSaludableAnimal) {
+        Animal animal = this.obtenerAnimal(legajo);
+        if (animal instanceof Animal) {
+            animal.setEstadoSaludableAnimal(estadoSaludableAnimal);
+        }
     }
 
 }

@@ -1,34 +1,23 @@
 package estados.alarma;
 
-import modelos.Alarma;
+import estrategias.accion.Accion;
 
 /**
  * 
  */
-public class Incompleta implements IEstadoAlarma {
+public class Incompleta implements IEstadoAccion {
 
-    private Alarma alarma;
-  
-    public Incompleta(Alarma alarma) {
-        this.alarma = alarma;
-    }
-
-    public Alarma getAlarma() {
-        return alarma;
-    }
-
-    public void setAlarma(Alarma alarma) {
-        this.alarma = alarma;
+    public Incompleta() {
     }
 
     /**
-     * @param Alarma alarma 
+     * @param Alarma alarma
      * @return
      */
     @Override
-    public void atenderAlarma(Alarma alarma) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atenderAlarma'");
+    public void atenderAlarma(Accion accion) {
+        System.out.println("atendiendo alarma");
+        accion.setEstadoAlarma(new Completa());
     }
 
 }

@@ -2,24 +2,26 @@ package modelos;
 
 import estados.adoptante.Habilitado;
 import estados.adoptante.IEstadoAdoptante;
+import modelos.dtos.RecordatorioDTO;
+import modelos.dtos.AdopcionDTO;
 
 public class Adopcion {
 
-    private static int idAutoIncremental = 0;
+    private static int numeradorAdopcion = 1;
 
     private Animal animal;
     private ClienteAdoptante cliente;
-    private int id;
+    private int numeroAdopcion;
     private String motivoAdopcion;
     private Seguimiento seguimiento;
     private IEstadoAdoptante estadoAdopcion;
 
-    public Adopcion(Animal animal, ClienteAdoptante cliente, String motivoAdopcion, TipoNotificacion notif) {
+    public Adopcion(Animal animal, ClienteAdoptante cliente, String motivoAdopcion) {
         this.animal = animal;
         this.cliente = cliente;
-        this.id = idAutoIncremental++;
+        this.numeroAdopcion = numeradorAdopcion++;
         this.motivoAdopcion = motivoAdopcion;
-        this.seguimiento = new Seguimiento(id, notif);// creamos el seguimiento cuando creamos la adopcion
+        this.seguimiento = new Seguimiento();// creamos el seguimiento cuando creamos la adopcion
         this.estadoAdopcion = new Habilitado(); // Va estar hablitado
     }
 
@@ -27,16 +29,16 @@ public class Adopcion {
         estadoAdopcion.adopcionAnimal(animal, cliente, this);
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public void cambiarEstado(IEstadoAdoptante estadoAdopcion) {
+        this.estadoAdopcion = estadoAdopcion;
     }
 
-    public void setCliente(ClienteAdoptante cliente) {
-        this.cliente = cliente;
+    public void enviarNotificacion(RecordatorioDTO recordatorio) {
+        this.seguimiento.enviarRecordatorio(recordatorio);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public AdopcionDTO toDTO() {
+        return new AdopcionDTO(this.animal.toDTO(), this.cliente.toDTO(), this.numeroAdopcion, this.motivoAdopcion);
     }
 
     public void setMotivoAdopcion(String motivoAdopcion) {
@@ -47,32 +49,27 @@ public class Adopcion {
         this.seguimiento = seguimiento;
     }
 
-    public void cambiarEstado(IEstadoAdoptante estadoAdopcion) {
-        this.estadoAdopcion = estadoAdopcion;
-    }
-
     public Animal getAnimal() {
-        return animal;
+        return this.animal;
     }
 
     public ClienteAdoptante getCliente() {
-        return cliente;
+        return this.cliente;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getnumeroAdopcion() {
+        return this.numeroAdopcion;
     }
 
     public String getMotivoAdopcion() {
-        return motivoAdopcion;
+        return this.motivoAdopcion;
     }
 
     public Seguimiento getSeguimiento() {
-        return seguimiento;
+        return this.seguimiento;
     }
 
     public IEstadoAdoptante getEstadoAdopcion() {
-        return estadoAdopcion;
+        return this.estadoAdopcion;
     }
-
 }

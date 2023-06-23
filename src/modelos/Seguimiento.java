@@ -1,67 +1,54 @@
 package modelos;
 
 import java.util.*;
+
+import enums.Calificacion;
 import modelos.dtos.RecordatorioDTO;
+import estrategias.recordatorio.RecordatorioPorEmail;
+import estrategias.recordatorio.RecordatorioPorWhatsApp;
+import estrategias.recordatorio.RecordatorioPorSMS;
 
 public class Seguimiento {
+    private static int numeradorSeguiemiento = 1;
 
-    private Date candenciaVisitas;
     private Boolean continuarSeguimiento;
-    private int idSeguimientoAnimal;
-    private TipoNotificacion tipoNotficacion;
-    private Recordador tipoNotificacionNotificador;
+    private int numeroSeguimiento;
     private Recordador recordador;
-    private Date frecuenciaVisita;
+    private int frecuenciaVisita; // cada cuanto se repite
     private Encuesta encuesta;
     private ArrayList<Visita> visitas;
+    private Usuario visitadorEncargado;
 
-    public Seguimiento(int idSeguimiento, TipoNotificacion notif) {
-        this.idSeguimientoAnimal=idSeguimiento;
-        this.tipoNotficacion = notif;
-        this.tipoNotificacionNotificador = new Recordador();
-        this.idSeguimientoAnimal = idSeguimiento;
+    public Seguimiento() {
+        this.recordador = new Recordador(new RecordatorioPorSMS());
+        this.numeroSeguimiento = numeradorSeguiemiento++;
         this.visitas = new ArrayList<Visita>();
-
-    }
-    
-    public Date getCandenciaVisitas() {
-        return candenciaVisitas;
     }
 
-    public void setCandenciaVisitas(Date candenciaVisitas) {
-        this.candenciaVisitas = candenciaVisitas;
+    public void agregarVisita(String comentario, Calificacion estadoAnimal, Calificacion limpieza,
+            Calificacion ambiente) {
+        Visita visitaNueva = new Visita(comentario, this.visitadorEncargado);
+        visitaNueva.completarEncuesta(estadoAnimal, limpieza, ambiente);
+        visitas.add(visitaNueva);
+        // solo para probar
+        System.out.println("Se creo la visita  con el comentario = " + visitaNueva.getComentario()
+                + " Tenes esta cantidad de visitas : " + cantidadVisitas());
     }
 
     public Boolean getContinuarSeguimiento() {
         return continuarSeguimiento;
     }
 
+    public int cantidadVisitas() {
+        return visitas.size();
+    }
+
     public void setContinuarSeguimiento(Boolean continuarSeguimiento) {
         this.continuarSeguimiento = continuarSeguimiento;
     }
 
-    public int getIdSeguimientoAnimal() {
-        return idSeguimientoAnimal;
-    }
-
-    public void setIdSeguimientoAnimal(int idSeguimientoAnimal) {
-        this.idSeguimientoAnimal = idSeguimientoAnimal;
-    }
-
-    public TipoNotificacion getTipoNotficacion() {
-        return tipoNotficacion;
-    }
-
-    public void setTipoNotficacion(TipoNotificacion tipoNotficacion) {
-        this.tipoNotficacion = tipoNotficacion;
-    }
-
-    public Recordador getTipoNotificacionNotificador() {
-        return tipoNotificacionNotificador;
-    }
-
-    public void setTipoNotificacionNotificador(Recordador tipoNotificacionNotificador) {
-        this.tipoNotificacionNotificador = tipoNotificacionNotificador;
+    public int getNumeroSeguimiento() {
+        return numeroSeguimiento;
     }
 
     public Recordador getRecordador() {
@@ -72,11 +59,11 @@ public class Seguimiento {
         this.recordador = recordador;
     }
 
-    public Date getFrecuenciaVisita() {
+    public int getFrecuenciaVisita() {
         return frecuenciaVisita;
     }
 
-    public void setFrecuenciaVisita(Date frecuenciaVisita) {
+    public void setFrecuenciaVisita(int frecuenciaVisita) {
         this.frecuenciaVisita = frecuenciaVisita;
     }
 
@@ -95,13 +82,28 @@ public class Seguimiento {
     public void setVisitas(ArrayList<Visita> visitas) {
         this.visitas = visitas;
     }
-    
+
+    public void setVisitador(Usuario visitador) {
+        this.visitadorEncargado = visitador;
+    }
+
     /**
      * @param recordatorio
      * @return
      */
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        // TODO implement here
+        switch (recordatorio.getDestinatario().getTipoNotificacion()) {
+            case EMAIL:
+                recordador.setEstrategia(new RecordatorioPorEmail());
+                break;
+            case SMS:
+                recordador.setEstrategia(new RecordatorioPorSMS());
+                break;
+            case WHATSAPP:
+                recordador.setEstrategia(new RecordatorioPorWhatsApp());
+                break;
+        }
+        this.recordador.enviarRecordatorio(recordatorio);
     }
 
 }

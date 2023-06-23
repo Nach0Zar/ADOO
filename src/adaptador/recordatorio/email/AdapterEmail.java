@@ -23,7 +23,7 @@ public class AdapterEmail implements AdapterRecordadorEmail {
                 "Se ha enviado un mensaje por Email al correo " + recordatorio.getDestinatario().getEmail()
                         + " del Cliente Adoptante " + recordatorio.getDestinatario().getNombre()
                         + " " + recordatorio.getDestinatario().getApellido() +
-                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: " + recordatorio.getMensaje()
+                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: \"" + recordatorio.getMensaje() + "\""
         );
     }
 

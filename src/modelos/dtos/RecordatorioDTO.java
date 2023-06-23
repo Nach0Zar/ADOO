@@ -1,20 +1,20 @@
 package modelos.dtos;
 
-import modelos.ClienteAdoptante;
-
 import java.util.*;
+
 public class RecordatorioDTO {
 
-    private ClienteAdoptante destinatario;
+    private ClienteAdoptanteDTO clienteAdoptanteDTO;
     private String mensaje;
     private Date fecha;
-    public RecordatorioDTO(String mensaje, Date fecha, ClienteAdoptante destinatario) {
+    
+    public RecordatorioDTO(String mensaje, Date fecha, ClienteAdoptanteDTO clienteAdoptanteDTO) {
         this.mensaje = mensaje;
         this.fecha = fecha;
-        this.destinatario = destinatario;
+        this.clienteAdoptanteDTO = clienteAdoptanteDTO;
     }
-    public ClienteAdoptante getDestinatario() {
-        return destinatario;
+    public ClienteAdoptanteDTO getDestinatario() {
+        return clienteAdoptanteDTO;
     }
     public String getMensaje() {
         return mensaje;
@@ -22,8 +22,8 @@ public class RecordatorioDTO {
     public Date getFecha() {
         return fecha;
     }
-    public void setDestinatario(ClienteAdoptante destinatario) {
-        this.destinatario = destinatario;
+    public void setDestinatario(ClienteAdoptanteDTO clienteAdoptanteDTO) {
+        this.clienteAdoptanteDTO = clienteAdoptanteDTO;
     }
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;

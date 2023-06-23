@@ -1,61 +1,58 @@
 package modelos;
 
 import java.util.*;
-import modelos.dtos.FichaMedicaDTO;
+import modelos.dtos.*;
 
 public class FichaMedica {
-    //ponemos la lista de alarmas aca?
-    private Exportador exportador;
+    
     private ArrayList <Tratamiento> tratamientos;
+    private ArrayList <Alarma> alarmas;
     private int legajo;
+    private Exportador exportador;
     private Animal animal;
 
-
-    public FichaMedica(int legajo, Animal animal) {
-        this.tratamientos = new ArrayList<Tratamiento>();
-        this.exportador = new Exportador();
-        this.legajo = legajo;
+    public FichaMedica(Animal animal) {
         this.animal = animal;
+        this.legajo = animal.getLegajo();
+        this.tratamientos = new ArrayList<Tratamiento>();
+        this.alarmas = new ArrayList<Alarma>();
+        this.exportador = new Exportador();
     }
 
-    //getters y setters
-
+    //Getters
     public Exportador getExportador() {
         return exportador;
-    }
-
-    public void setExportador(Exportador exportador) {
-        this.exportador = exportador;
     }
 
     public ArrayList<Tratamiento> getTratamientos() {
         return tratamientos;
     }
 
-    public void setTratamientos(ArrayList<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
+    public ArrayList<Alarma> getAlarmas() {
+        return alarmas;
+    }
+    //Fin Getters
+    
+    //Setters
+    public void setExportador(Exportador exportador) {
+        this.exportador = exportador;
     }
 
-    public int getLegajo() {
-        return legajo;
+    public void setAlarmas(ArrayList<Alarma> alarmas) {
+        this.alarmas = alarmas;
     }
+    //Fin Setters
 
-    public void setLegajo(int legajo) {
-        this.legajo = legajo;
-    }
-
-    //Fin getters y setters
-
-    public void exportarFichaMedica(FichaMedicaDTO fichaMedicaDTO) {
-        this.exportador.exportarFichaMedica(fichaMedicaDTO);
+    public void exportarFichaMedica() {
+        this.exportador.exportarFichaMedica(this.toDTO());
     }
 
     //Inicio Tratamientos
 
-    protected Tratamiento buscarTratamiento(int id) {
+    public Tratamiento buscarTratamiento(int numeroTratamiento) {
         Tratamiento tratamiento = null;
         for (Tratamiento t : tratamientos) {
-            if (t.getIdTratamiento() == id) {
+            if (t.getNumeroTratamiento() == numeroTratamiento) {
                 tratamiento = t;
                 break;
             }
@@ -63,32 +60,36 @@ public class FichaMedica {
         return tratamiento;
     }
 
-    public void crearTratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin) {
-        if(animal.getEstadoSaludableAnimal()){                                      //Siempre que el estado no sea saludable, tiene un tratamiento activo
-            Tratamiento tratamiento = new Tratamiento(nombre, descripcion, fechaInicio, fechaFin);
-            tratamientos.add(tratamiento);
-            animal.setEstadoSaludableAnimal(false);
-            
-            System.out.println("Se ha creado el tratamiento: " + tratamiento.getNombre() + " con id: " + tratamiento.getIdTratamiento());
-        }else{
-            System.out.println("Ya existe un tratamiento en curso, no se puede crear otro");
-        }
-    }
-
     public void agregarTratamiento(Tratamiento tratamiento) {
         tratamientos.add(tratamiento);
     }
 
-    public void finalizarTratamiento(int id) {
-        Tratamiento tratamiento = buscarTratamiento(id);
-        tratamiento.setFinalizado(true);
-        animal.setEstadoSaludableAnimal(true);
-        System.out.println("Ha finalizado el tratamiento: " + tratamiento.getNombre());
+    public FichaMedicaDTO toDTO() {
+        ArrayList<TratamientoDTO> tratamientosDTO = new ArrayList<TratamientoDTO>();
+        ArrayList<AlarmaDTO> alarmasDTO = new ArrayList<AlarmaDTO>();
+        for (Tratamiento t : tratamientos) {
+            tratamientosDTO.add(t.toDTO());
+        }
+        for (Alarma a : alarmas) {
+            alarmasDTO.add(a.toDTO());
+        }
+        return new FichaMedicaDTO(tratamientosDTO, alarmasDTO, this.animal, this.legajo);
     }
 
-    public FichaMedicaDTO getDTO() {
-        return null;
+    public int getLegajo(){
+        return this.legajo;
     }
 
+    public void setLegajo(int legajo){
+        this.legajo = legajo;
+    }
     //Fin tratamientos
+
+	public boolean getEstadoSaludableAnimal() {
+		return this.animal.getEstadoSaludableAnimal();
+	}
+
+	public Tratamiento getTratamientoActivo() {
+        return this.tratamientos.get(this.tratamientos.size() - 1);
+	}
 }

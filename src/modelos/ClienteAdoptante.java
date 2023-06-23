@@ -3,6 +3,10 @@ package modelos;
 
 import java.util.*;
 
+import enums.TipoNotificacion;
+import modelos.dtos.ClienteAdoptanteDTO;
+import enums.TipoAnimal;
+
 /**
  * 
  */
@@ -14,10 +18,31 @@ public class ClienteAdoptante {
     private String email;
     private String telefono;
     private String ocupacion;
-    private List<String> tipoDeAnimalesInteresados;
+    private ArrayList<TipoAnimal> tipoDeAnimalesInteresados;
+    private Boolean otrasMascotas;
+    private TipoNotificacion tipoNotificacion;
+    private String motivoAdopcion;
     private int cantidadAdopciones;
 
-    public ClienteAdoptante() {
+    public  ClienteAdoptante( String nombre, String apellido, String estadoCivil, String email, String telefono, String ocupacion,
+            ArrayList <TipoAnimal> tipoDeAnimalesInteresados, Boolean otrasMascotas, TipoNotificacion tipoNotificacion, String motivoAdopcion, int cantidadAdopciones) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.estadoCivil = estadoCivil;
+        this.email = email;
+        this.telefono = telefono;
+        this.ocupacion = ocupacion;
+        this.tipoDeAnimalesInteresados = tipoDeAnimalesInteresados;
+        this.otrasMascotas =  otrasMascotas;
+        this.tipoNotificacion = tipoNotificacion;
+        this.motivoAdopcion = motivoAdopcion;
+        this.cantidadAdopciones = cantidadAdopciones;
+    }
+
+    
+    public ClienteAdoptanteDTO toDTO() {
+        return new ClienteAdoptanteDTO(this.nombre, this.apellido, this.estadoCivil, this.email, this.telefono, 
+        this.ocupacion, this.tipoDeAnimalesInteresados, this.otrasMascotas, this.tipoNotificacion, this.motivoAdopcion, this.cantidadAdopciones);
     }
 
     public void setNombre(String nombre) {
@@ -44,44 +69,59 @@ public class ClienteAdoptante {
         this.ocupacion = ocupacion;
     }
 
-    public void setTipoDeAnimalesInteresados(List<String> tipoDeAnimalesInteresados) {
+    public void setTipoDeAnimalesInteresados(ArrayList<TipoAnimal> tipoDeAnimalesInteresados) {
         this.tipoDeAnimalesInteresados = tipoDeAnimalesInteresados;
     }
 
-    public void setCantidadAdopciones(int cantidadAdopciones) {
-        this.cantidadAdopciones = cantidadAdopciones;
+    public void setotrasMascotas(Boolean otrasMascotas) {
+        this.otrasMascotas = otrasMascotas;
+    }
+
+    public void setTipoNotificacion(TipoNotificacion tipoNotificacion) {
+        this.tipoNotificacion = tipoNotificacion;
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public String getApellido() {
-        return apellido;
+        return this.apellido;
     }
 
     public String getEstadoCivil() {
-        return estadoCivil;
+        return this.estadoCivil;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public String getTelefono() {
-        return telefono;
+        return this.telefono;
     }
 
     public String getOcupacion() {
-        return ocupacion;
+        return this.ocupacion;
     }
 
-    public List<String> getTipoDeAnimalesInteresados() {
-        return tipoDeAnimalesInteresados;
+    public ArrayList<TipoAnimal> getTipoDeAnimalesInteresados() {
+        return this.tipoDeAnimalesInteresados;
     }
 
-    public int getCantidadAdopciones() {
-        return cantidadAdopciones;
+    public Boolean getotrasMascotas() {
+        return this.otrasMascotas;
     }
 
+    public TipoNotificacion getTipoNotificacion() {
+        return this.tipoNotificacion;
+    }
+
+    public int getCantidadAdopciones(){
+        return this.cantidadAdopciones;
+    }
+
+    public void setCantidadAdopciones(int cantidadAdopciones){
+        this.cantidadAdopciones = cantidadAdopciones;
+    }
 }

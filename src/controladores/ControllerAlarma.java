@@ -1,55 +1,84 @@
 package controladores;
 
+import java.time.Duration;
+import java.util.ArrayList;
+
+import estrategias.accion.AlarmaControl;
+import estrategias.accion.AlarmaTratamiento;
+import estrategias.accion.ITipoAlarma;
+import modelos.Alarma;
 import modelos.Animal;
+import modelos.FichaMedica;
+import modelos.Tratamiento;
+import modelos.Usuario;
 import modelos.dtos.AlarmaDTO;
 
-/**
- * 
- */
 public class ControllerAlarma {
-    
-    private Animal animal;
-    private AlarmaDTO alarma;
 
-    /**
-     * Default constructor
-     */
-    
-    public ControllerAlarma(Animal animal, AlarmaDTO alarma) {
-        this.animal = animal;
-        this.alarma = alarma;
+    private static ControllerAlarma instancia;
+
+    private ArrayList<Alarma> alarmas;
+
+    private ControllerAlarma() {
+        alarmas = new ArrayList<Alarma>();
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public static ControllerAlarma getInstancia() {
+        if (instancia == null)
+            instancia = new ControllerAlarma();
+        return instancia;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public int crearAlarma(
+            Duration periodicidad,
+            int legajoAnimal,
+            String emailVeterinario) {
+        ITipoAlarma tipoAlarma = new AlarmaControl();
+        Animal animal = ControllerAnimal.getInstancia().obtenerAnimal(legajoAnimal);
+        Usuario veterinario = ControllerUsuario.getInstancia().buscarUsuario(emailVeterinario);
+        Alarma alarma = new Alarma(periodicidad, animal, tipoAlarma, veterinario);
+        this.alarmas.add(alarma);
+
+        return alarma.getNumeroAlarma();
     }
 
-    public AlarmaDTO getAlarma() {
-        return alarma;
+    public int crearAlarma(
+            Duration periodicidad,
+            int legajoAnimal,
+            String emailVeterinario,
+            int numeroDetratamiento) {
+        Animal animal = ControllerAnimal.getInstancia().obtenerAnimal(legajoAnimal);
+        Usuario veterinario = ControllerUsuario.getInstancia().buscarUsuario(emailVeterinario);
+        FichaMedica fichaMedica = ControllerFichaMedica.getInstancia().buscarFichaMedica(legajoAnimal);
+        Tratamiento tratamiento = fichaMedica.buscarTratamiento(numeroDetratamiento);
+        ITipoAlarma tipoAlarma = new AlarmaTratamiento(tratamiento);
+        Alarma alarma = new Alarma(periodicidad, animal, tipoAlarma, veterinario);
+        this.alarmas.add(alarma);
+
+        return alarma.getNumeroAlarma();
     }
 
-    public void setAlarma(AlarmaDTO alarma) {
-        this.alarma = alarma;
+    protected Alarma buscarAlarma(int numeroAlarma) {
+        for (Alarma alarma : alarmas) {
+            if (alarma.soyAlarma(numeroAlarma)) {
+                return alarma;
+            }
+        }
+        return null;
     }
 
-    /**
-     * @param AlarmaDTO alarma 
-     * @return
-     */
-    public void crearAlarma(AlarmaDTO alarmaDTO) {
-        // TODO implement here
+    public AlarmaDTO obtenerAlarmaDTO(int numeroAlarma) {
+        Alarma alarma = buscarAlarma(numeroAlarma);
+        return alarma.toDTO();
     }
 
-    /**
-     * @param AlarmaDTO alarma 
-     * @return
-     */
-    public void atenderAlarma(AlarmaDTO alarmaDTO) {
-        // TODO implement here
+    public void atenderAlarma(int numeroAlarma) {
+        Alarma alarma = buscarAlarma(numeroAlarma);
+        alarma.atenderAlarma();
     }
 
+    public void enviarNotificacion(int numeroAlarma) {
+        Alarma alarma = buscarAlarma(numeroAlarma);
+        alarma.enviarNotificacion();
+    }
 }

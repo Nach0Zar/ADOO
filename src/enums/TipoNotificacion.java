@@ -1,4 +1,4 @@
-package modelos;
+package enums;
 
 public enum TipoNotificacion {
     EMAIL,

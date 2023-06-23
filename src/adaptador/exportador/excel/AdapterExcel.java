@@ -14,7 +14,7 @@ public class AdapterExcel implements AdapterExportadorExcel {
     @Override
     public void exportarFichaMedica(FichaMedicaDTO fichaMedica) {
         System.out.println(
-                "Se ha exportado la ficha medica en formato Excel"
+                "Se ha exportado la ficha medica de legajo: "+ fichaMedica.getLegajo() + " en formato Excel"
         );
     }
 

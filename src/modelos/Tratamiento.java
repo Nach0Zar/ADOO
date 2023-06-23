@@ -3,15 +3,17 @@ package modelos;
 
 import java.util.*;
 
+import modelos.dtos.TratamientoDTO;
+
 /**
  * 
  */
 public class Tratamiento {
 
-    private static int id = 1;
+    private static int numero = 1;
 
     private Boolean finalizado; //Estado del tratamiento
-    private int idTratamiento;
+    private int numeroTratamiento;
     private Date fechaInicio;
     private Date fechaFin;
     private String nombre;
@@ -20,7 +22,7 @@ public class Tratamiento {
 
 
     public Tratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin) {
-        this.idTratamiento = id++;
+        this.numeroTratamiento = numero++;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.nombre = nombre;
@@ -37,12 +39,12 @@ public class Tratamiento {
         this.finalizado = finalizado;
     }
 
-    public int getIdTratamiento() {
-        return idTratamiento;
+    public int getNumeroTratamiento() {
+        return numeroTratamiento;
     }
 
-    public void setIdTratamiento(int idTratamiento) {
-        this.idTratamiento = idTratamiento;
+    public void setNumeroTratamiento(int numeroTratamiento) {
+        this.numeroTratamiento = numeroTratamiento;
     }
 
     public Date getFechaInicio() {
@@ -77,4 +79,7 @@ public class Tratamiento {
         this.descripcion = descripcion;
     }
 
+    public TratamientoDTO toDTO() {
+        return new TratamientoDTO(this.finalizado, this.numeroTratamiento, this.fechaInicio, this.fechaFin, this.nombre, this.descripcion);
+    }
 }
