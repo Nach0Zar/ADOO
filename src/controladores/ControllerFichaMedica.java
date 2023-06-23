@@ -44,7 +44,12 @@ public class ControllerFichaMedica {
     }
 
     // acá esta tipoExportacion es un String, no un enum. Hay que cambiarlo
-    public void exportarFichaMedica(int legajo, TipoExportacion tipoExportacion) {
+    public void exportarFichaMedica(int legajo) {
+        FichaMedica fichaMedica = buscarFichaMedica(legajo);
+        fichaMedica.exportarFichaMedica();
+    }
+
+    public void cambiarEstrategiaExportacion(TipoExportacion tipoExportacion, int legajo){
         FichaMedica fichaMedica = buscarFichaMedica(legajo);
 
         switch (tipoExportacion) {
@@ -56,7 +61,6 @@ public class ControllerFichaMedica {
                 break;
         }
 
-        fichaMedica.exportarFichaMedica();
     }
 
     public int crearTratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin, int legajo) {

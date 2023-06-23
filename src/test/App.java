@@ -5,7 +5,6 @@ import java.util.*;
 import java.time.Duration;
 
 import controladores.*;
-import modelos.*;
 import modelos.dtos.*;
 import singleton.Escaner;
 import enums.*;
@@ -149,10 +148,10 @@ public class App {
 
                 // Creo un seguimiento para el animal
 
-                Seguimiento seguimientoEncontrado = controladorSeguimiento
+                int numeroSeguimiento = controladorSeguimiento
                                 .agregarSeguimientoAnimal(adopcionEncontrada.getNumeroAdopcion());
                 System.out.println(" Se agrego el seguimiento de la adopcion "
-                                + seguimientoEncontrado.getNumeroSeguimiento());
+                                + numeroSeguimiento);
 
                 // enviar una notificacion
                 RecordatorioDTO recordatorio = controladorAdopcion.enviarNotificacion(numeroAdopcion3);
@@ -161,22 +160,24 @@ public class App {
 
                 // crear una visita y una encuesta posterior
 
-                controladorSeguimiento.agregarVisita(seguimientoEncontrado.getNumeroSeguimiento(),
+                controladorSeguimiento.agregarVisita(numeroSeguimiento,
                                 "El animal está mejorando.", Calificacion.BUENO, Calificacion.MALO,
                                 Calificacion.REGULAR);
 
-                controladorSeguimiento.agregarVisita(seguimientoEncontrado.getNumeroSeguimiento(),
+                controladorSeguimiento.agregarVisita(numeroSeguimiento,
                                 "El animal está mal.", Calificacion.MALO, Calificacion.MALO, Calificacion.REGULAR);
                 // exportar ficha medica en ambos formatos
 
                 FichaMedicaDTO fichaMedicaDTO1 = controladorFichaMedica.obtenerFichaMedicaDTO(legajo);
                 FichaMedicaDTO fichaMedicaDTO2 = controladorFichaMedica.obtenerFichaMedicaDTO(legajo2);
-                controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO1.getLegajo(), TipoExportacion.EXCEL);
-                controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO2.getLegajo(), TipoExportacion.PDF);
+                controladorFichaMedica.cambiarEstrategiaExportacion(TipoExportacion.EXCEL, fichaMedicaDTO1.getLegajo());
+                controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO1.getLegajo());
+                controladorFichaMedica.cambiarEstrategiaExportacion(TipoExportacion.PDF, fichaMedicaDTO1.getLegajo());
+                controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO2.getLegajo());
 
                 //finalizar un seguimiento
 
-                controladorSeguimiento.finalizarSeguimiento(seguimientoEncontrado.getNumeroSeguimiento());
+                controladorSeguimiento.finalizarSeguimiento(numeroSeguimiento);
 
                 controladorScanner.cerrarScanner();
 

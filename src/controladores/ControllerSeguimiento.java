@@ -7,9 +7,12 @@ import modelos.Seguimiento;
 import modelos.Adopcion;
 
 public class ControllerSeguimiento {
-    private ArrayList<Seguimiento> seguimientos;
+    
     private static ControllerSeguimiento instancia;
+    // atributos
+    private ArrayList<Seguimiento> seguimientos;
 
+    // constructor
     private ControllerSeguimiento() {
         seguimientos = new ArrayList<Seguimiento>();
     }
@@ -20,12 +23,7 @@ public class ControllerSeguimiento {
         return instancia;
     }
 
-    public Seguimiento agregarSeguimientoAnimal(int numeroAdopcion) {
-        Adopcion adopcion = ControllerAdopcion.getInstancia().buscarAdopcion(numeroAdopcion);
-        Seguimiento seguimiento = adopcion.getSeguimiento();
-        this.seguimientos.add(seguimiento);
-        return seguimiento;
-    }
+    // metodos
 
     private Seguimiento buscarSeguimiento(int numeroSeguimiento) {
         Seguimiento seguimientoEncontrado = null;
@@ -35,6 +33,13 @@ public class ControllerSeguimiento {
             }
         }
         return seguimientoEncontrado;
+    }
+
+    public int agregarSeguimientoAnimal(int numeroAdopcion) {
+        Adopcion adopcion = ControllerAdopcion.getInstancia().buscarAdopcion(numeroAdopcion);
+        Seguimiento seguimiento = adopcion.getSeguimiento();
+        this.seguimientos.add(seguimiento);
+        return seguimiento.getNumeroSeguimiento();
     }
 
     public void agregarVisita(int numeroSeguimiento, String comentario, Calificacion estadoAnimal,
