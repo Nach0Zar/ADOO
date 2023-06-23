@@ -83,19 +83,21 @@ public class App {
 
                 // Ahora que esta sano , adoptamos !
 
+                //Adoptamos a Luna
                 int numeroAdopcion1 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
                                 "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
                 // Intento adoptar el mismo animal
-
+                //Intento volver a adoptar a Luna
                 int numeroAdopcion2 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
                                 "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
                 // adopto hasta 3 animales y NO me deja , solo adopta 2.
-
+                //Adopto a Panchito
                 int numeroAdopcion3 = controladorAdopcion.crearAdopcion(legajo2, clienteEncontrado.getEmail(),
                                 "Quiero ", "lumolina@uade.edu.ar");
 
+                //Intento Adoptar a Shona
                 int numeroAdopcion4 = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(), "Quiero ",
                                 "lumolina@uade.edu.ar");
 
@@ -110,6 +112,8 @@ public class App {
                 // Crear una alarma de control para el animal 2
                 Duration periodicidad = Duration.ofDays(1);
                 controladorAlarma.crearAlarma(periodicidad, legajo3, "lumolina@uade.edu.ar");
+
+                //Recordatorio de la alarma disparada para el veterinario
 
                 // adoptar un animal
                 // int numeroAdopcion9 = controladorAdopcion.crearAdopcion(legajo,
@@ -158,9 +162,13 @@ public class App {
                 controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO1.getLegajo(), TipoExportacion.EXCEL);
                 controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO2.getLegajo(), TipoExportacion.PDF);
 
+                //finalizar un seguimiento
+
+                controladorSeguimiento.finalizarSeguimiento(seguimientoEncontrado.getNumeroSeguimiento());
+
                 controladorScanner.cerrarScanner();
 
-                //atender alarma
+                
                 //
         }
 }

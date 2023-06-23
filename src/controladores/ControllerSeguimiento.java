@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import enums.Calificacion;
 import modelos.Seguimiento;
 import modelos.Adopcion;
+import modelos.dtos.RecordatorioDTO;
 
 public class ControllerSeguimiento {
     private ArrayList<Seguimiento> seguimientos;
@@ -41,5 +42,16 @@ public class ControllerSeguimiento {
             Calificacion limpieza, Calificacion ambiente) {
         Seguimiento seguimiento = buscarSeguimiento(numeroSeguimiento);
         seguimiento.agregarVisita(comentario, estadoAnimal, limpieza, ambiente);
+    }
+
+    public void finalizarSeguimiento(int numeroSeguimiento){
+        Seguimiento seguimiento = this.buscarSeguimiento(numeroSeguimiento);
+        if(seguimiento instanceof Seguimiento){
+            seguimiento.setContinuarSeguimiento(false);
+            System.out.println("El seguimiento fue finalizado correctamente!");
+        }
+        else{
+            System.out.println("No se pudo hallar el seguimiento solicitado");
+        }
     }
 }

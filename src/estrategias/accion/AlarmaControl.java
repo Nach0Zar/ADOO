@@ -28,7 +28,8 @@ public class AlarmaControl implements ITipoAlarma {
     }
 
     private void crearAlarma() {
-        System.out.println("Ingrese las acciones a realizar para esta alarma de control");
+        System.out.println("Ingrese las acciones a realizar para esta alarma de control ");
+         System.out.println("ACCIONES POSIBLES : Control de parasitos | Colocar antiparasitarios | Comprobar peso y tamanio | Chequear nutricion | Colocar vacuna ");
         while (true) {
             System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
             String nombreAccion = Escaner.getInstancia().proxLinea();
