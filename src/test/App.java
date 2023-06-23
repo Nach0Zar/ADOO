@@ -103,18 +103,28 @@ public class App {
 
                 // Crear una alarma de tratamiento para el animal 3
                 Duration preriodicidad = Duration.ofDays(1);
-                int numeroAlarmaTratamiento = controladorAlarma.crearAlarma(preriodicidad, legajo3,
-                                "lumolina@uade.edu.ar", numeroDeTratamiento);
+                int numeroAlarmaTratamiento = controladorAlarma.crearAlarma(preriodicidad, legajo3, numeroDeTratamiento);
 
                 AlarmaDTO alarmaDTO = controladorAlarma.obtenerAlarmaDTO(numeroAlarmaTratamiento);
                 alarmaDTO.printAcciones();
 
+                //atender alarma de tratamiento 
+                controladorAlarma.atenderAlarma(alarmaDTO.getNumeroAlarma(), "lumolina@uade.edu.ar");
+
+                controladorAlarma.atenderAlarma(alarmaDTO.getNumeroAlarma(), "lumolina@uade.edu.ar");
+
+
                 // Crear una alarma de control para el animal 2
                 Duration periodicidad = Duration.ofDays(1);
-                controladorAlarma.crearAlarma(periodicidad, legajo3, "lumolina@uade.edu.ar");
+                int numeroAlarmaControl = controladorAlarma.crearAlarma(periodicidad, legajo3);
+                AlarmaDTO alarmaControlDTO = controladorAlarma.obtenerAlarmaDTO(numeroAlarmaControl);
 
-                //Recordatorio de la alarma disparada para el veterinario
 
+
+                // atender alarma de control
+                controladorAlarma.atenderAlarma(alarmaControlDTO.getNumeroAlarma(), "lumolina@uade.edu.ar");    
+                controladorAlarma.atenderAlarma(alarmaControlDTO.getNumeroAlarma(), "lumolina@uade.edu.ar");
+                
                 // adoptar un animal
                 // int numeroAdopcion9 = controladorAdopcion.crearAdopcion(legajo,
                 // clienteEncontrado.getEmail(),"Por que quiero una mascota",
@@ -168,7 +178,6 @@ public class App {
 
                 controladorScanner.cerrarScanner();
 
-                
-                //
+               
         }
 }

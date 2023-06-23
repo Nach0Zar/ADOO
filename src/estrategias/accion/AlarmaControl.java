@@ -21,33 +21,41 @@ public class AlarmaControl implements ITipoAlarma {
     public void atenderAlarma() {
         System.out.println("Se esta atendiendo la alarma de control");
         for (Accion accion : acciones) {
-            System.out.println("Se esta realizando la accion: " + accion.getNombre());
-            System.out.println("Descripcion: " + accion.getDescripcion());
+            accion.atenderAccion();
         }
         System.out.println("Se termino de atender la alarma de control");
     }
 
     private void crearAlarma() {
-        System.out.println("Ingrese las acciones a realizar para esta alarma de control ");
-         System.out.println("ACCIONES POSIBLES : Control de parasitos | Colocar antiparasitarios | Comprobar peso y tamanio | Chequear nutricion | Colocar vacuna ");
-        while (true) {
-            System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
-            String nombreAccion = Escaner.getInstancia().proxLinea();
+        System.out.println("Ingrese las acciones a realizar para esta alarma de control");
+        System.out.println("Acciones disponibles: ");
+        System.out.println("1. Control de parasitos");
+        System.out.println("2. Colocar antiparasitos");
+        System.out.println("3. Comprobar peso y tamaño");
+        System.out.println("4. Chequear nutricion");
+        System.out.println("5. Colocar vacuna");
 
-            if (nombreAccion.equals("x")) {
-                break;
-            }
+        System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
+        String nombreAccion = Escaner.getInstancia().proxLinea();
+
+        while (nombreAccion.equals("x")) {
+            System.out.println("La alarma sin acciones no puede ser creada");
+            System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
+            nombreAccion = Escaner.getInstancia().proxLinea();
+        }
+
+        while (!nombreAccion.equals("x")) {
 
             System.out.println("Ingrese la descripcion de la accion");
             String descripcionAccion = Escaner.getInstancia().proxLinea();
 
             Accion accion = new Accion(nombreAccion, descripcionAccion);
             acciones.add(accion);// aca guardamos las acciones de la alarma control
+
+            System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
+            nombreAccion = Escaner.getInstancia().proxLinea();
         }
-        if (acciones.size() > 0)
-            System.out.println("La alarma quedo seteada para el CONTROL del animal");
-        else
-            System.out.println("La alarma sin acciones no puede ser creada");
+        System.out.println("La alarma quedo seteada para el CONTROL del animal");
     }
 
     @Override
