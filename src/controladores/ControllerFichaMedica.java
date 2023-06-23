@@ -69,11 +69,11 @@ public class ControllerFichaMedica {
             Tratamiento tratamiento = new Tratamiento(nombre, descripcion, fechaInicio, fechaFin);
             fichaMedica.agregarTratamiento(tratamiento);
             ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, false);
-            System.out.println(ConsoleColors.GREEN + "Se ha creado el tratamiento: " + tratamiento.getNombre() + " con id: "
-                    + tratamiento.getNumeroTratamiento() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.GREEN + "Se ha creado el tratamiento: " + ConsoleColors.GREEN_BOLD + tratamiento.getNombre() + ConsoleColors.GREEN + " con id: "
+                    + ConsoleColors.GREEN_BOLD + tratamiento.getNumeroTratamiento() + ConsoleColors.RESET);
             return tratamiento.getNumeroTratamiento();
         } else {
-            System.out.println("Ya existe un tratamiento en curso, no se puede crear otro");
+            System.out.println(ConsoleColors.RED + "Ya existe un tratamiento en curso, no se puede crear otro" + ConsoleColors.RESET);
             return fichaMedica.getTratamientoActivo().getNumeroTratamiento();
         }
     }
@@ -83,8 +83,8 @@ public class ControllerFichaMedica {
         Tratamiento tratamiento = animal.getFichaMedica().buscarTratamiento(numeroTratamiento);
         tratamiento.setFinalizado(true);
         ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, true);
-        System.out.println(ConsoleColors.GREEN_BACKGROUND + 
-                "Ha finalizado el tratamiento: " + tratamiento.getNombre() + "  ahora el animal esta SALUDABLE" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.GREEN + 
+                "Ha finalizado el tratamiento: " + ConsoleColors.GREEN_BOLD + tratamiento.getNombre() + ConsoleColors.GREEN + ", ahora el animal " + ConsoleColors.GREEN_BOLD + animal.getNombre() + ConsoleColors.GREEN + " esta SALUDABLE" + ConsoleColors.RESET);
     }
 
     protected FichaMedica obtenerFichaMedica(int legajo) {

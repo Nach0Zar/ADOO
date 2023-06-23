@@ -20,10 +20,10 @@ public class AdapterEmail implements AdapterRecordadorEmail {
     @Override
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
         System.out.println(ConsoleColors.GREEN + 
-                "Se ha enviado un mensaje por Email al correo " + recordatorio.getDestinatario().getEmail()
-                        + " del Cliente Adoptante " + recordatorio.getDestinatario().getNombre()
-                        + " " + recordatorio.getDestinatario().getApellido() +
-                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: \"" + recordatorio.getMensaje() + "\"" + ConsoleColors.RESET
+                "Se ha enviado un mensaje por Email al correo " + ConsoleColors.GREEN_BOLD + recordatorio.getDestinatario().getEmail() + ConsoleColors.GREEN
+                        + " del Cliente Adoptante " + ConsoleColors.GREEN_BOLD + recordatorio.getDestinatario().getNombre() 
+                        + " " + recordatorio.getDestinatario().getApellido() + ConsoleColors.GREEN + 
+                        " en la fecha " + ConsoleColors.GREEN_BOLD + recordatorio.getFecha() + ConsoleColors.GREEN + " con el mensaje: " + ConsoleColors.GREEN_BOLD + "\"" + recordatorio.getMensaje() + "\"" + ConsoleColors.RESET
         );
     }
 

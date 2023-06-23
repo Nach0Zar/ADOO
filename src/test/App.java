@@ -3,9 +3,7 @@ package test;
 import java.util.*;
 
 import color.ConsoleColors;
-
 import java.time.Duration;
-
 import controladores.*;
 import modelos.dtos.*;
 import singleton.Escaner;
@@ -36,7 +34,7 @@ public class App {
                 ClienteAdoptanteDTO clienteEncontrado = controladorClienteAdoptante
                                 .buscarClienteAdoptanteDTO("john.doe@example.com");
 
-                System.out.println("El cliente " + clienteEncontrado.getNombre() + " " + clienteEncontrado.getApellido()
+                System.out.println(ConsoleColors.RESET + "El cliente " + clienteEncontrado.getNombre() + " " + clienteEncontrado.getApellido()
                                 + " fue cargado");
 
                 Escaner.getInstancia().proxLinea();
@@ -56,7 +54,7 @@ public class App {
 
                 Escaner.getInstancia().proxLinea();
 
-                // Crear 3 animales
+                // Crear 4 animales
 
                 int legajo = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 5, true, TipoAnimal.GATO,
                                 "Shona");
@@ -83,6 +81,19 @@ public class App {
 
                 Escaner.getInstancia().proxLinea();
 
+                int legajo4 = controladorAnimal.ingresarAnimal(false, (float) 2.0, (float) 3.0, 3, true, TipoAnimal.PERRO,
+                                "Pinky");
+
+                AnimalDTO animalEncontrado4 = controladorAnimal.obtenerAnimalDTO(legajo4);
+
+                System.out.println("El animal " + animalEncontrado4.getNombre() + " fue cargado con el legajo : "
+                                + animalEncontrado4.getLegajo());
+
+                Escaner.getInstancia().proxLinea();
+
+                
+                controladorAdopcion.crearAdopcion(legajo4, clienteEncontrado.getEmail(),
+                                "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
                 // Cargar tratamiento al animal 3
 
                 int numeroDeTratamiento = controladorFichaMedica.crearTratamiento("Vacuna", "Vacuna contra la rabia",
@@ -192,7 +203,7 @@ public class App {
 
                 int numeroSeguimiento = controladorSeguimiento
                                 .agregarSeguimientoAnimal(adopcionEncontrada.getNumeroAdopcion());
-                System.out.println(" Se agrego el seguimiento de la adopcion "
+                System.out.println("Se agrego el seguimiento de la adopcion "
                                 + numeroSeguimiento);
 
                 Escaner.getInstancia().proxLinea();

@@ -8,6 +8,7 @@ import adaptador.notificacion.INotificationPush;
 import estrategias.accion.ITipoAlarma;
 import modelos.dtos.AlarmaDTO;
 import modelos.dtos.UsuarioDTO;
+import singleton.Escaner;
 
 public class Alarma {
 
@@ -20,6 +21,7 @@ public class Alarma {
     private ITipoAlarma tipoAlarma;
     private Usuario veterinario;
     private Date ultimaEjecucion;
+    private String comentario;
 
     // Constructor
     public Alarma(Duration periodicidad, Animal animal,
@@ -50,7 +52,7 @@ public class Alarma {
             veterinarioDTO = this.veterinario.toDTO();
         }
         return new AlarmaDTO(this.numeroAlarma, this.periodicidad, this.animal, this.tipoAlarma,
-                veterinarioDTO, this.ultimaEjecucion);
+                veterinarioDTO, this.ultimaEjecucion, this.comentario);
     }
 
     // Getters
@@ -82,6 +84,10 @@ public class Alarma {
         return numeroAlarma;
     }
 
+    public String getComentario() {
+        return comentario;
+    }
+
     public void setPeriodicidad(Duration periodicidad) {
         this.periodicidad = periodicidad;
     }
@@ -104,6 +110,13 @@ public class Alarma {
 
     public void atenderAlarma() {
         tipoAlarma.atenderAlarma();
+
+        if(comentario == null) {
+
+            System.out.println("Ingrese un comentario: ");
+
+            this.comentario = Escaner.getInstancia().proxLinea();
+        }
     }
 
 }

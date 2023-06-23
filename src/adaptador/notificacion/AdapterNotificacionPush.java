@@ -20,7 +20,7 @@ public class AdapterNotificacionPush implements INotificationPush {
      */
     @Override
     public void enviarNotificacion(AlarmaDTO alarmaDTO) {
-        System.out.println(ConsoleColors.YELLOW + "Enviando notificacion push del animal " + alarmaDTO.getAnimalDTO().getNombre() + " a todos los usuarios conectados."  + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.YELLOW + "Enviando notificacion push del animal " + ConsoleColors.YELLOW_BOLD + alarmaDTO.getAnimalDTO().getNombre() + ConsoleColors.YELLOW + " a todos los usuarios conectados."  + ConsoleColors.RESET);
     }
 
 }

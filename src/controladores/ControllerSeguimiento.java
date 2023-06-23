@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import enums.Calificacion;
 import modelos.Seguimiento;
 import modelos.Adopcion;
+import color.ConsoleColors;
 
 public class ControllerSeguimiento {
     
@@ -52,10 +53,10 @@ public class ControllerSeguimiento {
         Seguimiento seguimiento = this.buscarSeguimiento(numeroSeguimiento);
         if(seguimiento instanceof Seguimiento){
             seguimiento.setContinuarSeguimiento(false);
-            System.out.println("El seguimiento fue finalizado correctamente!");
+            System.out.println(ConsoleColors.GREEN + "El seguimiento fue finalizado correctamente!" + ConsoleColors.RESET);
         }
         else{
-            System.out.println("No se pudo hallar el seguimiento solicitado");
+            System.out.println(ConsoleColors.RED + "No se pudo hallar el seguimiento solicitado" + ConsoleColors.RESET);
         }
     }
 }

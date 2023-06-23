@@ -75,7 +75,7 @@ public class ControllerAlarma {
         alarma.atenderAlarma();
         Usuario veterinario = ControllerUsuario.getInstancia().buscarUsuario(emailVeterinario);
         alarma.setVeterinario(veterinario);
-        System.out.println(ConsoleColors.GREEN + "Alarma atendida por el veterinario " + veterinario.getNombre() + "." + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.GREEN + "Alarma atendida por el veterinario " + ConsoleColors.GREEN_BOLD + veterinario.getNombre() + ConsoleColors.GREEN + "." + ConsoleColors.RESET);
     }
 
     public void enviarNotificacion(int numeroAlarma) {

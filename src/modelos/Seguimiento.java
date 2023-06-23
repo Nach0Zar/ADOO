@@ -7,6 +7,7 @@ import modelos.dtos.RecordatorioDTO;
 import estrategias.recordatorio.RecordatorioPorEmail;
 import estrategias.recordatorio.RecordatorioPorWhatsApp;
 import estrategias.recordatorio.RecordatorioPorSMS;
+import color.ConsoleColors;
 
 public class Seguimiento {
     private static int numeradorSeguiemiento = 1;
@@ -33,8 +34,8 @@ public class Seguimiento {
         visitaNueva.completarEncuesta(estadoAnimal, limpieza, ambiente);
         visitas.add(visitaNueva);
         // solo para probar
-        System.out.println("Se creo la visita  con el comentario = " + visitaNueva.getComentario()
-                + " Tenes esta cantidad de visitas : " + cantidadVisitas());
+        System.out.println(ConsoleColors.GREEN + "Se creo la visita  con el comentario = " + visitaNueva.getComentario()
+                + " Tenes esta cantidad de visitas : " + cantidadVisitas() + ConsoleColors.RESET);
     }
 
     public int cantidadVisitas() {

@@ -30,26 +30,26 @@ public class ControllerAdopcion {
         Animal animal1 = ControllerAnimal.getInstancia().obtenerAnimal(animal);
 
         if (animal1.getAdoptado() == true)
-            System.out.println(ConsoleColors.RED + "El animal " + animal1.getNombre() + " ya fue adoptado previamente, no se puede adoptar" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "El animal " + ConsoleColors.RED_BOLD + animal1.getNombre() + ConsoleColors.RED + " ya fue adoptado previamente, no se puede adoptar" + ConsoleColors.RESET);
 
         else if (animal1.getEstadoSaludableAnimal() == false)
-            System.out.println(ConsoleColors.RED + "El animal " + animal1.getNombre() + " NO esta saludable, no se puede adoptar" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "El animal " + ConsoleColors.RED_BOLD + animal1.getNombre() + ConsoleColors.RED  + " NO esta saludable, no se puede adoptar" + ConsoleColors.RESET);
             
         else if (animal1.getDomestico() == false)
-            System.out.println(ConsoleColors.RED + "El animal " + animal1.getNombre() + " NO es un animal domestico, no se puede adoptar" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED + "El animal " + ConsoleColors.RED_BOLD + animal1.getNombre() + ConsoleColors.RED  + " NO es un animal domestico, no se puede adoptar" + ConsoleColors.RESET);
         
         else {
             //si falla
             Adopcion adopcion = cliente1.adopcionNueva(cliente1, animal1, motivoDeAdopcion);
             if (adopcion == null) {
-                System.out.println(ConsoleColors.RED + "El cliente " + cliente1.getNombre() + " " + cliente1.getApellido() + " ya tiene 2 adopciones , no se puede adoptar" + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.RED + "El cliente " + ConsoleColors.RED_BOLD + cliente1.getNombre() + " " + cliente1.getApellido() + ConsoleColors.RED  + " ya tiene 2 adopciones, no se puede adoptar" + ConsoleColors.RESET);
                 return -1;
             }
             animal1.setAdoptado(true);
             Usuario visitador = ControllerUsuario.getInstancia().buscarUsuario(emailVisitador);
             adopcion.getSeguimiento().setVisitador(visitador);
             this.adopciones.add(adopcion);
-            System.out.println(ConsoleColors.GREEN + "El animal "+ animal1.getNombre() + " fue adoptado!" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.GREEN + "El animal " + ConsoleColors.GREEN_BOLD + animal1.getNombre() + ConsoleColors.GREEN + " fue adoptado!" + ConsoleColors.RESET);
             return adopcion.getnumeroAdopcion();
         }
         return -1;
