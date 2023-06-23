@@ -1,6 +1,7 @@
 package adaptador.notificacion;
 
 import modelos.dtos.AlarmaDTO;
+import color.ConsoleColors;
 
 /**
  * 
@@ -19,7 +20,7 @@ public class AdapterNotificacionPush implements INotificationPush {
      */
     @Override
     public void enviarNotificacion(AlarmaDTO alarmaDTO) {
-        System.out.println("Enviando notificacion push del animal " + alarmaDTO.getAnimalDTO().getNombre());
+        System.out.println(ConsoleColors.YELLOW + "Enviando notificacion push del animal " + ConsoleColors.YELLOW_BOLD + alarmaDTO.getAnimalDTO().getNombre() + ConsoleColors.YELLOW + " a todos los usuarios conectados."  + ConsoleColors.RESET);
     }
 
 }

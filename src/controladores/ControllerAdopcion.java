@@ -6,7 +6,7 @@ import modelos.Animal;
 import modelos.ClienteAdoptante;
 import modelos.Usuario;
 import modelos.dtos.AdopcionDTO;
-//import modelos.dtos.ClienteAdoptanteDTO;
+import color.ConsoleColors;
 import modelos.dtos.RecordatorioDTO;
 import singleton.Escaner;
 
@@ -29,26 +29,27 @@ public class ControllerAdopcion {
         ClienteAdoptante cliente1 = ControllerClienteAdoptante.getInstancia().buscarClienteAdoptante(emailCliente);
         Animal animal1 = ControllerAnimal.getInstancia().obtenerAnimal(animal);
 
-        if (cliente1.getCantidadAdopciones() == 2)
-            System.out.println("El cliente " + cliente1.getNombre() + " " + cliente1.getApellido() + " ya tiene 2 adopciones , no se puede adoptar");
-
-        else if (animal1.getAdoptado() == true)
-            System.out.println("El animal " + animal1.getNombre() + " ya fue adoptado previamente, no se puede adoptar");
+        if (animal1.getAdoptado() == true)
+            System.out.println(ConsoleColors.RED + "El animal " + ConsoleColors.RED_BOLD + animal1.getNombre() + ConsoleColors.RED + " ya fue adoptado previamente, no se puede adoptar" + ConsoleColors.RESET);
 
         else if (animal1.getEstadoSaludableAnimal() == false)
-            System.out.println("El animal " + animal1.getNombre() + " NO esta saludable , no se puede adoptar");
+            System.out.println(ConsoleColors.RED + "El animal " + ConsoleColors.RED_BOLD + animal1.getNombre() + ConsoleColors.RED  + " NO esta saludable, no se puede adoptar" + ConsoleColors.RESET);
+            
+        else if (animal1.getDomestico() == false)
+            System.out.println(ConsoleColors.RED + "El animal " + ConsoleColors.RED_BOLD + animal1.getNombre() + ConsoleColors.RED  + " NO es un animal domestico, no se puede adoptar" + ConsoleColors.RESET);
         
         else {
-            Adopcion adopcion = new Adopcion(
-                    animal1,
-                    cliente1,
-                    motivoDeAdopcion);
+            //si falla
+            Adopcion adopcion = cliente1.adopcionNueva(cliente1, animal1, motivoDeAdopcion);
+            if (adopcion == null) {
+                System.out.println(ConsoleColors.RED + "El cliente " + ConsoleColors.RED_BOLD + cliente1.getNombre() + " " + cliente1.getApellido() + ConsoleColors.RED  + " ya tiene 2 adopciones, no se puede adoptar" + ConsoleColors.RESET);
+                return -1;
+            }
             animal1.setAdoptado(true);
-            cliente1.setCantidadAdopciones(cliente1.getCantidadAdopciones() + 1);
             Usuario visitador = ControllerUsuario.getInstancia().buscarUsuario(emailVisitador);
             adopcion.getSeguimiento().setVisitador(visitador);
             this.adopciones.add(adopcion);
-            System.out.println("El animal "+ animal1.getNombre() + " fue adoptado!");
+            System.out.println(ConsoleColors.GREEN + "El animal " + ConsoleColors.GREEN_BOLD + animal1.getNombre() + ConsoleColors.GREEN + " fue adoptado!" + ConsoleColors.RESET);
             return adopcion.getnumeroAdopcion();
         }
         return -1;
@@ -63,7 +64,7 @@ public class ControllerAdopcion {
     }
 
     private String mensajeRecordatorio() {
-        System.out.println("Mensaje de recordatorio  :");
+        System.out.println(ConsoleColors.YELLOW + "Mensaje de recordatorio:" + ConsoleColors.RESET);
         String mensajeRecordatorio = Escaner.getInstancia().proxLinea();
         return mensajeRecordatorio;
     }

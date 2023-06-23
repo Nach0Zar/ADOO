@@ -7,6 +7,9 @@ import adaptador.notificacion.AdapterNotificacionPush;
 import adaptador.notificacion.INotificationPush;
 import estrategias.accion.ITipoAlarma;
 import modelos.dtos.AlarmaDTO;
+import modelos.dtos.UsuarioDTO;
+import singleton.Escaner;
+import color.ConsoleColors;
 
 public class Alarma {
 
@@ -17,17 +20,18 @@ public class Alarma {
     private Animal animal;
     private INotificationPush notificacion;
     private ITipoAlarma tipoAlarma;
-    private Usuario veterinario; // TODO: revisar si es necesario o si en realidad es el usuario que la creo
+    private Usuario veterinario;
     private Date ultimaEjecucion;
+    private String comentario;
 
     // Constructor
     public Alarma(Duration periodicidad, Animal animal,
-            ITipoAlarma tipoAlarma, Usuario veterinario) {
+            ITipoAlarma tipoAlarma) {
         this.periodicidad = periodicidad;
         this.animal = animal;
         this.notificacion = new AdapterNotificacionPush();
         this.tipoAlarma = tipoAlarma;
-        this.veterinario = veterinario;
+        this.veterinario = null;
         this.ultimaEjecucion = new Date();
         this.numeroAlarma = numeradorAlarma++;
     }
@@ -38,20 +42,18 @@ public class Alarma {
         this.notificacion.enviarNotificacion(toDTO());
     }
 
-    /*
-     * public void crearAlarma(ITipoAlarma alarma) {
-     * this.tipoAlarma = alarma;
-     * this.tipoAlarma.crearAlarma();
-     * }
-     */
-
     public boolean soyAlarma(int numeroAlarma) {
         return this.numeroAlarma == numeroAlarma;
     }
 
     public AlarmaDTO toDTO() {
-        return new AlarmaDTO(this.numeroAlarma, this.periodicidad, this.animal.toDTO(), this.tipoAlarma,
-                this.veterinario.toDTO(), this.ultimaEjecucion);
+        UsuarioDTO veterinarioDTO = null;
+
+        if (this.veterinario != null) {
+            veterinarioDTO = this.veterinario.toDTO();
+        }
+        return new AlarmaDTO(this.numeroAlarma, this.periodicidad, this.animal, this.tipoAlarma,
+                veterinarioDTO, this.ultimaEjecucion, this.comentario);
     }
 
     // Getters
@@ -83,14 +85,9 @@ public class Alarma {
         return numeroAlarma;
     }
 
-    // Setters
-    // TODO REVISAR
-    /*
-     * ENTIENDO QUE NO SE PUEDEN MODIFICAR EL ANIMAL DE LA ALARMA
-     * public void setAnimal(Animal animal) {
-     * this.animal = animal;
-     * }
-     */
+    public String getComentario() {
+        return comentario;
+    }
 
     public void setPeriodicidad(Duration periodicidad) {
         this.periodicidad = periodicidad;
@@ -114,6 +111,13 @@ public class Alarma {
 
     public void atenderAlarma() {
         tipoAlarma.atenderAlarma();
+
+        if(comentario == null) {
+
+            System.out.println(ConsoleColors.BLUE_BOLD + "Ingrese un comentario: " + ConsoleColors.RESET);
+
+            this.comentario = Escaner.getInstancia().proxLinea();
+        }
     }
 
 }

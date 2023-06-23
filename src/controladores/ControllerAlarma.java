@@ -12,6 +12,7 @@ import modelos.FichaMedica;
 import modelos.Tratamiento;
 import modelos.Usuario;
 import modelos.dtos.AlarmaDTO;
+import color.ConsoleColors;
 
 public class ControllerAlarma {
 
@@ -31,12 +32,10 @@ public class ControllerAlarma {
 
     public int crearAlarma(
             Duration periodicidad,
-            int legajoAnimal,
-            String emailVeterinario) {
+            int legajoAnimal) {
         ITipoAlarma tipoAlarma = new AlarmaControl();
         Animal animal = ControllerAnimal.getInstancia().obtenerAnimal(legajoAnimal);
-        Usuario veterinario = ControllerUsuario.getInstancia().buscarUsuario(emailVeterinario);
-        Alarma alarma = new Alarma(periodicidad, animal, tipoAlarma, veterinario);
+        Alarma alarma = new Alarma(periodicidad, animal, tipoAlarma);
         this.alarmas.add(alarma);
 
         return alarma.getNumeroAlarma();
@@ -45,15 +44,14 @@ public class ControllerAlarma {
     public int crearAlarma(
             Duration periodicidad,
             int legajoAnimal,
-            String emailVeterinario,
             int numeroDetratamiento) {
         Animal animal = ControllerAnimal.getInstancia().obtenerAnimal(legajoAnimal);
-        Usuario veterinario = ControllerUsuario.getInstancia().buscarUsuario(emailVeterinario);
         FichaMedica fichaMedica = ControllerFichaMedica.getInstancia().buscarFichaMedica(legajoAnimal);
         Tratamiento tratamiento = fichaMedica.buscarTratamiento(numeroDetratamiento);
         ITipoAlarma tipoAlarma = new AlarmaTratamiento(tratamiento);
-        Alarma alarma = new Alarma(periodicidad, animal, tipoAlarma, veterinario);
+        Alarma alarma = new Alarma(periodicidad, animal, tipoAlarma);
         this.alarmas.add(alarma);
+        fichaMedica.agregarAlarma(alarma);
 
         return alarma.getNumeroAlarma();
     }
@@ -72,9 +70,12 @@ public class ControllerAlarma {
         return alarma.toDTO();
     }
 
-    public void atenderAlarma(int numeroAlarma) {
+    public void atenderAlarma(int numeroAlarma, String emailVeterinario) {
         Alarma alarma = buscarAlarma(numeroAlarma);
         alarma.atenderAlarma();
+        Usuario veterinario = ControllerUsuario.getInstancia().buscarUsuario(emailVeterinario);
+        alarma.setVeterinario(veterinario);
+        System.out.println(ConsoleColors.GREEN + "Alarma atendida por el veterinario " + ConsoleColors.GREEN_BOLD + veterinario.getNombre() + ConsoleColors.GREEN + "." + ConsoleColors.RESET);
     }
 
     public void enviarNotificacion(int numeroAlarma) {

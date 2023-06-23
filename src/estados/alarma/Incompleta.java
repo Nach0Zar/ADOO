@@ -1,5 +1,6 @@
 package estados.alarma;
 
+import color.ConsoleColors;
 import estrategias.accion.Accion;
 
 /**
@@ -15,9 +16,14 @@ public class Incompleta implements IEstadoAccion {
      * @return
      */
     @Override
-    public void atenderAlarma(Accion accion) {
-        System.out.println("atendiendo alarma");
+    public void atenderAccion(Accion accion) {
+        System.out.println(ConsoleColors.YELLOW + "Atendiendo accion: " + ConsoleColors.YELLOW_BOLD + accion.getNombre() + ConsoleColors.RESET);
         accion.setEstadoAlarma(new Completa());
+    }
+
+    @Override
+    public boolean getFinalizada() {
+        return false;
     }
 
 }

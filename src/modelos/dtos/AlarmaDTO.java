@@ -4,26 +4,29 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import estrategias.accion.ITipoAlarma;
-
+import modelos.Animal;
+import color.ConsoleColors;
 import java.time.Duration;
 
 public class AlarmaDTO {
 
     private int numeroAlarma;
     private Duration periodicidad;
-    private AnimalDTO animalDTO;
+    private Animal animal;
     private ITipoAlarma tipoAlarma;
     private UsuarioDTO usuarioDTO;
     private Date ultimaEjecucion;
+    private String comentario;
 
-    public AlarmaDTO(int numeroAlarma, Duration periodicidad, AnimalDTO animalDTO,
-            ITipoAlarma tipoAlarma, UsuarioDTO usuarioDTO, Date ultimaEjecucion2) {
+    public AlarmaDTO(int numeroAlarma, Duration periodicidad, Animal animal,
+            ITipoAlarma tipoAlarma, UsuarioDTO usuarioDTO, Date ultimaEjecucion2, String comentario) {
         this.numeroAlarma = numeroAlarma;
         this.periodicidad = periodicidad;
-        this.animalDTO = animalDTO;
+        this.animal = animal;
         this.tipoAlarma = tipoAlarma;
         this.usuarioDTO = usuarioDTO;
         this.ultimaEjecucion = ultimaEjecucion2;
+        this.comentario = comentario;
     }
 
     public int getNumeroAlarma() {
@@ -34,8 +37,8 @@ public class AlarmaDTO {
         return periodicidad;
     }
 
-    public AnimalDTO getAnimalDTO() {
-        return animalDTO;
+    public Animal getAnimalDTO() {
+        return animal;
     }
 
     public UsuarioDTO getUsuarioDTO() {
@@ -50,10 +53,14 @@ public class AlarmaDTO {
         return tipoAlarma.getAccionesDTO();
     }
 
+    public String getComentario() {
+        return comentario;
+    } 
+
     public void printAcciones() {
         for (AccionDTO accion : tipoAlarma.getAccionesDTO()) {
-            System.out.println("Nombre: " + accion.getNombre());
-            System.out.println("Descripcion: " + accion.getDescripcion());
+            System.out.println(ConsoleColors.BLUE + "Nombre: " + ConsoleColors.BLUE_BOLD + accion.getNombre() + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.BLUE + "Descripcion: " + ConsoleColors.BLUE_BOLD + accion.getDescripcion() + ConsoleColors.RESET);
         }
     }
 

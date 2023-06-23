@@ -1,7 +1,5 @@
 package modelos;
 
-import estados.adoptante.Habilitado;
-import estados.adoptante.IEstadoAdoptante;
 import modelos.dtos.RecordatorioDTO;
 import modelos.dtos.AdopcionDTO;
 
@@ -14,7 +12,6 @@ public class Adopcion {
     private int numeroAdopcion;
     private String motivoAdopcion;
     private Seguimiento seguimiento;
-    private IEstadoAdoptante estadoAdopcion;
 
     public Adopcion(Animal animal, ClienteAdoptante cliente, String motivoAdopcion) {
         this.animal = animal;
@@ -22,15 +19,6 @@ public class Adopcion {
         this.numeroAdopcion = numeradorAdopcion++;
         this.motivoAdopcion = motivoAdopcion;
         this.seguimiento = new Seguimiento();// creamos el seguimiento cuando creamos la adopcion
-        this.estadoAdopcion = new Habilitado(); // Va estar hablitado
-    }
-
-    public void adopcionNueva(ClienteAdoptante cliente, Animal animal) {
-        estadoAdopcion.adopcionAnimal(animal, cliente, this);
-    }
-
-    public void cambiarEstado(IEstadoAdoptante estadoAdopcion) {
-        this.estadoAdopcion = estadoAdopcion;
     }
 
     public void enviarNotificacion(RecordatorioDTO recordatorio) {
@@ -67,9 +55,5 @@ public class Adopcion {
 
     public Seguimiento getSeguimiento() {
         return this.seguimiento;
-    }
-
-    public IEstadoAdoptante getEstadoAdopcion() {
-        return this.estadoAdopcion;
     }
 }

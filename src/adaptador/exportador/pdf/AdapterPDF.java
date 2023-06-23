@@ -1,6 +1,7 @@
 package adaptador.exportador.pdf;
 
 import modelos.dtos.FichaMedicaDTO;
+import color.ConsoleColors;
 
 public class AdapterPDF implements AdapterExportadorPDF {
 
@@ -13,8 +14,8 @@ public class AdapterPDF implements AdapterExportadorPDF {
      */
     @Override
     public void exportarFichaMedica(FichaMedicaDTO fichaMedica) {
-        System.out.println(
-                "Se ha exportado la ficha medica de legajo: "+ fichaMedica.getLegajo() + " en formato PDF"
+        System.out.println(ConsoleColors.GREEN + 
+                "Se ha exportado la ficha medica de legajo: "+ fichaMedica.getLegajo() + " en formato PDF" + ConsoleColors.RESET
         );
     }
 
