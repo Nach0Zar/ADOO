@@ -64,7 +64,7 @@ public class ControllerAdopcion {
     }
 
     private String mensajeRecordatorio() {
-        System.out.println(ConsoleColors.YELLOW + "Mensaje de recordatorio  :" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.YELLOW + "Mensaje de recordatorio:" + ConsoleColors.RESET);
         String mensajeRecordatorio = Escaner.getInstancia().proxLinea();
         return mensajeRecordatorio;
     }

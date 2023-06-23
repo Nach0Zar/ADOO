@@ -34,13 +34,13 @@ public class App {
                 ClienteAdoptanteDTO clienteEncontrado = controladorClienteAdoptante
                                 .buscarClienteAdoptanteDTO("john.doe@example.com");
 
-                System.out.println(ConsoleColors.RESET + "El cliente " + clienteEncontrado.getNombre() + " " + clienteEncontrado.getApellido()
-                                + " fue cargado");
+                System.out.println(ConsoleColors.RESET + ConsoleColors.GREEN_BACKGROUND + "El cliente " + clienteEncontrado.getNombre() + " " + clienteEncontrado.getApellido()
+                                + " fue cargado" + ConsoleColors.RESET);
 
                 Escaner.getInstancia().proxLinea();
                 
                 // crear usuario visitador y autenticar
-                System.out.println("Crear y autenticar usuario visitador: ");
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "Crear y autenticar usuario visitador: " + ConsoleColors.RESET);
                 String emailVisitador = controladorUsuario.agregarUsuario("lumolina@uade.edu.ar", "Lucas",
                                 TipoUsuario.VISITADOR);
                 controladorUsuario.autenticar(emailVisitador);
@@ -48,7 +48,7 @@ public class App {
                 Escaner.getInstancia().proxLinea();
 
                 // crear usuario veterinario y autenticar
-                System.out.println("Crear y autenticar usuario veterinario: ");
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "Crear y autenticar usuario veterinario: " + ConsoleColors.RESET);
                 controladorUsuario.agregarUsuario("caesquivel@uade.edu.ar", "Candela", TipoUsuario.VETERINARIO);
                 controladorUsuario.autenticar("caesquivel@uade.edu.ar");
 
@@ -59,16 +59,16 @@ public class App {
                 int legajo = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 5, true, TipoAnimal.GATO,
                                 "Shona");
                 AnimalDTO animalEncontrado = controladorAnimal.obtenerAnimalDTO(legajo);
-                System.out.println("El animal " + animalEncontrado.getNombre() + " fue cargado con el legajo : "
-                                + animalEncontrado.getLegajo());
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "El animal " + animalEncontrado.getNombre() + " fue cargado con el legajo: "
+                                + animalEncontrado.getLegajo() + ConsoleColors.RESET);
                                 
                 Escaner.getInstancia().proxLinea();
 
                 int legajo2 = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 2, true,
                                 TipoAnimal.PERRO, "Panchito");
                 AnimalDTO animalEncontrado2 = controladorAnimal.obtenerAnimalDTO(legajo2);
-                System.out.println("El animal " + animalEncontrado2.getNombre() + " fue cargado con el legajo : "
-                                + animalEncontrado2.getLegajo());
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "El animal " + animalEncontrado2.getNombre() + " fue cargado con el legajo: "
+                                + animalEncontrado2.getLegajo() + ConsoleColors.RESET);
                                 
                 Escaner.getInstancia().proxLinea();
 
@@ -76,8 +76,8 @@ public class App {
                                 "Luna");
 
                 AnimalDTO animalEncontrado3 = controladorAnimal.obtenerAnimalDTO(legajo3);
-                System.out.println("El animal " + animalEncontrado3.getNombre() + " fue cargado con el legajo : "
-                                + animalEncontrado3.getLegajo());
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "El animal " + animalEncontrado3.getNombre() + " fue cargado con el legajo: "
+                                + animalEncontrado3.getLegajo() + ConsoleColors.RESET);
 
                 Escaner.getInstancia().proxLinea();
 
@@ -86,8 +86,8 @@ public class App {
 
                 AnimalDTO animalEncontrado4 = controladorAnimal.obtenerAnimalDTO(legajo4);
 
-                System.out.println("El animal " + animalEncontrado4.getNombre() + " fue cargado con el legajo : "
-                                + animalEncontrado4.getLegajo());
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "El animal " + animalEncontrado4.getNombre() + " fue cargado con el legajo: "
+                                + animalEncontrado4.getLegajo() + ConsoleColors.RESET);
 
                 Escaner.getInstancia().proxLinea();
 
@@ -181,8 +181,8 @@ public class App {
                 // "lumolina@uade.edu.ar");
                 AdopcionDTO adopcionEncontrada = controladorAdopcion.buscarAdopcionDTO(numeroAdopcion3);
 
-                System.out.println(ConsoleColors.GREEN + "Se cargo la adopcion del animal " + adopcionEncontrada.getAnimalDTO().getNombre()
-                                + " del cliente : " + adopcionEncontrada.getClienteDTO().getNombre() + ConsoleColors.RESET);
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "Se cargo la adopcion del animal " + adopcionEncontrada.getAnimalDTO().getNombre() 
+                                + " del cliente: " + adopcionEncontrada.getClienteDTO().getNombre() + ConsoleColors.RESET);
 
                 Escaner.getInstancia().proxLinea();
 
@@ -194,8 +194,8 @@ public class App {
                  * "Por que quiero otra mascota", "lumolina@uade.edu.ar");
                  */
                 AdopcionDTO adopcionEncontrada2 = controladorAdopcion.buscarAdopcionDTO(numeroAdopcion1);
-                System.out.println("Se cargo la adopcion del animal " + adopcionEncontrada2.getAnimalDTO().getNombre()
-                                + " del cliente : " + adopcionEncontrada2.getClienteDTO().getNombre());
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "Se cargo la adopcion del animal " + adopcionEncontrada2.getAnimalDTO().getNombre()
+                                + " del cliente: " + adopcionEncontrada2.getClienteDTO().getNombre() + ConsoleColors.RESET);
 
                 Escaner.getInstancia().proxLinea();
 
@@ -203,15 +203,15 @@ public class App {
 
                 int numeroSeguimiento = controladorSeguimiento
                                 .agregarSeguimientoAnimal(adopcionEncontrada.getNumeroAdopcion());
-                System.out.println("Se agrego el seguimiento de la adopcion "
-                                + numeroSeguimiento);
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "Se agrego el seguimiento de la adopcion " 
+                                + numeroSeguimiento + ConsoleColors.RESET);
 
                 Escaner.getInstancia().proxLinea();
 
                 // enviar una notificacion
                 RecordatorioDTO recordatorio = controladorAdopcion.enviarNotificacion(numeroAdopcion3);
-                System.out.println("Recordatorio creado para destinatario : "
-                                + recordatorio.getDestinatario().getNombre());
+                System.out.println(ConsoleColors.GREEN_BACKGROUND + "Recordatorio creado para destinatario: "
+                                + recordatorio.getDestinatario().getNombre() + ConsoleColors.RESET);
 
                 Escaner.getInstancia().proxLinea();
 
@@ -227,11 +227,9 @@ public class App {
                                 "El animal está mal.", Calificacion.MALO, Calificacion.MALO, Calificacion.REGULAR);
                 // exportar ficha medica en ambos formatos
 
-                Escaner.getInstancia().proxLinea();
-
                 FichaMedicaDTO fichaMedicaDTO1 = controladorFichaMedica.obtenerFichaMedicaDTO(legajo);
                 FichaMedicaDTO fichaMedicaDTO2 = controladorFichaMedica.obtenerFichaMedicaDTO(legajo2);
-
+                
                 Escaner.getInstancia().proxLinea();
 
                 controladorFichaMedica.cambiarEstrategiaExportacion(TipoExportacion.EXCEL, fichaMedicaDTO1.getLegajo());

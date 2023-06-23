@@ -9,6 +9,7 @@ import estrategias.accion.ITipoAlarma;
 import modelos.dtos.AlarmaDTO;
 import modelos.dtos.UsuarioDTO;
 import singleton.Escaner;
+import color.ConsoleColors;
 
 public class Alarma {
 
@@ -113,7 +114,7 @@ public class Alarma {
 
         if(comentario == null) {
 
-            System.out.println("Ingrese un comentario: ");
+            System.out.println(ConsoleColors.BLUE_BOLD + "Ingrese un comentario: " + ConsoleColors.RESET);
 
             this.comentario = Escaner.getInstancia().proxLinea();
         }

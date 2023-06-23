@@ -34,8 +34,8 @@ public class Seguimiento {
         visitaNueva.completarEncuesta(estadoAnimal, limpieza, ambiente);
         visitas.add(visitaNueva);
         // solo para probar
-        System.out.println(ConsoleColors.GREEN + "Se creo la visita  con el comentario = " + visitaNueva.getComentario()
-                + " Tenes esta cantidad de visitas : " + cantidadVisitas() + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.GREEN + "Se creo la visita con el comentario: " + ConsoleColors.GREEN_BOLD + "\"" + visitaNueva.getComentario()
+                +"\"" + ConsoleColors.GREEN + ". Tenes esta cantidad de visitas: " + ConsoleColors.GREEN_BOLD + cantidadVisitas() + ConsoleColors.RESET);
     }
 
     public int cantidadVisitas() {
