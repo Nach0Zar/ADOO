@@ -22,12 +22,12 @@ public class Alarma {
 
     // Constructor
     public Alarma(Duration periodicidad, Animal animal,
-            ITipoAlarma tipoAlarma, Usuario veterinario) {
+            ITipoAlarma tipoAlarma) {
         this.periodicidad = periodicidad;
         this.animal = animal;
         this.notificacion = new AdapterNotificacionPush();
         this.tipoAlarma = tipoAlarma;
-        this.veterinario = veterinario;
+        this.veterinario = null;
         this.ultimaEjecucion = new Date();
         this.numeroAlarma = numeradorAlarma++;
     }
@@ -37,13 +37,6 @@ public class Alarma {
     public void enviarNotificacion() {
         this.notificacion.enviarNotificacion(toDTO());
     }
-
-    /*
-     * public void crearAlarma(ITipoAlarma alarma) {
-     * this.tipoAlarma = alarma;
-     * this.tipoAlarma.crearAlarma();
-     * }
-     */
 
     public boolean soyAlarma(int numeroAlarma) {
         return this.numeroAlarma == numeroAlarma;
@@ -82,15 +75,6 @@ public class Alarma {
     public int getNumeroAlarma() {
         return numeroAlarma;
     }
-
-    // Setters
-    // TODO REVISAR
-    /*
-     * ENTIENDO QUE NO SE PUEDEN MODIFICAR EL ANIMAL DE LA ALARMA
-     * public void setAnimal(Animal animal) {
-     * this.animal = animal;
-     * }
-     */
 
     public void setPeriodicidad(Duration periodicidad) {
         this.periodicidad = periodicidad;
