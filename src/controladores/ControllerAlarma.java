@@ -3,9 +3,9 @@ package controladores;
 import java.time.Duration;
 import java.util.ArrayList;
 
-import estrategias.alarma.AlarmaControl;
-import estrategias.alarma.AlarmaTratamiento;
-import estrategias.alarma.ITipoAlarma;
+import estrategias.accion.AlarmaControl;
+import estrategias.accion.AlarmaTratamiento;
+import estrategias.accion.ITipoAlarma;
 import modelos.Alarma;
 import modelos.Animal;
 import modelos.FichaMedica;

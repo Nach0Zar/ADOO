@@ -1,17 +1,17 @@
 package estados.alarma;
 
-import modelos.Alarma;
+import estrategias.accion.Accion;
 
 /**
  * 
  */
-public class Completa implements IEstadoAlarma {
+public class Completa implements IEstadoAccion {
 
-    public Completa( ) {
+    public Completa() {
     }
 
     @Override
-    public void atenderAlarma(Alarma alarma) {
+    public void atenderAlarma(Accion accion) {
         System.out.println("Alarma ya atendida");
     }
 

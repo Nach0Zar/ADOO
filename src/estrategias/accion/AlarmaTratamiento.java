@@ -1,10 +1,10 @@
-package estrategias.alarma;
+package estrategias.accion;
 
 import java.util.ArrayList;
 
-import controladores.ControllerScanner;
 import modelos.Tratamiento;
 import modelos.dtos.AccionDTO;
+import singleton.Escaner;
 
 public class AlarmaTratamiento implements ITipoAlarma {
     // atributos
@@ -18,18 +18,28 @@ public class AlarmaTratamiento implements ITipoAlarma {
         crearAlarma();
     }
 
+    @Override
+    public void atenderAlarma() {
+        System.out.println("Ejecutando alarma de tratamiento");
+        for (Accion accion : acciones) {
+            System.out.println("Ejecutando accion: " + accion.getNombre());
+            System.out.println("Descripcion: " + accion.getDescripcion());
+        }
+        System.out.println("Alarma de tratamiento atendida");
+    }
+
     private void crearAlarma() {
         System.out.println("Ingrese las acciones a realizar para esta alarma de tratamiento");
         while (true) {
             System.out.println("Ingrese el nombre de la accion, utilize 'x' para salir");
-            String nombreAccion = ControllerScanner.getInstancia().proxLinea();
+            String nombreAccion = Escaner.getInstancia().proxLinea();
 
             if (nombreAccion.equals("x")) {
                 break;
             }
 
             System.out.println("Ingrese la descripcion de la accion");
-            String descripcionAccion = ControllerScanner.getInstancia().proxLinea();
+            String descripcionAccion = Escaner.getInstancia().proxLinea();
 
             Accion accion = new Accion(nombreAccion, descripcionAccion);
             acciones.add(accion);// aca guardamos las acciones de la alarma tratamiento
@@ -44,7 +54,10 @@ public class AlarmaTratamiento implements ITipoAlarma {
         return acciones;
     }
 
-    
+    public Tratamiento getTratamiento() {
+        return tratamiento;
+    }
+
     public ArrayList<AccionDTO> getAccionesDTO() {
         ArrayList<AccionDTO> accionesDTO = new ArrayList<AccionDTO>();
         for (Accion accion : acciones) {
@@ -53,17 +66,4 @@ public class AlarmaTratamiento implements ITipoAlarma {
         }
         return accionesDTO;
     }
-
-    public void setAcciones(ArrayList<Accion> acciones) {
-        this.acciones = acciones;
-    }
-
-    public Tratamiento getTratamiento() {
-        return tratamiento;
-    }
-
-    public void setTratamiento(Tratamiento tratamiento) {
-        this.tratamiento = tratamiento;
-    }
-
 }

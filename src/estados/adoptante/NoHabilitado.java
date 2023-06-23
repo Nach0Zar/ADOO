@@ -11,7 +11,7 @@ public class NoHabilitado implements IEstadoAdoptante {
 
     @Override
     public void adopcionAnimal(Animal animal, ClienteAdoptante clienteAdoptante, Adopcion adopcion) {
-        System.out.println("NO esta habilitado la adopcion del animal");
+        System.out.println("NO esta habilitada la adopcion del animal");
     }
 
 }

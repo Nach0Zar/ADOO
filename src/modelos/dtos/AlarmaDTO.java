@@ -2,26 +2,25 @@ package modelos.dtos;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.time.Duration;
-import estrategias.alarma.ITipoAlarma;
 
+import estrategias.accion.ITipoAlarma;
+
+import java.time.Duration;
 
 public class AlarmaDTO {
 
     private int numeroAlarma;
     private Duration periodicidad;
     private AnimalDTO animalDTO;
-    private boolean alarmaAtendida;
     private ITipoAlarma tipoAlarma;
     private UsuarioDTO usuarioDTO;
     private Date ultimaEjecucion;
 
-    public AlarmaDTO(int numeroAlarma, Duration periodicidad, AnimalDTO animalDTO, Boolean estadoAlarma,
+    public AlarmaDTO(int numeroAlarma, Duration periodicidad, AnimalDTO animalDTO,
             ITipoAlarma tipoAlarma, UsuarioDTO usuarioDTO, Date ultimaEjecucion2) {
         this.numeroAlarma = numeroAlarma;
         this.periodicidad = periodicidad;
         this.animalDTO = animalDTO;
-        this.alarmaAtendida = estadoAlarma;
         this.tipoAlarma = tipoAlarma;
         this.usuarioDTO = usuarioDTO;
         this.ultimaEjecucion = ultimaEjecucion2;
@@ -39,17 +38,13 @@ public class AlarmaDTO {
         return animalDTO;
     }
 
-    public boolean getAlarmaAtendida() {
-        return alarmaAtendida;
-    }
-
     public UsuarioDTO getUsuarioDTO() {
         return usuarioDTO;
     }
 
     public Date getUltimaEjecucion() {
         return ultimaEjecucion;
-    }  
+    }
 
     public ArrayList<AccionDTO> getAcciones() {
         return tipoAlarma.getAccionesDTO();
@@ -57,9 +52,9 @@ public class AlarmaDTO {
 
     public void printAcciones() {
         for (AccionDTO accion : tipoAlarma.getAccionesDTO()) {
-            System.out.println("Nombre: " + accion.getNombre() );
-            System.out.println("Descripcion: " + accion.getDescripcion() );
+            System.out.println("Nombre: " + accion.getNombre());
+            System.out.println("Descripcion: " + accion.getDescripcion());
         }
     }
-    
+
 }

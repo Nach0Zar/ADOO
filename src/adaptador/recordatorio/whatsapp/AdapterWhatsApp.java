@@ -16,7 +16,7 @@ public class AdapterWhatsApp implements AdapterRecordadorWhatsApp {
                 "Se ha enviado un mensaje por Whatsapp al numero " + recordatorio.getDestinatario().getTelefono()
                         + " del Cliente Adoptante " + recordatorio.getDestinatario().getNombre()
                         + " " + recordatorio.getDestinatario().getApellido() +
-                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: " + recordatorio.getMensaje()
+                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: \"" + recordatorio.getMensaje() + "\""
         );
     }
 

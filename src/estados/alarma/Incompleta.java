@@ -1,23 +1,23 @@
 package estados.alarma;
 
-import modelos.Alarma;
+import estrategias.accion.Accion;
 
 /**
  * 
  */
-public class Incompleta implements IEstadoAlarma {
-  
+public class Incompleta implements IEstadoAccion {
+
     public Incompleta() {
     }
 
     /**
-     * @param Alarma alarma 
+     * @param Alarma alarma
      * @return
      */
     @Override
-    public void atenderAlarma(Alarma alarma) {
+    public void atenderAlarma(Accion accion) {
         System.out.println("atendiendo alarma");
-        alarma.setEstadoAlarma(new Completa());
+        accion.setEstadoAlarma(new Completa());
     }
 
 }

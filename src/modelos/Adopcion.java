@@ -40,16 +40,7 @@ public class Adopcion {
     public AdopcionDTO toDTO() {
         return new AdopcionDTO(this.animal.toDTO(), this.cliente.toDTO(), this.numeroAdopcion, this.motivoAdopcion);
     }
-    //TODO REVISAR PERO ENTIENDO QUE NO SE PUEDE MODIFICAR EL ANIMAL NI EL CLIENTE DE UNA ADOPCION
-/*  
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
 
-    public void setCliente(ClienteAdoptante cliente) {
-        this.cliente = cliente;
-    }
- */
     public void setMotivoAdopcion(String motivoAdopcion) {
         this.motivoAdopcion = motivoAdopcion;
     }

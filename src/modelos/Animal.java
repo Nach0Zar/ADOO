@@ -15,6 +15,7 @@ public class Animal {
     private TipoAnimal tipoDeAnimal;
     private String nombre;
     private int legajo;
+    private Boolean adoptado;
     private FichaMedica fichaMedica;
 
     public Animal(Boolean domestico, Float altura, Float peso, int edad, Boolean estadoSaludableAnimal,
@@ -28,6 +29,7 @@ public class Animal {
         this.legajo = contadorLegajo++;
         this.nombre = nombre;
         this.fichaMedica = new FichaMedica(this);
+        this.adoptado = false;
     }
 
     public AnimalDTO toDTO() {
@@ -72,6 +74,10 @@ public class Animal {
         return this.fichaMedica;
     }
 
+    public Boolean getAdoptado(){
+        return this.adoptado;
+    }
+
     public void setDomestico(Boolean domestico) {
         this.domestico = domestico;
     }
@@ -106,5 +112,9 @@ public class Animal {
 
     public void setEstadoSaludableAnimal(Boolean estadoSaludableAnimal) {
         this.estadoSaludableAnimal = estadoSaludableAnimal;
+    }
+   
+    public void setAdoptado(Boolean adoptado) {
+        this.adoptado = adoptado;
     }
 }

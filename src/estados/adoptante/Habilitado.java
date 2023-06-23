@@ -11,7 +11,7 @@ public class Habilitado implements IEstadoAdoptante {
 
     @Override
     public void adopcionAnimal(Animal animal, ClienteAdoptante clienteAdoptante, Adopcion adopcion) {
-        if (clienteAdoptante.getCantidadAdopciones() >= 2 || !animal.getDomestico() || animal.getEstadoSaludableAnimal() == true) {
+        if (clienteAdoptante.getCantidadAdopciones() >= 2 || !animal.getDomestico() || animal.getEstadoSaludableAnimal() == true || animal.getAdoptado() == true) {
             adopcion.cambiarEstado(new NoHabilitado());// cambio del estado
             System.out.println("Adopcion en estado NO habilitada");
         } else {

@@ -7,6 +7,7 @@ import java.time.Duration;
 import controladores.*;
 import modelos.*;
 import modelos.dtos.*;
+import singleton.Escaner;
 import enums.*;
 
 public class App {
@@ -20,19 +21,22 @@ public class App {
                 ControllerSeguimiento controladorSeguimiento = ControllerSeguimiento.getInstancia();
                 ControllerUsuario controladorUsuario = ControllerUsuario.getInstancia();
                 ControllerClienteAdoptante controladorClienteAdoptante = ControllerClienteAdoptante.getInstancia();
+                Escaner controladorScanner = Escaner.getInstancia();
+
+                ArrayList<TipoAnimal> tipoAnimales = new ArrayList<TipoAnimal>();
 
                 // Crear un cliente
-                ArrayList<TipoAnimal> tipoAnimales = new ArrayList<TipoAnimal>();
+
                 tipoAnimales.add(TipoAnimal.GATO);
                 tipoAnimales.add(TipoAnimal.PERRO);
                 controladorClienteAdoptante.crearCliente("John", "Doe", "Soltero", "john.doe@example.com", "123456789",
                                 "Estudiante", tipoAnimales, false, TipoNotificacion.WHATSAPP, "Amor a los animales", 0);
+
                 ClienteAdoptanteDTO clienteEncontrado = controladorClienteAdoptante
                                 .buscarClienteAdoptanteDTO("john.doe@example.com");
 
-                System.out.println(
-                                "El cliente " + clienteEncontrado.getNombre() + " " + clienteEncontrado.getApellido()
-                                                + " fue cargado");
+                System.out.println("El cliente " + clienteEncontrado.getNombre() + " " + clienteEncontrado.getApellido()
+                                + " fue cargado");
 
                 // crear usuario visitador y autenticar
                 System.out.println("Crear y autenticar usuario visitador: ");
@@ -50,10 +54,10 @@ public class App {
                 int legajo = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 5, true, TipoAnimal.GATO,
                                 "Shona");
                 int legajo2 = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 2, true,
-                                TipoAnimal.PERRO,
-                                "Panchito");
+                                TipoAnimal.PERRO, "Panchito");
                 int legajo3 = controladorAnimal.ingresarAnimal(true, (float) 2.0, (float) 3.0, 3, true, TipoAnimal.GATO,
                                 "Luna");
+
                 AnimalDTO animalEncontrado = controladorAnimal.obtenerAnimalDTO(legajo);
                 System.out.println("El animal " + animalEncontrado.getNombre() + " fue cargado con el legajo : "
                                 + animalEncontrado.getLegajo());
@@ -69,73 +73,62 @@ public class App {
                 int numeroDeTratamiento = controladorFichaMedica.crearTratamiento("Vacuna", "Vacuna contra la rabia",
                                 new Date(), new Date(), legajo3);
 
+                // adoptar animal 3 en tratamiento
 
-                // adoptar  animal 3 en tratamiento
-
-                int numeroAdopcion3 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
+                int numeroAdopcion0 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
                                 "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
-               // Finalizar el tratamiento del animal 3
+                // Finalizar el tratamiento del animal 3
                 controladorFichaMedica.finalizarTratamiento(legajo3, numeroDeTratamiento);
 
-                //Ahora que esta sano , adoptamos !
+                // Ahora que esta sano , adoptamos !
 
-                int numeroAdopcion33 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
-                "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
+                int numeroAdopcion1 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
+                                "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
-                //adopto hasta 3 animales y NO me deja , solo adopta 2.
+                // Intento adoptar el mismo animal
 
-                int numeroAdopcion44 = controladorAdopcion.crearAdopcion(legajo2, clienteEncontrado.getEmail(),
-                "Quiero ", "lumolina@uade.edu.ar");
-                 
-           
-                int numeroAdopcion = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(),
-                "Quiero ", "lumolina@uade.edu.ar");
+                int numeroAdopcion2 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
+                                "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
-                 
+                // adopto hasta 3 animales y NO me deja , solo adopta 2.
+
+                int numeroAdopcion3 = controladorAdopcion.crearAdopcion(legajo2, clienteEncontrado.getEmail(),
+                                "Quiero ", "lumolina@uade.edu.ar");
+
+                int numeroAdopcion4 = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(), "Quiero ",
+                                "lumolina@uade.edu.ar");
+
                 // Crear una alarma de tratamiento para el animal 3
                 Duration preriodicidad = Duration.ofDays(1);
-                int numeroAlarmaTratamiento = controladorAlarma.crearAlarma(preriodicidad, legajo3, "lumolina@uade.edu.ar", numeroDeTratamiento);
+                int numeroAlarmaTratamiento = controladorAlarma.crearAlarma(preriodicidad, legajo3,
+                                "lumolina@uade.edu.ar", numeroDeTratamiento);
 
                 AlarmaDTO alarmaDTO = controladorAlarma.obtenerAlarmaDTO(numeroAlarmaTratamiento);
                 alarmaDTO.printAcciones();
-                
-             
 
-                /* FALTA ARREGLAR LO DEL SCANNER 
-                  // Crear una alarma de control para el animal 2
+                // Crear una alarma de control para el animal 2
                 Duration periodicidad = Duration.ofDays(1);
                 controladorAlarma.crearAlarma(periodicidad, legajo3, "lumolina@uade.edu.ar");
 
-                 */
-                
-                
- 
-               
-
-            
-      
-
-        /*
-         
-
-               
-
                 // adoptar un animal
-                int numeroAdopcion = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(),
-                                "Por que quiero una mascota", "lumolina@uade.edu.ar");
-                AdopcionDTO adopcionEncontrada = controladorAdopcion.buscarAdopcionDTO(numeroAdopcion);
-                System.out.println("Se cargo la adopcion del animal " +
-                                adopcionEncontrada.getAnimalDTO().getNombre()
+                // int numeroAdopcion9 = controladorAdopcion.crearAdopcion(legajo,
+                // clienteEncontrado.getEmail(),"Por que quiero una mascota",
+                // "lumolina@uade.edu.ar");
+                AdopcionDTO adopcionEncontrada = controladorAdopcion.buscarAdopcionDTO(numeroAdopcion3);
+
+                System.out.println("Se cargo la adopcion del animal " + adopcionEncontrada.getAnimalDTO().getNombre()
                                 + " del cliente : " + adopcionEncontrada.getClienteDTO().getNombre());
 
                 // adoptar segundo animal
 
-                int numeroAdopcion2 = controladorAdopcion.crearAdopcion(legajo2, clienteEncontrado.getEmail(),
-                                "Por que quiero otra mascota", "lumolina@uade.edu.ar");
-                AdopcionDTO adopcionEncontrada2 = controladorAdopcion.buscarAdopcionDTO(numeroAdopcion2);
-                System.out.println("Se cargo la adopcion del animal " +
-                                adopcionEncontrada2.getAnimalDTO().getNombre()
+                /*
+                 * int numeroAdopcion5 = controladorAdopcion.crearAdopcion(legajo2,
+                 * clienteEncontrado.getEmail(),
+                 * "Por que quiero otra mascota", "lumolina@uade.edu.ar");
+                 */
+                AdopcionDTO adopcionEncontrada2 = controladorAdopcion.buscarAdopcionDTO(numeroAdopcion1);
+                System.out.println("Se cargo la adopcion del animal " + adopcionEncontrada2.getAnimalDTO().getNombre()
                                 + " del cliente : " + adopcionEncontrada2.getClienteDTO().getNombre());
 
                 // Creo un seguimiento para el animal
@@ -146,36 +139,25 @@ public class App {
                                 + seguimientoEncontrado.getNumeroSeguimiento());
 
                 // enviar una notificacion
-                RecordatorioDTO recordatorio = controladorAdopcion.enviarNotificacion(numeroAdopcion);
+                RecordatorioDTO recordatorio = controladorAdopcion.enviarNotificacion(numeroAdopcion3);
                 System.out.println("Recordatorio creado para destinatario : "
                                 + recordatorio.getDestinatario().getNombre());
 
                 // crear una visita y una encuesta posterior
 
                 controladorSeguimiento.agregarVisita(seguimientoEncontrado.getNumeroSeguimiento(),
-                                "El animal está mejorando.",
-                                Calificacion.BUENO, Calificacion.MALO, Calificacion.REGULAR);
+                                "El animal está mejorando.", Calificacion.BUENO, Calificacion.MALO,
+                                Calificacion.REGULAR);
 
                 controladorSeguimiento.agregarVisita(seguimientoEncontrado.getNumeroSeguimiento(),
-                                "El animal está mal.",
-                                Calificacion.MALO, Calificacion.MALO, Calificacion.REGULAR);
-          // exportar ficha medica en ambos formatos
+                                "El animal está mal.", Calificacion.MALO, Calificacion.MALO, Calificacion.REGULAR);
+                // exportar ficha medica en ambos formatos
 
                 FichaMedicaDTO fichaMedicaDTO1 = controladorFichaMedica.obtenerFichaMedicaDTO(legajo);
                 FichaMedicaDTO fichaMedicaDTO2 = controladorFichaMedica.obtenerFichaMedicaDTO(legajo2);
-                controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO1.getLegajo(),
-                                TipoExportacion.EXCEL);
-                controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO2.getLegajo(),
-                                TipoExportacion.PDF);
+                controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO1.getLegajo(), TipoExportacion.EXCEL);
+                controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO2.getLegajo(), TipoExportacion.PDF);
 
-                
-              
-              
-             
-                
-         */
-
-               
-
+                controladorScanner.cerrarScanner();
         }
 }

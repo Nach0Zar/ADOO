@@ -1,20 +1,20 @@
-package controladores;
+package singleton;
 
 import java.util.Scanner;
 
 
-public class ControllerScanner {
+public class Escaner {
 
    private Scanner scanner;
-   private static ControllerScanner instancia;
+   private static Escaner instancia;
 
-   private ControllerScanner(){
+   private Escaner(){
       scanner = new Scanner(System.in);
    }
 
-   public static ControllerScanner getInstancia() {
+   public static Escaner getInstancia() {
       if (instancia == null)
-         instancia = new ControllerScanner();
+         instancia = new Escaner();
       return instancia;
    }
 
