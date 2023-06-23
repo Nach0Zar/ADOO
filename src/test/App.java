@@ -159,5 +159,8 @@ public class App {
                 controladorFichaMedica.exportarFichaMedica(fichaMedicaDTO2.getLegajo(), TipoExportacion.PDF);
 
                 controladorScanner.cerrarScanner();
+
+                //atender alarma
+                //
         }
 }
