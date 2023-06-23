@@ -9,7 +9,7 @@ import modelos.Tratamiento;
 import modelos.Animal;
 import modelos.dtos.FichaMedicaDTO;
 import enums.TipoExportacion;
-
+import color.ConsoleColors;
 /**
  * 
  */
@@ -44,7 +44,12 @@ public class ControllerFichaMedica {
     }
 
     // acá esta tipoExportacion es un String, no un enum. Hay que cambiarlo
-    public void exportarFichaMedica(int legajo, TipoExportacion tipoExportacion) {
+    public void exportarFichaMedica(int legajo) {
+        FichaMedica fichaMedica = buscarFichaMedica(legajo);
+        fichaMedica.exportarFichaMedica();
+    }
+
+    public void cambiarEstrategiaExportacion(TipoExportacion tipoExportacion, int legajo){
         FichaMedica fichaMedica = buscarFichaMedica(legajo);
 
         switch (tipoExportacion) {
@@ -56,23 +61,19 @@ public class ControllerFichaMedica {
                 break;
         }
 
-        fichaMedica.exportarFichaMedica();
     }
 
     public int crearTratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin, int legajo) {
         FichaMedica fichaMedica = buscarFichaMedica(legajo);
-        if (fichaMedica.getEstadoSaludableAnimal()) { // Siempre que el estado no sea saludable, tiene un tratamiento
-                                                      // activo
+        if (fichaMedica.getEstadoSaludableAnimal()) { 
             Tratamiento tratamiento = new Tratamiento(nombre, descripcion, fechaInicio, fechaFin);
             fichaMedica.agregarTratamiento(tratamiento);
-            // TODO estado saludable en animal o en ficha medica? o solo se verifica que no
-            // tenga un tratamiento activo?
             ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, false);
-            System.out.println("Se ha creado el tratamiento: " + tratamiento.getNombre() + " con id: "
-                    + tratamiento.getNumeroTratamiento());
+            System.out.println(ConsoleColors.GREEN + "Se ha creado el tratamiento: " + ConsoleColors.GREEN_BOLD + tratamiento.getNombre() + ConsoleColors.GREEN + " con id: "
+                    + ConsoleColors.GREEN_BOLD + tratamiento.getNumeroTratamiento() + ConsoleColors.RESET);
             return tratamiento.getNumeroTratamiento();
         } else {
-            System.out.println("Ya existe un tratamiento en curso, no se puede crear otro");
+            System.out.println(ConsoleColors.RED + "Ya existe un tratamiento en curso, no se puede crear otro" + ConsoleColors.RESET);
             return fichaMedica.getTratamientoActivo().getNumeroTratamiento();
         }
     }
@@ -82,8 +83,8 @@ public class ControllerFichaMedica {
         Tratamiento tratamiento = animal.getFichaMedica().buscarTratamiento(numeroTratamiento);
         tratamiento.setFinalizado(true);
         ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, true);
-        System.out.println(
-                "Ha finalizado el tratamiento: " + tratamiento.getNombre() + "  ahora el animal esta SALUDABLE");
+        System.out.println(ConsoleColors.GREEN + 
+                "Ha finalizado el tratamiento: " + ConsoleColors.GREEN_BOLD + tratamiento.getNombre() + ConsoleColors.GREEN + ", ahora el animal " + ConsoleColors.GREEN_BOLD + animal.getNombre() + ConsoleColors.GREEN + " esta SALUDABLE" + ConsoleColors.RESET);
     }
 
     protected FichaMedica obtenerFichaMedica(int legajo) {
