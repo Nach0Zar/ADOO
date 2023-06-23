@@ -22,7 +22,6 @@ public class Incompleta implements IEstadoAccion {
 
     @Override
     public boolean getFinalizada() {
-        // TODO Auto-generated method stub
         return false;
     }
 

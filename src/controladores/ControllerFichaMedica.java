@@ -9,7 +9,7 @@ import modelos.Tratamiento;
 import modelos.Animal;
 import modelos.dtos.FichaMedicaDTO;
 import enums.TipoExportacion;
-
+import color.ConsoleColors;
 /**
  * 
  */
@@ -65,15 +65,12 @@ public class ControllerFichaMedica {
 
     public int crearTratamiento(String nombre, String descripcion, Date fechaInicio, Date fechaFin, int legajo) {
         FichaMedica fichaMedica = buscarFichaMedica(legajo);
-        if (fichaMedica.getEstadoSaludableAnimal()) { // Siempre que el estado no sea saludable, tiene un tratamiento
-                                                      // activo
+        if (fichaMedica.getEstadoSaludableAnimal()) { 
             Tratamiento tratamiento = new Tratamiento(nombre, descripcion, fechaInicio, fechaFin);
             fichaMedica.agregarTratamiento(tratamiento);
-            // TODO estado saludable en animal o en ficha medica? o solo se verifica que no
-            // tenga un tratamiento activo?
             ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, false);
-            System.out.println("Se ha creado el tratamiento: " + tratamiento.getNombre() + " con id: "
-                    + tratamiento.getNumeroTratamiento());
+            System.out.println(ConsoleColors.GREEN + "Se ha creado el tratamiento: " + tratamiento.getNombre() + " con id: "
+                    + tratamiento.getNumeroTratamiento() + ConsoleColors.RESET);
             return tratamiento.getNumeroTratamiento();
         } else {
             System.out.println("Ya existe un tratamiento en curso, no se puede crear otro");
@@ -86,7 +83,7 @@ public class ControllerFichaMedica {
         Tratamiento tratamiento = animal.getFichaMedica().buscarTratamiento(numeroTratamiento);
         tratamiento.setFinalizado(true);
         ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, true);
-        System.out.println(
+        System.out.println(ConsoleColors.GREEN_BACKGROUND + 
                 "Ha finalizado el tratamiento: " + tratamiento.getNombre() + "  ahora el animal esta SALUDABLE");
     }
 

@@ -18,7 +18,7 @@ public class Alarma {
     private Animal animal;
     private INotificationPush notificacion;
     private ITipoAlarma tipoAlarma;
-    private Usuario veterinario; // TODO: revisar si es necesario o si en realidad es el usuario que la creo
+    private Usuario veterinario;
     private Date ultimaEjecucion;
 
     // Constructor

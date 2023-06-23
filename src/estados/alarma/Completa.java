@@ -17,7 +17,6 @@ public class Completa implements IEstadoAccion {
 
     @Override
     public boolean getFinalizada() {
-        // TODO Auto-generated method stub
         return true;
     }
 
