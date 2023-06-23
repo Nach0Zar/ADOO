@@ -10,7 +10,6 @@ import modelos.Alarma;
 import modelos.Animal;
 import modelos.FichaMedica;
 import modelos.Tratamiento;
-import modelos.Usuario;
 import modelos.dtos.AlarmaDTO;
 
 public class ControllerAlarma {

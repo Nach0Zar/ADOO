@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import enums.Calificacion;
 import modelos.Seguimiento;
 import modelos.Adopcion;
-import modelos.dtos.RecordatorioDTO;
 
 public class ControllerSeguimiento {
     private ArrayList<Seguimiento> seguimientos;

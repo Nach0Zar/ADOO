@@ -75,7 +75,7 @@ public class App {
 
                 // adoptar animal 3 en tratamiento
 
-                int numeroAdopcion0 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
+                controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
                                 "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
                 // Finalizar el tratamiento del animal 3
@@ -89,7 +89,7 @@ public class App {
 
                 // Intento adoptar el mismo animal
                 //Intento volver a adoptar a Luna
-                int numeroAdopcion2 = controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
+                controladorAdopcion.crearAdopcion(legajo3, clienteEncontrado.getEmail(),
                                 "Quiero una mascota en tratamiento", "lumolina@uade.edu.ar");
 
                 // adopto hasta 3 animales y NO me deja , solo adopta 2.
@@ -98,7 +98,7 @@ public class App {
                                 "Quiero ", "lumolina@uade.edu.ar");
 
                 //Intento Adoptar a Shona
-                int numeroAdopcion4 = controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(), "Quiero ",
+                controladorAdopcion.crearAdopcion(legajo, clienteEncontrado.getEmail(), "Quiero ",
                                 "lumolina@uade.edu.ar");
 
                 // Crear una alarma de tratamiento para el animal 3
