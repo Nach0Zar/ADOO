@@ -84,7 +84,7 @@ public class ControllerFichaMedica {
         tratamiento.setFinalizado(true);
         ControllerAnimal.getInstancia().setEstadoSaludableAnimal(legajo, true);
         System.out.println(ConsoleColors.GREEN_BACKGROUND + 
-                "Ha finalizado el tratamiento: " + tratamiento.getNombre() + "  ahora el animal esta SALUDABLE");
+                "Ha finalizado el tratamiento: " + tratamiento.getNombre() + "  ahora el animal esta SALUDABLE" + ConsoleColors.RESET);
     }
 
     protected FichaMedica obtenerFichaMedica(int legajo) {
