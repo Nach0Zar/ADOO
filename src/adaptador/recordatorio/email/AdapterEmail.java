@@ -1,7 +1,7 @@
 package adaptador.recordatorio.email;
 
 import modelos.dtos.RecordatorioDTO;
-
+import color.ConsoleColors;
 /**
  * 
  */
@@ -19,11 +19,11 @@ public class AdapterEmail implements AdapterRecordadorEmail {
      */
     @Override
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        System.out.println(
+        System.out.println(ConsoleColors.GREEN + 
                 "Se ha enviado un mensaje por Email al correo " + recordatorio.getDestinatario().getEmail()
                         + " del Cliente Adoptante " + recordatorio.getDestinatario().getNombre()
                         + " " + recordatorio.getDestinatario().getApellido() +
-                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: \"" + recordatorio.getMensaje() + "\""
+                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: \"" + recordatorio.getMensaje() + "\"" + ConsoleColors.RESET
         );
     }
 
