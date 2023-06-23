@@ -12,6 +12,7 @@ import modelos.FichaMedica;
 import modelos.Tratamiento;
 import modelos.Usuario;
 import modelos.dtos.AlarmaDTO;
+import color.ConsoleColors;
 
 public class ControllerAlarma {
 
@@ -74,7 +75,7 @@ public class ControllerAlarma {
         alarma.atenderAlarma();
         Usuario veterinario = ControllerUsuario.getInstancia().buscarUsuario(emailVeterinario);
         alarma.setVeterinario(veterinario);
-        System.out.println("Alarma atendida por el veterinario " + veterinario.getNombre() + ".");
+        System.out.println(ConsoleColors.GREEN + "Alarma atendida por el veterinario " + ConsoleColors.GREEN_BOLD + veterinario.getNombre() + ConsoleColors.GREEN + "." + ConsoleColors.RESET);
     }
 
     public void enviarNotificacion(int numeroAlarma) {

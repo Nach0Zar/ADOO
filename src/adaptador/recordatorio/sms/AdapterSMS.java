@@ -1,6 +1,8 @@
 package adaptador.recordatorio.sms;
 
 import modelos.dtos.RecordatorioDTO;
+import color.ConsoleColors;
+
 public class AdapterSMS implements AdapterRecordadorSMS {
     public AdapterSMS() {
     }
@@ -11,11 +13,11 @@ public class AdapterSMS implements AdapterRecordadorSMS {
      */
     @Override
     public void enviarRecordatorio(RecordatorioDTO recordatorio) {
-        System.out.println(
-                "Se ha enviado un mensaje por SMS al numero " + recordatorio.getDestinatario().getTelefono()
-                        + " del Cliente Adoptante " + recordatorio.getDestinatario().getNombre()
-                        + " " + recordatorio.getDestinatario().getApellido() +
-                        " en la fecha " + recordatorio.getFecha() + " con el mensaje: \"" + recordatorio.getMensaje() + "\""
+        System.out.println(ConsoleColors.GREEN + 
+                "Se ha enviado un mensaje por SMS al numero " + ConsoleColors.GREEN_BOLD + recordatorio.getDestinatario().getTelefono() + ConsoleColors.GREEN 
+                        + " del Cliente Adoptante " + ConsoleColors.GREEN_BOLD + recordatorio.getDestinatario().getNombre()
+                        + " " + recordatorio.getDestinatario().getApellido() + ConsoleColors.GREEN +
+                        " en la fecha " + ConsoleColors.GREEN_BOLD + recordatorio.getFecha() + ConsoleColors.GREEN + " con el mensaje: " + ConsoleColors.GREEN_BOLD + "\"" + recordatorio.getMensaje() + "\"" + ConsoleColors.RESET
         );
     }
 
