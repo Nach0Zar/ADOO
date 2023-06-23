@@ -10,6 +10,7 @@ import modelos.Alarma;
 import modelos.Animal;
 import modelos.FichaMedica;
 import modelos.Tratamiento;
+import modelos.Usuario;
 import modelos.dtos.AlarmaDTO;
 
 public class ControllerAlarma {
@@ -71,7 +72,9 @@ public class ControllerAlarma {
     public void atenderAlarma(int numeroAlarma, String emailVeterinario) {
         Alarma alarma = buscarAlarma(numeroAlarma);
         alarma.atenderAlarma();
-        alarma.setVeterinario(ControllerUsuario.getInstancia().buscarUsuario(emailVeterinario));
+        Usuario veterinario = ControllerUsuario.getInstancia().buscarUsuario(emailVeterinario);
+        alarma.setVeterinario(veterinario);
+        System.out.println("Alarma atendida por el veterinario " + veterinario.getNombre() + ".");
     }
 
     public void enviarNotificacion(int numeroAlarma) {

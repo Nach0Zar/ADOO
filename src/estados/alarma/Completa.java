@@ -15,4 +15,10 @@ public class Completa implements IEstadoAccion {
         System.out.println("Acción ya atendida");
     }
 
+    @Override
+    public boolean getFinalizada() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
 }

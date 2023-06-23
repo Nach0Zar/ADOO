@@ -41,4 +41,8 @@ public class Accion {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public boolean getFinalizada() {
+        return this.estadoAccion.getFinalizada();
+    }
 }

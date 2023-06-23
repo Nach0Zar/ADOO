@@ -24,7 +24,21 @@ public class AlarmaTratamiento implements ITipoAlarma {
         for (Accion accion : acciones) {
             accion.atenderAccion();
         }
-        System.out.println("Alarma de tratamiento atendida");
+        if(accionesTerminadas()){
+            tratamiento.setFinalizado(true);
+            System.out.println("Alarma de tratamiento atendida");
+        }
+    }
+
+    private boolean accionesTerminadas() {
+        boolean terminadas = true;
+        for (Accion accion : acciones) {
+            if(!accion.getFinalizada()){
+                terminadas = false;
+                break;
+            }
+        }
+        return terminadas;
     }
 
     private void crearAlarma() {

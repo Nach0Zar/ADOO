@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import estrategias.accion.ITipoAlarma;
+import modelos.Animal;
 
 import java.time.Duration;
 
@@ -11,16 +12,16 @@ public class AlarmaDTO {
 
     private int numeroAlarma;
     private Duration periodicidad;
-    private AnimalDTO animalDTO;
+    private Animal animal;
     private ITipoAlarma tipoAlarma;
     private UsuarioDTO usuarioDTO;
     private Date ultimaEjecucion;
 
-    public AlarmaDTO(int numeroAlarma, Duration periodicidad, AnimalDTO animalDTO,
+    public AlarmaDTO(int numeroAlarma, Duration periodicidad, Animal animal,
             ITipoAlarma tipoAlarma, UsuarioDTO usuarioDTO, Date ultimaEjecucion2) {
         this.numeroAlarma = numeroAlarma;
         this.periodicidad = periodicidad;
-        this.animalDTO = animalDTO;
+        this.animal = animal;
         this.tipoAlarma = tipoAlarma;
         this.usuarioDTO = usuarioDTO;
         this.ultimaEjecucion = ultimaEjecucion2;
@@ -34,8 +35,8 @@ public class AlarmaDTO {
         return periodicidad;
     }
 
-    public AnimalDTO getAnimalDTO() {
-        return animalDTO;
+    public Animal getAnimalDTO() {
+        return animal;
     }
 
     public UsuarioDTO getUsuarioDTO() {

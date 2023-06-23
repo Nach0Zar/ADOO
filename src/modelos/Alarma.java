@@ -7,6 +7,7 @@ import adaptador.notificacion.AdapterNotificacionPush;
 import adaptador.notificacion.INotificationPush;
 import estrategias.accion.ITipoAlarma;
 import modelos.dtos.AlarmaDTO;
+import modelos.dtos.UsuarioDTO;
 
 public class Alarma {
 
@@ -43,8 +44,13 @@ public class Alarma {
     }
 
     public AlarmaDTO toDTO() {
-        return new AlarmaDTO(this.numeroAlarma, this.periodicidad, this.animal.toDTO(), this.tipoAlarma,
-                this.veterinario.toDTO(), this.ultimaEjecucion);
+        UsuarioDTO veterinarioDTO = null;
+
+        if (this.veterinario != null) {
+            veterinarioDTO = this.veterinario.toDTO();
+        }
+        return new AlarmaDTO(this.numeroAlarma, this.periodicidad, this.animal, this.tipoAlarma,
+                veterinarioDTO, this.ultimaEjecucion);
     }
 
     // Getters

@@ -20,4 +20,10 @@ public class Incompleta implements IEstadoAccion {
         accion.setEstadoAlarma(new Completa());
     }
 
+    @Override
+    public boolean getFinalizada() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

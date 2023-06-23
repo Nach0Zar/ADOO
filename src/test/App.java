@@ -105,6 +105,8 @@ public class App {
                 Duration preriodicidad = Duration.ofDays(1);
                 int numeroAlarmaTratamiento = controladorAlarma.crearAlarma(preriodicidad, legajo3, numeroDeTratamiento);
 
+                controladorAlarma.enviarNotificacion(numeroAlarmaTratamiento);
+
                 AlarmaDTO alarmaDTO = controladorAlarma.obtenerAlarmaDTO(numeroAlarmaTratamiento);
                 alarmaDTO.printAcciones();
 
@@ -119,7 +121,7 @@ public class App {
                 int numeroAlarmaControl = controladorAlarma.crearAlarma(periodicidad, legajo3);
                 AlarmaDTO alarmaControlDTO = controladorAlarma.obtenerAlarmaDTO(numeroAlarmaControl);
 
-
+                controladorAlarma.enviarNotificacion(numeroAlarmaTratamiento);
 
                 // atender alarma de control
                 controladorAlarma.atenderAlarma(alarmaControlDTO.getNumeroAlarma(), "lumolina@uade.edu.ar");    
